@@ -1,0 +1,7 @@
+export const tableConfig = {
+    headers: [
+        { label: 'BK. NO', key: 'bkNo', sortable: true, filterable: true },
+        // ... rest of the headers ...
+    ],
+    rows: []
+}; 
