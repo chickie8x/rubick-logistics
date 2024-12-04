@@ -68,7 +68,7 @@
   <Teleport to="body">
     <Modal :open="isModalOpen" @close="onCloseModal" @submit="onSubmitModal">
       <DeleteBooking v-if="modalVSlot === 'delete'" />
-      <EditBooking v-else-if="modalVSlot === 'edit'" :booking="bookingEdit" />
+      <EditBooking v-else-if="modalVSlot === 'edit'" :booking="bookingEdit" :department="userDepartment" />
     </Modal>
   </Teleport>
 </template>

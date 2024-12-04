@@ -56,6 +56,25 @@ export const users = [
   },
 ]
 
+export const departments = [
+  {
+    key: 'ops',
+    value: 'Ops',
+  },
+  {
+    key: 'docs',
+    value: 'Docs',
+  },
+  {
+    key: 'bod',
+    value: 'BOD',
+  },
+  {
+    key: 'accountant',
+    value: 'Accountant',
+  },
+]
+
 export const permissions = [
   {
     key: 'staff',
@@ -77,4 +96,102 @@ export const permissions = [
     key: 'admin',
     value: 5,
   },
+]
+
+export const headers = [
+  { label: 'BK. NO', key: 'bkNo' },
+  { label: 'Month', key: 'month' },
+  { label: 'Signal', key: 'signal' },
+  { label: 'CUS PIC', key: 'cusPic' },
+  { label: 'Số File', key: 'fileNumber' },
+  { label: 'MST', key: 'mst' },
+  { label: 'Tên Khách Hàng', key: 'customerName' },
+  { label: 'MUA BẢO HIỂM', key: 'insurance', sortable: false, filterable: true },
+  { label: 'Saler', key: 'saler' },
+  { label: 'Agent', key: 'agent' },
+  { label: 'LCL (cbm)', key: 'lclCbm' },
+  { label: "20'DC (Trên 10t)", key: 'twentyDc' },
+  { label: "40'DC/40'HC", key: 'fortyDcHc' },
+  { label: 'FR/other', key: 'frOther' },
+  { label: 'VESSEL', key: 'vessel' },
+  { label: 'Loading Date', key: 'loadingDate' },
+  { label: 'CLS', key: 'cls' },
+  { label: 'ETD', key: 'etd' },
+  { label: 'ETA', key: 'eta' },
+  { label: 'MNF deadline', key: 'mnfDeadline' },
+  { label: 'Arrival actualy', key: 'arrivalActual' },
+  { label: 'Door or NOT', key: 'doorOrNot' },
+  { label: 'Term', key: 'term' },
+  { label: 'Loading Port', key: 'loadingPort' },
+  { label: 'Dest Port', key: 'destPort' },
+  { label: 'MBL', key: 'mbl' },
+  { label: 'HBL', key: 'hbl' },
+  { label: 'Cảng', key: 'port' },
+  { label: 'Số Cont/Chì', key: 'containerNumber' },
+  { label: 'Số tờ Khai', key: 'declarationNumber' },
+  { label: 'Luồng', key: 'lane' },
+  { label: 'TTHQ', key: 'customsProcedure' },
+  { label: 'X/N', key: 'importExport' },
+  { label: 'ETA/ETD', key: 'etaEtd' },
+  { label: 'LCL', key: 'lcl' },
+  { label: 'FCL', key: 'fcl' },
+  { label: 'Giá Cost Mua', key: 'costPrice' },
+  { label: 'Nhà xe', key: 'carrier' },
+  { label: 'Ngày trả', key: 'returnDate' },
+  { label: 'Xác nhận Trả hàng (ngày)', key: 'confirmationDate' },
+  { label: 'Cảng/Kho CFS', key: 'cfsWarehouse' },
+  { label: 'Địa chỉ nhận hàng', key: 'deliveryAddress' },
+  { label: 'Người nhận', key: 'recipient' },
+]
+
+export const generalFields = [
+  { label: 'BK. NO', key: 'bkNo' },
+  { label: 'Month', key: 'month' },
+  { label: 'Signal', key: 'signal' },
+  { label: 'CUS PIC', key: 'cusPic' },
+  { label: 'Số File', key: 'fileNumber' },
+  { label: 'MST', key: 'mst' },
+  { label: 'Tên Khách Hàng', key: 'customerName' },
+  { label: 'MUA BẢO HIỂM', key: 'insurance', sortable: false, filterable: true },
+  { label: 'Saler', key: 'saler' },
+  { label: 'Agent', key: 'agent' },
+]
+
+export const docsFields = [
+  { label: 'LCL (cbm)', key: 'lclCbm' },
+  { label: "20'DC (Trên 10t)", key: 'twentyDc' },
+  { label: "40'DC/40'HC", key: 'fortyDcHc' },
+  { label: 'FR/other', key: 'frOther' },
+  { label: 'VESSEL', key: 'vessel' },
+  { label: 'Loading Date', key: 'loadingDate' },
+  { label: 'CLS', key: 'cls' },
+  { label: 'ETD', key: 'etd' },
+  { label: 'ETA', key: 'eta' },
+  { label: 'MNF deadline', key: 'mnfDeadline' },
+  { label: 'Arrival actualy', key: 'arrivalActual' },
+  { label: 'Door or NOT', key: 'doorOrNot' },
+  { label: 'Term', key: 'term' },
+  { label: 'Loading Port', key: 'loadingPort' },
+  { label: 'Dest Port', key: 'destPort' },
+  { label: 'MBL', key: 'mbl' },
+  { label: 'HBL', key: 'hbl' },
+  { label: 'Cảng', key: 'port' },
+  { label: 'Số Cont/Chì', key: 'containerNumber' },
+]
+
+export const logsFields = [
+  { label: 'Số tờ Khai', key: 'declarationNumber' },
+  { label: 'Luồng', key: 'lane' },
+  { label: 'TTHQ', key: 'customsProcedure' },
+  { label: 'X/N', key: 'importExport' },
+  { label: 'ETA/ETD', key: 'etaEtd' },
+  { label: 'LCL', key: 'lcl' },
+  { label: 'FCL', key: 'fcl' },
+  { label: 'Giá Cost Mua', key: 'costPrice' },
+  { label: 'Nhà xe', key: 'carrier' },
+  { label: 'Ngày trả', key: 'returnDate' },
+  { label: 'Xác nhận Trả hàng (ngày)', key: 'confirmationDate' },
+  { label: 'Cảng/Kho CFS', key: 'cfsWarehouse' },
+  { label: 'Địa chỉ nhận hàng', key: 'deliveryAddress' },
+  { label: 'Người nhận', key: 'recipient' },
 ]
