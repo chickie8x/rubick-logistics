@@ -67,7 +67,8 @@
   </div>
   <Teleport to="body">
     <Modal :open="isModalOpen" @close="onCloseModal" @submit="onSubmitModal">
-      <EditBooking :booking="bookingEdit" />
+      <DeleteBooking v-if="modalVSlot === 'delete'" />
+      <EditBooking v-else-if="modalVSlot === 'edit'" :booking="bookingEdit" />
     </Modal>
   </Teleport>
 </template>
@@ -79,6 +80,7 @@ import Button from '@/components/kits/button/index.vue'
 import Table from '@/components/kits/table/index.vue'
 import Modal from '@/components/kits/modal/index.vue'
 import EditBooking from './edit/index.vue'
+import DeleteBooking from './delete/index.vue'
 import {
   PlusIcon,
   ArrowDownOnSquareIcon,
@@ -101,6 +103,7 @@ const userPermission = permissions.find((permission) => permission.key === userR
 const actions = ref(false)
 const actionRows = ref([])
 const bookingEdit = ref(null)
+const modalVSlot = ref(null)
 
 const rowDataByRule = computed(() => {
   if (userPermission >= 2) return rows
@@ -136,6 +139,7 @@ const onSelectedRows = (selectedRows) => {
 }
 
 const onDelete = () => {
+  modalVSlot.value = 'delete'
   isModalOpen.value = true
 }
 
@@ -145,6 +149,7 @@ const onSubmitModal = () => {
 }
 
 const onModify = () => {
+  modalVSlot.value = 'edit'
   isModalOpen.value = true
 }
 

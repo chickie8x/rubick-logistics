@@ -53,8 +53,8 @@
                     <li>
                       <ul role="list" class="-mx-2 space-y-1">
                         <li v-for="item in navigation" :key="item.name">
-                          <a
-                            :href="item.href"
+                          <router-link
+                            :to="item.href"
                             :class="[
                               item.current
                                 ? 'bg-gray-800 text-white'
@@ -64,7 +64,7 @@
                           >
                             <component :is="item.icon" class="size-6 shrink-0" aria-hidden="true" />
                             {{ item.name }}
-                          </a>
+                          </router-link>
                         </li>
                       </ul>
                     </li>
@@ -72,8 +72,8 @@
                       <div class="text-xs/6 font-semibold text-gray-400">Your teams</div>
                       <ul role="list" class="-mx-2 mt-2 space-y-1">
                         <li v-for="team in teams" :key="team.name">
-                          <a
-                            :href="team.href"
+                          <router-link
+                            :to="team.href"
                             :class="[
                               team.current
                                 ? 'bg-gray-800 text-white'
@@ -86,7 +86,7 @@
                               >{{ team.initial }}</span
                             >
                             <span class="truncate">{{ team.name }}</span>
-                          </a>
+                            </router-link>
                         </li>
                       </ul>
                     </li>
@@ -120,10 +120,10 @@
             <li>
               <ul role="list" class="-mx-2 space-y-1">
                 <li v-for="item in navigation" :key="item.name">
-                  <a
-                    :href="item.href"
+                  <router-link
+                    :to="item.href"
                     :class="[
-                      item.current
+                      currentRoute.includes(item.href)
                         ? 'bg-gray-800 text-white'
                         : 'text-gray-400 hover:bg-gray-800 hover:text-white',
                       'group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold',
@@ -131,7 +131,7 @@
                   >
                     <component :is="item.icon" class="size-6 shrink-0" aria-hidden="true" />
                     {{ item.name }}
-                  </a>
+                  </router-link>
                 </li>
               </ul>
             </li>
@@ -139,8 +139,8 @@
               <div class="text-xs/6 font-semibold text-gray-400">Your teams</div>
               <ul role="list" class="-mx-2 mt-2 space-y-1">
                 <li v-for="team in teams" :key="team.name">
-                  <a
-                    :href="team.href"
+                  <router-link
+                    :to="team.href"
                     :class="[
                       team.current
                         ? 'bg-gray-800 text-white'
@@ -153,7 +153,7 @@
                       >{{ team.initial }}</span
                     >
                     <span class="truncate">{{ team.name }}</span>
-                  </a>
+                  </router-link>
                 </li>
               </ul>
             </li>
@@ -247,6 +247,8 @@
       <main class="py-4 flex-1">
         <div class="px-4 sm:px-6 lg:px-8 h-full">
           <router-view />
+    <button @click="console.log(currentRoute)">Route</button>
+
         </div>
       </main>
     </div>
@@ -254,7 +256,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import {
   Dialog,
   DialogPanel,
@@ -279,11 +281,11 @@ import {
 } from '@heroicons/vue/24/outline'
 import { ChevronDownIcon, MagnifyingGlassIcon } from '@heroicons/vue/20/solid'
 import Bookings from '@/components/functions/bookings/index.vue'
-import { useRouter } from 'vue-router'
+import { useRouter, useRoute } from 'vue-router'
 import Logo from '@/components/icons/logo.vue'
 
 const navigation = [
-  { name: 'Bookings Data', href: '/bookings', icon: CalendarIcon, current: true },
+  { name: 'Bookings Data', href: '/bookings', icon: CalendarIcon, current: false },
   { name: 'Users', href: '/users', icon: UsersIcon, current: false },
   { name: 'Customers Data', href: '/customers', icon: FolderIcon, current: false },
   { name: 'Accountant', href: '#', icon: DocumentDuplicateIcon, current: false },
@@ -301,6 +303,10 @@ const userNavigation = [
 
 const sidebarOpen = ref(false)
 const router = useRouter()
+const route = useRoute()
+const currentRoute = computed(() => {
+  return route.path
+})
 const user = JSON.parse(localStorage.getItem('user'))
 const logout = () => {
   localStorage.removeItem('user')
