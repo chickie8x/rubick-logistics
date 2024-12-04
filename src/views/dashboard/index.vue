@@ -187,11 +187,7 @@
         <!-- Separator -->
         <div class="h-6 w-px bg-gray-900/10 lg:hidden" aria-hidden="true" />
 
-        <div class="flex flex-1 gap-x-4 self-stretch lg:gap-x-6 justify-end">
-          <!-- <form class="grid flex-1 grid-cols-1" action="#" method="GET">
-            <input type="search" name="search" aria-label="Search" class="col-start-1 row-start-1 block size-full bg-white pl-8 text-base text-gray-900 outline-none placeholder:text-gray-400 sm:text-sm/6" placeholder="Search" />
-            <MagnifyingGlassIcon class="pointer-events-none col-start-1 row-start-1 size-5 self-center text-gray-400" aria-hidden="true" />
-          </form> -->
+        <div v-if="user.email" class="flex flex-1 gap-x-4 self-stretch lg:gap-x-6 justify-end">
           <div class="flex items-center gap-x-4 lg:gap-x-6">
             <button type="button" class="-m-2.5 p-2.5 text-gray-400 hover:text-gray-500">
               <span class="sr-only">View notifications</span>
@@ -211,9 +207,9 @@
                   alt=""
                 />
                 <span class="hidden lg:flex lg:items-center">
-                  <span class="ml-4 text-sm/6 font-semibold text-gray-900" aria-hidden="true"
-                    >Tom Cook</span
-                  >
+                  <span class="ml-4 text-sm/6 font-semibold text-gray-900" aria-hidden="true">{{
+                    user.username
+                  }}</span>
                   <ChevronDownIcon class="ml-2 size-5 text-gray-400" aria-hidden="true" />
                 </span>
               </MenuButton>
@@ -229,19 +225,22 @@
                   class="absolute right-0 z-10 mt-2.5 w-32 origin-top-right rounded-md bg-white py-2 shadow-lg ring-1 ring-gray-900/5 focus:outline-none"
                 >
                   <MenuItem v-for="item in userNavigation" :key="item.name" v-slot="{ active }">
-                    <a
-                      :href="item.href"
+                    <span
+                      @click="item.event"
                       :class="[
                         active ? 'bg-gray-50 outline-none' : '',
-                        'block px-3 py-1 text-sm/6 text-gray-900',
+                        'block px-3 py-1 text-sm/6 text-gray-900 cursor-default select-none',
                       ]"
-                      >{{ item.name }}</a
+                      >{{ item.name }}</span
                     >
                   </MenuItem>
                 </MenuItems>
               </transition>
             </Menu>
           </div>
+        </div>
+        <div v-else>
+          <router-link to="/auth">Login</router-link>
         </div>
       </div>
 
@@ -286,7 +285,7 @@ import Logo from '@/components/icons/logo.vue'
 const navigation = [
   { name: 'Bookings Data', href: '/bookings', icon: CalendarIcon, current: true },
   { name: 'Users', href: '/users', icon: UsersIcon, current: false },
-  { name: 'Customers Data', href: '#', icon: FolderIcon, current: false },
+  { name: 'Customers Data', href: '/customers', icon: FolderIcon, current: false },
   { name: 'Accountant', href: '#', icon: DocumentDuplicateIcon, current: false },
   { name: 'Reports', href: '#', icon: ChartPieIcon, current: false },
 ]
@@ -296,11 +295,18 @@ const teams = [
   { id: 3, name: 'Workcation', href: '#', initial: 'W', current: false },
 ]
 const userNavigation = [
-  { name: 'Your profile', href: '#' },
-  { name: 'Sign out', href: '#' },
+  { name: 'Your profile', event: () => profile() },
+  { name: 'Sign out', event: () => logout() },
 ]
 
 const sidebarOpen = ref(false)
 const router = useRouter()
-// router.push('/bookings')
+const user = JSON.parse(localStorage.getItem('user'))
+const logout = () => {
+  localStorage.removeItem('user')
+  router.push('/auth')
+}
+const profile = () => {
+  // router.push('/profile')
+}
 </script>

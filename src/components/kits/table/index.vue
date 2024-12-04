@@ -3,7 +3,12 @@
     <thead class="bg-gray-50">
       <tr class="divide-x">
         <th v-if="modifiable" scope="col" class="w-10">
-          <input type="checkbox" class="scale-125" v-model="isAllSelected" />
+          <input
+            type="checkbox"
+            class="scale-125"
+            v-model="isAllSelected"
+            @change="selectAllToggle"
+          />
         </th>
         <th
           v-for="header in headers"
@@ -15,7 +20,7 @@
         </th>
       </tr>
     </thead>
-    <tbody class="divide-y divide-gray-200">
+    <tbody v-if="data.length > 0" class="divide-y divide-gray-200">
       <tr
         v-for="(row, idx) in data"
         :key="idx"
@@ -34,11 +39,22 @@
         </td>
       </tr>
     </tbody>
+    <tbody v-else>
+      <tr>
+        <td colspan="100%" class="text-center text-sm text-gray-600 mt-4 p-8">
+          <div class="flex items-center justify-center">
+            <NoSymbolIcon class="size-5 mr-2 text-red-600" /> Không có dữ liệu từ user này hoặc
+            không có quyền truy cập dữ liệu này
+          </div>
+        </td>
+      </tr>
+    </tbody>
   </table>
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
+import { NoSymbolIcon } from '@heroicons/vue/24/outline'
 
 const props = defineProps({
   headers: {
@@ -55,6 +71,19 @@ const props = defineProps({
   },
 })
 
+const emit = defineEmits(['selectedRows'])
+
 const isAllSelected = ref(false)
 const rowsSelected = ref(new Array(props.data.length).fill(false))
+const selectAllToggle = () => {
+  rowsSelected.value = new Array(props.data.length).fill(isAllSelected.value)
+}
+
+watch(
+  rowsSelected,
+  (newVal) => {
+    emit('selectedRows', newVal)
+  },
+  { deep: true },
+)
 </script>

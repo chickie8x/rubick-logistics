@@ -30,10 +30,8 @@
               class="relative transform overflow-hidden rounded-lg bg-white p-2 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-[480px] sm:p-6 w-auto"
             >
               <slot />
-              <div class="flex justify-end gap-x-2 mt-8">
-                <Button @click="$emit('submit')" :variant="'primary'" class="w-28"
-                  >Tạo booking</Button
-                >
+              <div class="flex justify-end gap-x-6 mt-8">
+                <Button @click="$emit('submit')" :variant="'primary'" class="w-28">Xác nhận</Button>
                 <Button @click="$emit('close')" :variant="'secondary'" class="w-28">Hủy</Button>
               </div>
             </DialogPanel>
