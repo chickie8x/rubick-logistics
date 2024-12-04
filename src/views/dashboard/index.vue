@@ -247,8 +247,6 @@
       <main class="py-4 flex-1">
         <div class="px-4 sm:px-6 lg:px-8 h-full">
           <router-view />
-    <button @click="console.log(currentRoute)">Route</button>
-
         </div>
       </main>
     </div>
