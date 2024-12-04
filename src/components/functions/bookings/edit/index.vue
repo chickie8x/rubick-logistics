@@ -1,7 +1,6 @@
 <template>
   <div >
     <h1 class="text-gray-700 text-2xl text-center font-bold">Cập nhật booking</h1>
-    {{ department }}
     <div class="max-h-96 w-full overflow-auto mt-4 space-y-4">
         <div v-for="header in fields" :key="header.key" class="flex flex-col">
             <span class="text-sm text-gray-600">{{ header.label }}</span>
