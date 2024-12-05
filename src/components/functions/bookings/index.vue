@@ -13,7 +13,7 @@
             <PlusIcon class="size-5 mr-2" />
             New
           </Button>
-          <Button class="flex items-center">
+          <Button class="flex items-center" @click="onExport">
             <ArrowDownOnSquareIcon class="size-5 mr-2" />
             Export
           </Button>
@@ -68,7 +68,12 @@
   <Teleport to="body">
     <Modal :open="isModalOpen" @close="onCloseModal" @submit="onSubmitModal">
       <DeleteBooking v-if="modalVSlot === 'delete'" />
-      <EditBooking v-else-if="modalVSlot === 'edit'" :booking="bookingEdit" :department="userDepartment" />
+      <EditBooking
+        v-else-if="modalVSlot === 'edit'"
+        :booking="bookingEdit"
+        :department="userDepartment"
+      />
+      <QuotationForm v-else-if="quotationForm === 'quotation'" />
     </Modal>
   </Teleport>
 </template>
@@ -81,6 +86,7 @@ import Table from '@/components/kits/table/index.vue'
 import Modal from '@/components/kits/modal/index.vue'
 import EditBooking from './edit/index.vue'
 import DeleteBooking from './delete/index.vue'
+import QuotationForm from './quotation-form/index.vue'
 import {
   PlusIcon,
   ArrowDownOnSquareIcon,
@@ -104,6 +110,7 @@ const actions = ref(false)
 const actionRows = ref([])
 const bookingEdit = ref(null)
 const modalVSlot = ref(null)
+const quotationForm = ref(null)
 
 const rowDataByRule = computed(() => {
   if (userPermission >= 2) return rows
@@ -128,13 +135,13 @@ const onCloseModal = () => {
 
 const onSelectedRows = (selectedRows) => {
   actionRows.value = selectedRows
-  if(actionRows.value.filter(Boolean).length === 1) {
+  if (actionRows.value.filter(Boolean).length === 1) {
     actionRows.value.map((item, idx) => {
-      if(item) {
+      if (item) {
         bookingEdit.value = rowDataByRule.value[idx]
         console.log(bookingEdit.value)
       }
-    })  
+    })
   }
 }
 
@@ -150,6 +157,11 @@ const onSubmitModal = () => {
 
 const onModify = () => {
   modalVSlot.value = 'edit'
+  isModalOpen.value = true
+}
+
+const onExport   = () => {
+  quotationForm.value = 'quotation'
   isModalOpen.value = true
 }
 

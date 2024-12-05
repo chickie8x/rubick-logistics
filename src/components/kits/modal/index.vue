@@ -27,7 +27,7 @@
             leave-to="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
           >
             <DialogPanel
-              class="relative transform overflow-hidden rounded-lg bg-white p-2 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-[480px] sm:p-6 w-auto"
+              class="relative transform overflow-hidden rounded-lg bg-white p-2 text-left shadow-xl transition-all sm:my-8"
             >
               <slot />
               <div class="flex justify-end gap-x-6 mt-8">

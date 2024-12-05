@@ -86,7 +86,7 @@
                               >{{ team.initial }}</span
                             >
                             <span class="truncate">{{ team.name }}</span>
-                            </router-link>
+                          </router-link>
                         </li>
                       </ul>
                     </li>

@@ -67,6 +67,14 @@ const router = createRouter({
       },
       name: 'auth',
     },
+    {
+      path: '/auth/forgot-password',
+      component: () => import('../views/auth/forgot-password/index.vue'),
+      meta: {
+        requiresAuth: false,
+      },
+      name: 'forgot-password',
+    },
   ],
 })
 
@@ -82,6 +90,8 @@ router.beforeEach((to, from, next) => {
     next('/auth')
   } else if (to.path === '/' && isAuthenticated) {
     next('/bookings')
+  } else if (to.path === '/auth/forgot-password') {
+    next()
   } else if (to.path === '/bookings/add' && isAuthenticated && userDepartment !== 'Sale') {
     alert('Bạn không có quyền truy cập vào trang này')
     next(from.fullPath)

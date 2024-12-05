@@ -28,10 +28,10 @@
         <div class="flex justify-end text-sm space-x-2">
           <span class="text-gray-700 text-sm">Quên mật khẩu?</span>
           <span
-            @click="isSignedup = true"
+            @click="router.push('/auth/forgot-password')"
             class="text-indigo-600 text-sm cursor-pointer hover:underline"
           >
-            Khôi phục mật khẩu</span
+            Khôi phục</span
           >
         </div>
         <div class="flex justify-end items-end flex-1 pb-0">
