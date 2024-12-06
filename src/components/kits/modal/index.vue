@@ -27,13 +27,9 @@
             leave-to="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
           >
             <DialogPanel
-              class="relative transform overflow-hidden rounded-lg bg-white p-2 text-left shadow-xl transition-all sm:my-8"
+              class="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8"
             >
               <slot />
-              <div class="flex justify-end gap-x-6 mt-8">
-                <Button @click="$emit('submit')" :variant="'primary'" class="w-28">Xác nhận</Button>
-                <Button @click="$emit('close')" :variant="'secondary'" class="w-28">Hủy</Button>
-              </div>
             </DialogPanel>
           </TransitionChild>
         </div>
@@ -46,7 +42,6 @@
 import { ref } from 'vue'
 import { Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot } from '@headlessui/vue'
 import { CheckIcon } from '@heroicons/vue/24/outline'
-import Button from '@/components/kits/button/index.vue'
 
 const props = defineProps({
   open: {
@@ -55,6 +50,4 @@ const props = defineProps({
     default: () => false,
   },
 })
-
-const emit = defineEmits(['submit', 'close'])
 </script>

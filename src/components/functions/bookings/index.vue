@@ -66,14 +66,34 @@
     </div>
   </div>
   <Teleport to="body">
-    <Modal :open="isModalOpen" @close="onCloseModal" @submit="onSubmitModal">
-      <DeleteBooking v-if="modalVSlot === 'delete'" />
+    <Modal :open="isModalOpen">
+      <DeleteBooking
+        v-if="modalVSlot === 'delete'"
+        @submitDelete="onSubmitDelete"
+        @closeDelete="onCloseDelete"
+      />
       <EditBooking
         v-else-if="modalVSlot === 'edit'"
         :booking="bookingEdit"
         :department="userDepartment"
+        @submitEdit="onSubmitEdit"
+        @cancelEdit="onCancelEdit"
       />
-      <QuotationForm v-else-if="quotationForm === 'quotation'" />
+      <QuotationFormType1
+        v-else-if="quotationForm === 'fcl1'"
+        @submitExportQuotation="onSubmitExportQuotation"
+        @cancelExportQuotation="onCancelExportQuotation"
+      />
+      <QuotationFormType2
+        v-else-if="quotationForm === 'fcl2'"
+        @submitExportQuotation="onSubmitExportQuotation"
+        @cancelExportQuotation="onCancelExportQuotation"
+      />
+      <QuotationChoice
+        v-else-if="quotationChoice"
+        @submitQuotationChoice="onSubmitQuotationChoice"
+        @cancelQuotationChoice="onCancelQuotationChoice"
+      />
     </Modal>
   </Teleport>
 </template>
@@ -86,7 +106,9 @@ import Table from '@/components/kits/table/index.vue'
 import Modal from '@/components/kits/modal/index.vue'
 import EditBooking from './edit/index.vue'
 import DeleteBooking from './delete/index.vue'
-import QuotationForm from './quotation-form/index.vue'
+import QuotationFormType2 from './quotation-form/type2/index.vue'
+import QuotationFormType1 from './quotation-form/type1/index.vue'
+import QuotationChoice from './quotation-form/choices/index.vue'
 import {
   PlusIcon,
   ArrowDownOnSquareIcon,
@@ -100,6 +122,7 @@ import { ref, computed } from 'vue'
 import { headers, rows } from './data'
 import { permissions } from '@/mockdata'
 
+const isModalOpen = ref(false)
 const router = useRouter()
 const user = JSON.parse(localStorage.getItem('user'))
 const username = user.username
@@ -111,6 +134,7 @@ const actionRows = ref([])
 const bookingEdit = ref(null)
 const modalVSlot = ref(null)
 const quotationForm = ref(null)
+const quotationChoice = ref(false)
 
 const rowDataByRule = computed(() => {
   if (userPermission >= 2) return rows
@@ -126,11 +150,26 @@ const onCancel = () => {
   actions.value = false
 }
 
-const isModalOpen = ref(false)
-
-const onCloseModal = () => {
+const onSubmitDelete = () => {
+  console.log('submit delete')
   isModalOpen.value = false
-  console.log('closed modal')
+  modalVSlot.value = null
+}
+
+const onCloseDelete = () => {
+  isModalOpen.value = false
+  modalVSlot.value = null
+}
+
+const onSubmitEdit = () => {
+  console.log('submit edit')
+  isModalOpen.value = false
+  modalVSlot.value = null
+}
+
+const onCancelEdit = () => {
+  isModalOpen.value = false
+  modalVSlot.value = null
 }
 
 const onSelectedRows = (selectedRows) => {
@@ -150,19 +189,41 @@ const onDelete = () => {
   isModalOpen.value = true
 }
 
-const onSubmitModal = () => {
-  isModalOpen.value = false
-  console.log('submitted modal')
-}
-
 const onModify = () => {
   modalVSlot.value = 'edit'
   isModalOpen.value = true
 }
 
-const onExport   = () => {
-  quotationForm.value = 'quotation'
+const onExport = () => {
+  quotationChoice.value = true
   isModalOpen.value = true
+}
+
+const onSubmitQuotationChoice = (choice) => {
+  quotationChoice.value = false
+  console.log(choice)
+  quotationForm.value = choice
+}
+
+const onCancelQuotationChoice = () => {
+  quotationChoice.value = false
+  modalVSlot.value = null
+  isModalOpen.value = false
+}
+
+const onSubmitExportQuotation = () => {
+  console.log('submit export quotation')
+  quotationForm.value = null
+  modalVSlot.value = null
+  isModalOpen.value = false
+
+}
+
+const onCancelExportQuotation = () => {
+  console.log('cancel export quotation')
+  quotationForm.value = null
+  modalVSlot.value = null
+  isModalOpen.value = false
 }
 
 const actionDelete = computed(() => {
