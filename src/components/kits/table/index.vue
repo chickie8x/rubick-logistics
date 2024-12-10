@@ -1,7 +1,7 @@
 <template>
-  <table class="min-w-full divide-y divide-gray-300 table-auto border">
-    <thead class="bg-gray-50">
-      <tr class="divide-x">
+  <table class="min-w-full border-t-0 border border-gray-300 relative">
+    <thead class="sticky top-0">
+      <tr class="bg-slate-300 divide-x divide-gray-200">
         <th v-if="modifiable" scope="col" class="w-10">
           <input
             type="checkbox"
@@ -14,7 +14,7 @@
           v-for="header in headers"
           :key="header.key"
           scope="col"
-          class="py-3.5 pl-4 pr-6 text-left text-sm font-semibold text-gray-900 w-auto whitespace-nowrap"
+          class="py-3.5 pl-4 pr-6 text-left text-sm font-semibold text-gray-700 w-auto whitespace-nowrap"
         >
           {{ header.label }}
         </th>
@@ -24,8 +24,13 @@
       <tr
         v-for="(row, idx) in data"
         :key="idx"
-        class="divide-x"
-        :class="{ 'bg-gray-100': rowsSelected[idx] }"
+        @click="rowClicked(row)"
+        class="divide-x hover:bg-slate-200 cursor-default"
+        :class="{
+          '!bg-indigo-100': rowsSelected[idx],
+          'bg-gray-50': idx % 2 !== 0,
+          'cursor-pointer': rowEvent,
+        }"
       >
         <td v-if="modifiable" class="px-4">
           <input type="checkbox" class="scale-125" v-model="rowsSelected[idx]" />
@@ -43,8 +48,8 @@
       <tr>
         <td colspan="100%" class="text-center text-sm text-gray-600 mt-4 p-8">
           <div class="flex items-center justify-center">
-            <NoSymbolIcon class="size-5 mr-2 text-red-600" /> Không có dữ liệu từ user này hoặc
-            không có quyền truy cập dữ liệu này
+            <NoSymbolIcon class="size-5 mr-2 text-red-600" /> Không có dữ liệu hoặc không có quyền
+            truy cập dữ liệu này
           </div>
         </td>
       </tr>
@@ -64,14 +69,19 @@ const props = defineProps({
   data: {
     type: Array,
     required: true,
+    default: () => [],
   },
   modifiable: {
     type: Boolean,
     default: false,
   },
+  rowEvent: {
+    type: Boolean,
+    default: false,
+  },
 })
 
-const emit = defineEmits(['selectedRows'])
+const emit = defineEmits(['selectedRows', 'onRowClick'])
 
 const isAllSelected = ref(false)
 const rowsSelected = ref(new Array(props.data.length).fill(false))
@@ -86,4 +96,12 @@ watch(
   },
   { deep: true },
 )
+
+const rowClicked = (row) => {
+  if (props.rowEvent) {
+    emit('onRowClick', row)
+  } else {
+    return
+  }
+}
 </script>

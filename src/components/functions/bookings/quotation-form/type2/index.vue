@@ -21,7 +21,8 @@
           <div class="space-x-2 max-w-[700px] whitespace-pre-wrap text-center">
             <span class="font-bold">Hanoi Branch:</span>
             <span
-              >No 02 Galaxy 3 Street, Galaxy Urban Area, Van Phuc, Ha Dong District, Hanoi City</span
+              >No 02 Galaxy 3 Street, Galaxy Urban Area, Van Phuc, Ha Dong District, Hanoi
+              City</span
             >
           </div>
           <div class="space-x-2 max-w-[700px] whitespace-wrap flex justify-evenly">
@@ -178,7 +179,7 @@
             <div class="col-span-2 px-2 py-1">
               <span class="block text-center">USD</span>
             </div>
-  
+
             <div class="col-span-1 px-2 py-1">
               <span></span>
             </div>
@@ -191,7 +192,7 @@
             <div class="col-span-2 px-2 py-1">
               <span class="block text-center">USD</span>
             </div>
-  
+
             <div class="col-span-1 px-2 py-1">
               <span></span>
             </div>
@@ -204,7 +205,7 @@
             <div class="col-span-2 px-2 py-1">
               <span class="block text-center">USD</span>
             </div>
-  
+
             <div class="col-span-1 px-2 py-1">
               <span></span>
             </div>
@@ -217,7 +218,7 @@
             <div class="col-span-2 px-2 py-1">
               <span class="block text-center">USD</span>
             </div>
-  
+
             <div class="col-span-1 px-2 py-1">
               <span></span>
             </div>
@@ -230,7 +231,7 @@
             <div class="col-span-2 px-2 py-1">
               <span class="block text-center">USD</span>
             </div>
-  
+
             <div class="col-span-1 px-2 py-1">
               <span></span>
             </div>
@@ -243,7 +244,7 @@
             <div class="col-span-2 px-2 py-1">
               <span class="block text-center">USD</span>
             </div>
-  
+
             <div class="col-span-1 px-2 py-1">
               <span></span>
             </div>
@@ -256,7 +257,7 @@
             <div class="col-span-2 px-2 py-1">
               <span class="block text-center">USD</span>
             </div>
-  
+
             <div class="col-span-1 px-2 py-1">
               <span></span>
             </div>
@@ -269,7 +270,7 @@
             <div class="col-span-2 px-2 py-1">
               <span class="block text-center">USD</span>
             </div>
-  
+
             <div class="col-span-1 px-2 py-1">
               <span></span>
             </div>
@@ -282,7 +283,7 @@
             <div class="col-span-2 px-2 py-1">
               <span class="block text-center">USD</span>
             </div>
-  
+
             <div class="col-span-1 px-2 py-1">
               <span></span>
             </div>
@@ -295,7 +296,7 @@
             <div class="col-span-2 px-2 py-1">
               <span class="block text-center">USD</span>
             </div>
-  
+
             <div class="col-span-1 px-2 py-1">
               <span></span>
             </div>
@@ -308,7 +309,7 @@
             <div class="col-span-2 px-2 py-1">
               <span class="block text-center"></span>
             </div>
-  
+
             <div class="col-span-1 px-2 py-1">
               <span></span>
             </div>
@@ -321,7 +322,7 @@
             <div class="col-span-2 px-2 py-1">
               <span class="block text-center">USD</span>
             </div>
-  
+
             <div class="col-span-1 px-2 py-1">
               <span></span>
             </div>
@@ -334,7 +335,7 @@
             <div class="col-span-2 px-2 py-1">
               <span class="block text-center">USD</span>
             </div>
-  
+
             <div class="col-span-1 px-2 py-1">
               <span></span>
             </div>
@@ -347,7 +348,7 @@
             <div class="col-span-2 px-2 py-1">
               <span class="block text-center">USD</span>
             </div>
-  
+
             <div class="col-span-2 row-span-2 px-2 py-1 flex justify-center items-center">
               <span class="block text-center">Total</span>
             </div>
@@ -363,7 +364,7 @@
             <div class="col-span-2 px-2 py-1">
               <span class="block text-center"></span>
             </div>
-  
+
             <div class="col-span-2 px-2 py-1">
               <span class="block text-center">Phí thủ tục hải quan</span>
             </div>
@@ -373,7 +374,7 @@
             <div class="col-span-2 px-2 py-1">
               <span class="block text-center"></span>
             </div>
-  
+
             <div class="col-span-2 px-2 py-1">
               <span class="block text-center h-5"></span>
             </div>
@@ -383,7 +384,7 @@
             <div class="col-span-2 px-2 py-1">
               <span class="block text-center"></span>
             </div>
-  
+
             <div class="col-span-2 px-2 py-1">
               <span class="block text-center">Phí dịch vụ</span>
             </div>
@@ -393,7 +394,7 @@
             <div class="col-span-2 px-2 py-1">
               <span class="block text-center"></span>
             </div>
-  
+
             <div class="col-span-2 px-2 py-1">
               <span class="block text-center h-5"></span>
             </div>
@@ -403,7 +404,7 @@
             <div class="col-span-2 px-2 py-1">
               <span class="block text-center"></span>
             </div>
-  
+
             <div class="col-span-2 px-2 py-1">
               <span class="block text-center h-5"></span>
             </div>
@@ -413,7 +414,7 @@
             <div class="col-span-2 px-2 py-1">
               <span class="block text-center"></span>
             </div>
-  
+
             <div class="col-span-2 px-2 py-1">
               <span class="block text-center"></span>
             </div>
@@ -423,7 +424,7 @@
             <div class="col-span-2 px-2 py-1">
               <span class="block text-center"></span>
             </div>
-  
+
             <div class="col-span-2 px-2 py-1">
               <span class="block text-center uppercase font-bold">Profits</span>
             </div>
@@ -433,7 +434,7 @@
             <div class="col-span-2 px-2 py-1">
               <span class="block text-center">VND</span>
             </div>
-  
+
             <div class="col-span-2 px-2 py-1">
               <span class="block text-center"></span>
             </div>
@@ -444,7 +445,7 @@
               <span class="block text-center"></span>
             </div>
           </div>
-  
+
           <span class="text-lg font-bold uppercase block bg-slate-700 text-white px-2 py-1"
             >III - Ghi chú</span
           >
@@ -457,7 +458,7 @@
             <li>Báo giá chưa bao gồm chi phí đường cấm (nếu có)</li>
             <li>Thời gian báo giá (Thời gian muốn ấn định giá)</li>
           </ol>
-  
+
           <div class="border-t border-slate-300 py-2 flex justify-center space-x-80 border-b h-40">
             <div class="text-center">
               <span class="font-bold">Người báo giá</span>

@@ -56,7 +56,7 @@
         >Lưu ý , có thể chọn nhiều booking để xoá , chỉnh sửa chỉ được phép chọn 1 booking</span
       >
     </div>
-    <div class="mt-4 w-full overflow-auto flex-1">
+    <div class="mt-4 w-full h-full overflow-auto">
       <Table
         :headers="headers"
         :data="rowDataByRule"
@@ -216,7 +216,6 @@ const onSubmitExportQuotation = () => {
   quotationForm.value = null
   modalVSlot.value = null
   isModalOpen.value = false
-
 }
 
 const onCancelExportQuotation = () => {

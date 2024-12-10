@@ -21,7 +21,8 @@
           <div class="space-x-2 max-w-[700px] whitespace-pre-wrap text-center">
             <span class="font-bold">Hanoi Branch:</span>
             <span
-              >No 02 Galaxy 3 Street, Galaxy Urban Area, Van Phuc, Ha Dong District, Hanoi City</span
+              >No 02 Galaxy 3 Street, Galaxy Urban Area, Van Phuc, Ha Dong District, Hanoi
+              City</span
             >
           </div>
           <div class="space-x-2 max-w-[700px] whitespace-wrap flex justify-evenly">
@@ -168,7 +169,9 @@
             >
               <span class="font-bold">x(loại cont)</span>
             </div>
-            <div class="col-span-2 row-span-2 px-2 py-1 text-center flex items-center justify-center">
+            <div
+              class="col-span-2 row-span-2 px-2 py-1 text-center flex items-center justify-center"
+            >
               <span class="font-bold">Ghi chú</span>
             </div>
           </div>
@@ -217,7 +220,7 @@
             <div class="col-span-2 px-2 py-1">
               <span></span>
             </div>
-  
+
             <div class="col-span-1 px-2 py-1">
               <span>Charges per</span>
             </div>
@@ -239,7 +242,7 @@
             <div class="col-span-2 px-2 py-1">
               <span></span>
             </div>
-  
+
             <div class="col-span-1 px-2 py-1">
               <span>Other fee</span>
             </div>
@@ -261,7 +264,7 @@
             <div class="col-span-2 px-2 py-1">
               <span></span>
             </div>
-  
+
             <div class="col-span-1 px-2 py-1">
               <span></span>
             </div>
@@ -283,7 +286,7 @@
             <div class="col-span-2 px-2 py-1">
               <span></span>
             </div>
-  
+
             <div class="col-span-1 px-2 py-1">
               <span></span>
             </div>
@@ -305,9 +308,9 @@
             <div class="col-span-2 px-2 py-1">
               <span></span>
             </div>
-  
+
             <!-- II - OF-Cước biển FCL/LCL -->
-  
+
             <div class="col-span-1 px-2 py-1 flex items-center justify-center">
               <span class="font-bold">II</span>
             </div>
@@ -329,7 +332,7 @@
             <div class="col-span-2 px-2 py-1">
               <span></span>
             </div>
-  
+
             <!-- III - Phí local charge -->
             <div
               class="col-span-1 row-span-7 px-2 py-1 border-l border-t border-slate-300 flex items-center justify-center text-center"
@@ -339,7 +342,7 @@
                 Phí local charge</span
               >
             </div>
-  
+
             <div class="col-span-3 px-2 py-1 flex items-center justify-center">
               <span>CFS - Phí khai thác</span>
             </div>
@@ -358,7 +361,7 @@
             <div class="col-span-2 px-2 py-1">
               <span></span>
             </div>
-  
+
             <div class="col-span-3 px-2 py-1 flex items-center justify-center">
               <span>THC - Phí cầu cảng</span>
             </div>
@@ -377,7 +380,7 @@
             <div class="col-span-2 px-2 py-1">
               <span></span>
             </div>
-  
+
             <div class="col-span-3 px-2 py-1 flex items-center justify-center">
               <span>CIC - Phí phụ trội</span>
             </div>
@@ -396,7 +399,7 @@
             <div class="col-span-2 px-2 py-1">
               <span></span>
             </div>
-  
+
             <div class="col-span-3 px-2 py-1 flex items-center justify-center">
               <span>LSS - Phụ phí lưu huỳnh</span>
             </div>
@@ -415,7 +418,7 @@
             <div class="col-span-2 px-2 py-1">
               <span></span>
             </div>
-  
+
             <div class="col-span-3 px-2 py-1 flex items-center justify-center">
               <span>Cleaning fee - Phí vệ sinh</span>
             </div>
@@ -434,7 +437,7 @@
             <div class="col-span-2 px-2 py-1">
               <span></span>
             </div>
-  
+
             <div class="col-span-3 px-2 py-1 flex items-center justify-center">
               <span>Handling fee - Phí đại lý</span>
             </div>
@@ -453,7 +456,7 @@
             <div class="col-span-2 px-2 py-1">
               <span></span>
             </div>
-  
+
             <div class="col-span-3 px-2 py-1 flex items-center justify-center">
               <span>D/O Phí chứng từ</span>
             </div>
@@ -472,7 +475,7 @@
             <div class="col-span-2 px-2 py-1">
               <span></span>
             </div>
-  
+
             <div class="col-span-1 row-span-2 px-2 py-1">
               <span></span>
             </div>
@@ -509,14 +512,14 @@
             <div class="col-span-2 px-2 py-1">
               <span></span>
             </div>
-  
+
             <!-- IV  -->
             <div
               class="col-span-1 row-span-4 px-2 py-1 border-l border-t border-slate-300 flex items-center justify-center text-center"
             >
               <span class="font-bold">IV</span>
             </div>
-  
+
             <div class="col-span-3 px-2 py-1 flex items-center justify-center">
               <span>Phí thủ tục hải quan</span>
             </div>
@@ -535,7 +538,7 @@
             <div class="col-span-2 px-2 py-1">
               <span></span>
             </div>
-  
+
             <div class="col-span-3 px-2 py-1 flex items-center justify-center">
               <span>Kiểm hoá (Nếu có)</span>
             </div>
@@ -554,7 +557,7 @@
             <div class="col-span-2 px-2 py-1">
               <span></span>
             </div>
-  
+
             <div class="col-span-3 px-2 py-1 flex items-center justify-center">
               <span>Vận tải (từ...đến...)</span>
             </div>
@@ -573,7 +576,7 @@
             <div class="col-span-2 px-2 py-1">
               <span></span>
             </div>
-  
+
             <div class="col-span-3 px-2 py-1 flex items-center justify-center">
               <span>Đường cấm (Nếu có)</span>
             </div>
@@ -592,7 +595,7 @@
             <div class="col-span-2 px-2 py-1">
               <span></span>
             </div>
-  
+
             <div class="col-span-1 px-2 py-1">
               <span class="block h-5"></span>
             </div>
@@ -614,7 +617,7 @@
             <div class="col-span-2 px-2 py-1">
               <span></span>
             </div>
-  
+
             <div class="col-span-4 px-2 py-1 flex items-center justify-center">
               <span class="font-bold uppercase">Tổng chi phí lô hàng</span>
             </div>
@@ -634,7 +637,7 @@
               <span class="font-bold">Chưa bao gồm VAT ... %</span>
             </div>
           </div>
-  
+
           <span class="text-lg font-bold uppercase block bg-slate-700 text-white px-2 py-1"
             >III - Ghi chú</span
           >
@@ -647,7 +650,7 @@
             <li>Báo giá chưa bao gồm chi phí đường cấm (nếu có)</li>
             <li>Thời gian báo giá (Thời gian muốn ấn định giá)</li>
           </ol>
-  
+
           <div class="border-t border-slate-300 py-2 flex justify-center space-x-80 border-b h-40">
             <div class="text-center">
               <span class="font-bold">Người báo giá</span>

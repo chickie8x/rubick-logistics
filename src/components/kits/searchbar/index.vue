@@ -8,10 +8,18 @@
       class="pointer-events-none col-start-1 row-start-1 size-5 self-center text-gray-400"
       aria-hidden="true"
     />
-    <input type="search" placeholder="Search" class="w-full outline-none" aria-label="Search" />
+    <input
+      type="search"
+      v-model="model"
+      placeholder="Search"
+      class="w-full outline-none"
+      aria-label="Search"
+    />
   </form>
 </template>
 
 <script setup>
 import { MagnifyingGlassIcon } from '@heroicons/vue/24/outline'
+
+const model = defineModel()
 </script>

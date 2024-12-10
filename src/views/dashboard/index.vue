@@ -245,7 +245,7 @@
       </div>
 
       <main class="py-4 flex-1">
-        <div class="px-4 sm:px-6 lg:px-8 h-full">
+        <div class="px-4 sm:px-6 lg:px-8 h-[calc(100vh-100px)]">
           <router-view />
         </div>
       </main>
