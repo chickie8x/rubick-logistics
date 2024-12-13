@@ -66,6 +66,7 @@
             :class="[sortable ? 'border border-gray-500 outline-indigo-500 rounded-md ' : '']"
             v-model="row.sortIdx"
             min="0"
+            @click.stop
           />
         </td>
       </tr>
