@@ -276,6 +276,7 @@ import {
   HomeIcon,
   UsersIcon,
   XMarkIcon,
+  FolderArrowDownIcon,
 } from '@heroicons/vue/24/outline'
 import { ChevronDownIcon, MagnifyingGlassIcon } from '@heroicons/vue/20/solid'
 import Bookings from '@/components/functions/bookings/index.vue'
@@ -285,7 +286,8 @@ import Logo from '@/components/icons/logo.vue'
 const navigation = [
   { name: 'Bookings Data', href: '/bookings', icon: CalendarIcon, current: false },
   { name: 'Users', href: '/users', icon: UsersIcon, current: false },
-  { name: 'Customers Data', href: '/customers', icon: FolderIcon, current: false },
+  { name: 'Customers Data (Data tổng)', href: '/customers', icon: FolderIcon, current: false },
+  { name: 'Follow Data', href: '/follow-data', icon: FolderArrowDownIcon, current: false },
   { name: 'Accountant', href: '#', icon: DocumentDuplicateIcon, current: false },
   { name: 'Reports', href: '#', icon: ChartPieIcon, current: false },
 ]

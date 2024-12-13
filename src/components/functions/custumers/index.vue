@@ -27,14 +27,8 @@
         <CustomerSelect
           v-if="modalVslot === 'customerDetail'"
           :customer="customer"
-          @createBooking="createBooking"
-          @cancelCreateBooking="cancelCreateBooking"
-        />
-        <CreateBooking
-          v-if="modalVslot === 'createBooking'"
-          :customer="customer"
-          @createBookingWithCustomer="createBookingWithCustomer"
-          @cancelCreateBooking="cancelCreateBooking"
+          @pickupCustomer="pickupCustomer"
+          @cancelPickupCustomer="cancelPickupCustomer"
         />
       </Modal>
     </Teleport>
@@ -43,6 +37,7 @@
 
 <script setup>
 import { ref, watch } from 'vue'
+import { useRouter } from 'vue-router'
 import SearchBar from '@/components/kits/searchbar/index.vue'
 import Button from '@/components/kits/button/index.vue'
 import { AdjustmentsVerticalIcon, PlusIcon } from '@heroicons/vue/24/outline'
@@ -51,7 +46,8 @@ import { customerHeaders, customerPool } from './index'
 import Table from '@/components/kits/table/index.vue'
 import Modal from '@/components/kits/modal/index.vue'
 import CustomerSelect from './custumer-select/index.vue'
-import CreateBooking from './create-booking/index.vue'
+
+const router = useRouter()
 
 const filterOptions = ref([
   {
@@ -98,11 +94,22 @@ const onRowClick = (row) => {
   customer.value = row
 }
 
-const createBooking = () => {
-  modalVslot.value = 'createBooking'
+const user = ref(JSON.parse(localStorage.getItem('user')))
+const pickupCustomer = () => {
+  const sortedCustomer = { ...customer.value }
+  sortedCustomer.sortIdx = null
+  if (user.value.pickupCustomer) {
+    user.value.pickupCustomer.push(sortedCustomer)
+  } else {
+    user.value.pickupCustomer = [sortedCustomer]
+  }
+  localStorage.setItem('user', JSON.stringify(user.value))
+  router.push({
+    path: '/follow-data',
+  })
 }
 
-const cancelCreateBooking = () => {
+const cancelPickupCustomer = () => {
   modalVslot.value = null
   customerModal.value = false
 }

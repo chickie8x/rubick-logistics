@@ -57,6 +57,15 @@ const router = createRouter({
           },
           name: 'customers',
         },
+        {
+          path: 'follow-data',
+          component: () => import('../components/functions/follow-data/index.vue'),
+          meta: {
+            requiresAuth: true,
+            minPermission: 1,
+          },
+          name: 'follow-data',
+        },
       ],
     },
     {
@@ -80,7 +89,6 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
   const isAuthenticated = localStorage.getItem('user')
-  console.log(isAuthenticated)
   const permission = isAuthenticated
     ? permissions.find((permission) => permission.key === JSON.parse(isAuthenticated).role).value
     : 0

@@ -6,6 +6,4 @@
 
 <script setup>
 import { ref } from 'vue'
-
-const isLoading = ref(true)
 </script>

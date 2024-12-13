@@ -16,7 +16,25 @@
           scope="col"
           class="py-3.5 pl-4 pr-6 text-left text-sm font-semibold text-gray-700 w-auto whitespace-nowrap"
         >
-          {{ header.label }}
+          {{ header.key === 'sortIdx' ? '' : header.label }}
+          <ChevronUpDownIcon
+            v-if="header.key === 'sortIdx' && !sortable"
+            @click="enableSort"
+            class="w-6 h-6 cursor-pointer hover:text-indigo-500 bg-gray-200 p-1 rounded-md scale-110"
+          />
+          <div
+            v-else-if="header.key === 'sortIdx' && sortable"
+            class="flex items-center justify-center gap-2"
+          >
+            <CheckIcon
+              @click="emit('confirmIdxSort', sortIndex)"
+              class="w-6 h-6 text-green-500 bg-white p-1 rounded-md hover:bg-green-500 hover:text-white"
+            />
+            <XMarkIcon
+              @click="emit('rejectIdxSort')"
+              class="w-6 h-6 text-red-500 bg-white p-1 rounded-md hover:bg-red-500 hover:text-white"
+            />
+          </div>
         </th>
       </tr>
     </thead>
@@ -40,7 +58,15 @@
           :key="header.key"
           class="py-2 pl-4 pr-6 text-left text-sm text-gray-600 w-auto whitespace-nowrap"
         >
-          {{ row[header.key] }}
+          {{ header.key === 'sortIdx' && sortable ? '' : row[header.key] }}
+          <input
+            v-if="sortable && header.key === 'sortIdx'"
+            type="number"
+            class="scale-125 w-14 text-xs px-2 py-1"
+            :class="[sortable ? 'border border-gray-500 outline-indigo-500 rounded-md ' : '']"
+            v-model="row.sortIdx"
+            min="0"
+          />
         </td>
       </tr>
     </tbody>
@@ -48,8 +74,7 @@
       <tr>
         <td colspan="100%" class="text-center text-sm text-gray-600 mt-4 p-8">
           <div class="flex items-center justify-center">
-            <NoSymbolIcon class="size-5 mr-2 text-red-600" /> Không có dữ liệu hoặc không có quyền
-            truy cập dữ liệu này
+            <NoSymbolIcon class="size-5 mr-2 text-red-600" /> Không có dữ liệu
           </div>
         </td>
       </tr>
@@ -58,8 +83,8 @@
 </template>
 
 <script setup>
-import { ref, watch } from 'vue'
-import { NoSymbolIcon } from '@heroicons/vue/24/outline'
+import { ref, watch, computed } from 'vue'
+import { NoSymbolIcon, ChevronUpDownIcon, CheckIcon, XMarkIcon } from '@heroicons/vue/24/outline'
 
 const props = defineProps({
   headers: {
@@ -79,15 +104,29 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  sortable: {
+    type: Boolean,
+    default: false,
+  },
 })
 
-const emit = defineEmits(['selectedRows', 'onRowClick'])
+const emit = defineEmits([
+  'selectedRows',
+  'onRowClick',
+  'enableSort',
+  'confirmIdxSort',
+  'rejectIdxSort',
+])
 
 const isAllSelected = ref(false)
 const rowsSelected = ref(new Array(props.data.length).fill(false))
 const selectAllToggle = () => {
   rowsSelected.value = new Array(props.data.length).fill(isAllSelected.value)
 }
+
+const sortIndex = computed(() => {
+  return props.data.map((row, idx) => row.sortIdx)
+})
 
 watch(
   rowsSelected,
@@ -103,5 +142,9 @@ const rowClicked = (row) => {
   } else {
     return
   }
+}
+
+const enableSort = () => {
+  emit('enableSort', props.data)
 }
 </script>

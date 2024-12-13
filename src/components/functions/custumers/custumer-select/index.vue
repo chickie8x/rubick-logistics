@@ -18,8 +18,10 @@
         <label for="potentialCustomer" class="text-slate-500">Đánh dấu khách hàng tiềm năng</label>
       </div>
       <div class="flex items-center gap-4">
-        <Button :variant="'primary'" @click="emit('createBooking', customer)"> Tạo booking </Button>
-        <Button :variant="'secondary'" @click="emit('cancelCreateBooking')"> Huỷ </Button>
+        <Button :variant="'primary'" @click="emit('pickupCustomer', customer)">
+          Get Customer
+        </Button>
+        <Button :variant="'secondary'" @click="emit('cancelPickupCustomer')"> Huỷ </Button>
       </div>
     </div>
   </div>
@@ -33,5 +35,5 @@ const props = defineProps({
   required: true,
   default: () => {},
 })
-const emit = defineEmits(['createBooking', 'cancelCreateBooking'])
+const emit = defineEmits(['pickupCustomer', 'cancelPickupCustomer'])
 </script>
