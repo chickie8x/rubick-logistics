@@ -15,7 +15,11 @@
     </div>
     <Teleport to="body">
       <Modal :open="customerModal">
-        <CreateBooking :customer="selectedCustomer" @cancelCreateBooking="cancelCreateBooking" @createBookingWithCustomer="createBookingWithCustomer"/>
+        <CreateBooking
+          :customer="selectedCustomer"
+          @cancelCreateBooking="cancelCreateBooking"
+          @createBookingWithCustomer="createBookingWithCustomer"
+        />
       </Modal>
     </Teleport>
   </div>
@@ -24,10 +28,13 @@
 <script setup>
 import { ref, nextTick } from 'vue'
 import Table from '@/components/kits/table/index.vue'
-import { customerHeaders } from '@/components/functions/custumers/index'
+import { customerHeaders } from '@/components/functions/data/total'
 import Modal from '@/components/kits/modal/index.vue'
-import CreateBooking from '@/components/functions/custumers/create-booking/index.vue'
+import CreateBooking from '@/components/functions/data/create-booking/index.vue'
+import { toast } from 'vue-sonner'
+import { useRouter } from 'vue-router'
 
+const router = useRouter()
 const user = ref({})
 const customerModal = ref(false)
 const selectedCustomer = ref({})
@@ -64,31 +71,32 @@ const confirmIdxSort = (data) => {
     localStorage.setItem('user', JSON.stringify(user.value))
     user.value = JSON.parse(localStorage.getItem('user'))
   })
-  customer.value = user.value.pickupCustomer?.sort((a, b) => {
-    if (a.sortIdx === null && b.sortIdx !== null) return 1
-    if (a.sortIdx !== null && b.sortIdx === null) return -1
-    if (a.sortIdx !== null && b.sortIdx !== null) return a.sortIdx - b.sortIdx
-    return 0
-  }) || []
+  customer.value =
+    user.value.pickupCustomer?.sort((a, b) => {
+      if (a.sortIdx === null && b.sortIdx !== null) return 1
+      if (a.sortIdx !== null && b.sortIdx === null) return -1
+      if (a.sortIdx !== null && b.sortIdx !== null) return a.sortIdx - b.sortIdx
+      return 0
+    }) || []
 
   sortable.value = false
 }
 
 const rejectIdxSort = () => {
   user.value = JSON.parse(localStorage.getItem('user'))
-  customer.value = user.value.pickupCustomer?.sort((a, b) => {
-    if (a.sortIdx === null && b.sortIdx !== null) return 1
-    if (a.sortIdx !== null && b.sortIdx === null) return -1
-    if (a.sortIdx !== null && b.sortIdx !== null) return a.sortIdx - b.sortIdx
-    return 0
-  }) || []
+  customer.value =
+    user.value.pickupCustomer?.sort((a, b) => {
+      if (a.sortIdx === null && b.sortIdx !== null) return 1
+      if (a.sortIdx !== null && b.sortIdx === null) return -1
+      if (a.sortIdx !== null && b.sortIdx !== null) return a.sortIdx - b.sortIdx
+      return 0
+    }) || []
   sortable.value = false
 }
 
 const onRowClick = (row) => {
   selectedCustomer.value = row
   customerModal.value = true
-  console.log(row)
 }
 
 const cancelCreateBooking = () => {
@@ -96,6 +104,18 @@ const cancelCreateBooking = () => {
 }
 
 const createBookingWithCustomer = () => {
+  const bookedCustomer = user.value.bookedCustomer ? user.value.bookedCustomer : []
+  bookedCustomer.push(selectedCustomer.value)
+  user.value.bookedCustomer = bookedCustomer
+  user.value.pickupCustomer = user.value.pickupCustomer.filter(
+    (item) => item.mst !== selectedCustomer.value.mst,
+  )
+  nextTick(() => {
+    localStorage.setItem('user', JSON.stringify(user.value))
+    user.value = JSON.parse(localStorage.getItem('user'))
+  })
   customerModal.value = false
+  toast.success('Tạo booking thành công')
+  router.push('/data/booked')
 }
 </script>

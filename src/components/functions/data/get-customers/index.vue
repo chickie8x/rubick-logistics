@@ -28,7 +28,7 @@
 </template>
 <script setup>
 import Button from '@/components/kits/button/index.vue'
-import { customerHeaders } from '../index'
+import { customerHeaders } from '../total/index'
 
 const props = defineProps({
   customer: Object,

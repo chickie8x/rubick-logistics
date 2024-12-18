@@ -58,6 +58,7 @@
     </div>
     <div class="mt-4 w-full h-full overflow-auto">
       <Table
+        :selectAllEnable="true"
         :headers="headers"
         :data="rowDataByRule"
         :modifiable="actions"

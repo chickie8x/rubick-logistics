@@ -1,6 +1,6 @@
 <template>
   <div class="p-4">
-    <div class="w-[1024px] p-4">
+    <div class="w-[1024px] p-4" id="my-node">
       <div class="flex border-b border-slate-300 pb-4">
         <div class="mr-10 h-40">
           <img src="/images/quotationlogo.png" alt="logo" class="h-full" />
@@ -671,7 +671,7 @@
       </div>
     </div>
     <div class="flex justify-end mt-4 space-x-4">
-      <Button :variant="'primary'" @click="emit('submitExportQuotation')">Xuất báo giá</Button>
+      <Button :variant="'primary'" @click="exportQuotation">Xuất báo giá</Button>
       <Button :variant="'secondary'" @click="emit('cancelExportQuotation')">Huỷ</Button>
     </div>
   </div>
@@ -679,6 +679,26 @@
 
 <script setup>
 import Button from '@/components/kits/button/index.vue'
+import domtoimage from 'dom-to-image'
+import html2pdf from 'html2pdf.js'
 
 const emit = defineEmits(['submitExportQuotation', 'cancelExportQuotation'])
+
+const exportQuotation = () => {
+  const node = document.getElementById('my-node')
+  domtoimage
+    .toPng(node, { quality: 0.95, width: node.scrollWidth, height: node.scrollHeight })
+    .then((dataUrl) => {
+      const img = document.createElement('img')
+      img.setAttribute('src', dataUrl)
+      img.setAttribute('id', 'generated-img')
+      html2pdf(img, {
+        margin: 1,
+        filename: `dsfg`,
+        image: { type: 'png', quality: 0.98 },
+        html2canvas: { scale: 3 },
+        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
+      })
+    })
+}
 </script>

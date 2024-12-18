@@ -52,41 +52,55 @@
                   <ul role="list" class="flex flex-1 flex-col gap-y-7">
                     <li>
                       <ul role="list" class="-mx-2 space-y-1">
-                        <li v-for="item in navigation" :key="item.name">
+                        <li v-for="item in navigation" :key="item.name" class="group">
                           <router-link
                             :to="item.href"
                             :class="[
-                              item.current
+                              currentRoute.includes(item.href)
                                 ? 'bg-gray-800 text-white'
                                 : 'text-gray-400 hover:bg-gray-800 hover:text-white',
                               'group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold',
+                              user.role === 'staff' && item.name === 'Users' ? 'hidden' : '',
                             ]"
                           >
-                            <component :is="item.icon" class="size-6 shrink-0" aria-hidden="true" />
-                            {{ item.name }}
+                            <div class="flex items-center justify-between gap-x-3">
+                              <component
+                                :is="item.icon"
+                                class="size-6 shrink-0"
+                                aria-hidden="true"
+                              />
+                              {{ item.name }}
+                            </div>
+                            <ChevronDownIcon
+                              v-if="item.name === 'Data'"
+                              class="size-6 shrink-0 ml-auto"
+                              aria-hidden="true"
+                            />
                           </router-link>
-                        </li>
-                      </ul>
-                    </li>
-                    <li>
-                      <div class="text-xs/6 font-semibold text-gray-400">Your teams</div>
-                      <ul role="list" class="-mx-2 mt-2 space-y-1">
-                        <li v-for="team in teams" :key="team.name">
-                          <router-link
-                            :to="team.href"
-                            :class="[
-                              team.current
-                                ? 'bg-gray-800 text-white'
-                                : 'text-gray-400 hover:bg-gray-800 hover:text-white',
-                              'group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold',
-                            ]"
+                          <div
+                            v-if="item.name === 'Data'"
+                            class="mt-1 group-hover:h-auto h-0 opacity-0 group-hover:opacity-100 transition-all duration-300 overflow-hidden bg-gray-800 rounded-md"
                           >
-                            <span
-                              class="flex size-6 shrink-0 items-center justify-center rounded-lg border border-gray-700 bg-gray-800 text-[0.625rem] font-medium text-gray-400 group-hover:text-white"
-                              >{{ team.initial }}</span
-                            >
-                            <span class="truncate">{{ team.name }}</span>
-                          </router-link>
+                            <ul role="list" class="space-y-1 rounded-md">
+                              <li
+                                v-for="subItem in dataSubMenus"
+                                :key="subItem.name"
+                                class="flex items-center gap-x-2 rounded-md p-2 text-sm/6 font-semibold text-gray-400 hover:bg-gray-700 hover:text-white pl-8"
+                              >
+                                <component
+                                  :is="subItem.icon"
+                                  class="size-6 shrink-0"
+                                  aria-hidden="true"
+                                />
+                                <router-link
+                                  :to="subItem.href"
+                                  class="text-gray-400 hover:text-white block w-full"
+                                >
+                                  {{ subItem.name }}
+                                </router-link>
+                              </li>
+                            </ul>
+                          </div>
                         </li>
                       </ul>
                     </li>
@@ -119,41 +133,47 @@
           <ul role="list" class="flex flex-1 flex-col gap-y-7">
             <li>
               <ul role="list" class="-mx-2 space-y-1">
-                <li v-for="item in navigation" :key="item.name">
+                <li v-for="item in navigation" :key="item.name" class="group">
                   <router-link
-                    :to="item.href"
+                    :to="item.name === 'Data' ? '' : item.href"
                     :class="[
                       currentRoute.includes(item.href)
                         ? 'bg-gray-800 text-white'
                         : 'text-gray-400 hover:bg-gray-800 hover:text-white',
-                      'group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold',
+                      'group flex items-center h-full gap-x-3 rounded-md p-2 text-sm/6 font-semibold',
+                      user.role === 'staff' && item.name === 'Users' ? 'hidden' : '',
                     ]"
                   >
-                    <component :is="item.icon" class="size-6 shrink-0" aria-hidden="true" />
-                    {{ item.name }}
+                    <div class="flex items-center justify-between gap-x-3">
+                      <component :is="item.icon" class="size-6 shrink-0" aria-hidden="true" />
+                      {{ item.name }}
+                    </div>
+                    <ChevronUpIcon
+                      v-if="item.name === 'Data'"
+                      class="size-4 shrink-0 ml-auto rotate-90 group-hover:rotate-180 transition-all duration-300"
+                      aria-hidden="true"
+                    />
                   </router-link>
-                </li>
-              </ul>
-            </li>
-            <li>
-              <div class="text-xs/6 font-semibold text-gray-400">Your teams</div>
-              <ul role="list" class="-mx-2 mt-2 space-y-1">
-                <li v-for="team in teams" :key="team.name">
-                  <router-link
-                    :to="team.href"
-                    :class="[
-                      team.current
-                        ? 'bg-gray-800 text-white'
-                        : 'text-gray-400 hover:bg-gray-800 hover:text-white',
-                      'group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold',
-                    ]"
+                  <div
+                    v-if="item.name === 'Data'"
+                    class="mt-1 group-hover:max-h-80 max-h-0 opacity-0 group-hover:opacity-100 transition-all duration-500 overflow-hidden bg-gray-800 rounded-md"
                   >
-                    <span
-                      class="flex size-6 shrink-0 items-center justify-center rounded-lg border border-gray-700 bg-gray-800 text-[0.625rem] font-medium text-gray-400 group-hover:text-white"
-                      >{{ team.initial }}</span
-                    >
-                    <span class="truncate">{{ team.name }}</span>
-                  </router-link>
+                    <ul role="list" class="space-y-1 rounded-md">
+                      <li
+                        v-for="subItem in dataSubMenus"
+                        :key="subItem.name"
+                        class="flex items-center gap-x-2 rounded-md p-2 text-sm/6 font-semibold text-gray-400 hover:bg-gray-700 hover:text-white pl-8"
+                      >
+                        <component :is="subItem.icon" class="size-6 shrink-0" aria-hidden="true" />
+                        <router-link
+                          :to="subItem.href"
+                          class="text-gray-400 hover:text-white block w-full"
+                        >
+                          {{ subItem.name }}
+                        </router-link>
+                      </li>
+                    </ul>
+                  </div>
                 </li>
               </ul>
             </li>
@@ -277,6 +297,10 @@ import {
   UsersIcon,
   XMarkIcon,
   FolderArrowDownIcon,
+  CircleStackIcon,
+  ArchiveBoxArrowDownIcon,
+  BanknotesIcon,
+  ChevronUpIcon,
 } from '@heroicons/vue/24/outline'
 import { ChevronDownIcon, MagnifyingGlassIcon } from '@heroicons/vue/20/solid'
 import Bookings from '@/components/functions/bookings/index.vue'
@@ -286,10 +310,16 @@ import Logo from '@/components/icons/logo.vue'
 const navigation = [
   { name: 'Bookings Data', href: '/bookings', icon: CalendarIcon, current: false },
   { name: 'Users', href: '/users', icon: UsersIcon, current: false },
-  { name: 'Customers Data (Data tổng)', href: '/customers', icon: FolderIcon, current: false },
-  { name: 'Follow Data', href: '/follow-data', icon: FolderArrowDownIcon, current: false },
+  { name: 'Data', href: '/data', icon: FolderIcon, current: false },
+  // { name: 'Follow Data', href: '/data/follow', icon: FolderArrowDownIcon, current: false },
   { name: 'Accountant', href: '#', icon: DocumentDuplicateIcon, current: false },
   { name: 'Reports', href: '#', icon: ChartPieIcon, current: false },
+]
+const dataSubMenus = [
+  { name: 'Total Data', href: '/data/total', icon: CircleStackIcon, current: false },
+  { name: 'Follow Data', href: '/data/follow', icon: FolderArrowDownIcon, current: false },
+  { name: 'Booked Data', href: '/data/booked', icon: ArchiveBoxArrowDownIcon, current: false },
+  { name: 'Quotation', href: '/data/quotation', icon: BanknotesIcon, current: false },
 ]
 const teams = [
   { id: 1, name: 'Heroicons', href: '#', initial: 'H', current: false },

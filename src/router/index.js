@@ -49,22 +49,49 @@ const router = createRouter({
           name: 'users-add',
         },
         {
-          path: 'customers',
-          component: () => import('../components/functions/custumers/index.vue'),
+          path: 'data',
+          component: () => import('../components/functions/data/index.vue'),
           meta: {
             requiresAuth: true,
             minPermission: 1,
           },
-          name: 'customers',
+          name: 'data',
         },
         {
-          path: 'follow-data',
-          component: () => import('../components/functions/follow-data/index.vue'),
+          path: 'data/total',
+          component: () => import('../components/functions/data/total/index.vue'),
           meta: {
             requiresAuth: true,
             minPermission: 1,
           },
-          name: 'follow-data',
+          name: 'data-total',
+        },
+        {
+          path: 'data/follow',
+          component: () => import('../components/functions/data/follow/index.vue'),
+          meta: {
+            requiresAuth: true,
+            minPermission: 1,
+          },
+          name: 'data-follow',
+        },
+        {
+          path: 'data/booked',
+          component: () => import('../components/functions/data/booked/index.vue'),
+          meta: {
+            requiresAuth: true,
+            minPermission: 1,
+          },
+          name: 'data-booked',
+        },
+        {
+          path: 'data/quotation',
+          component: () => import('../components/functions/data/quotation/index.vue'),
+          meta: {
+            requiresAuth: true,
+            minPermission: 1,
+          },
+          name: 'data-quotation',
         },
       ],
     },

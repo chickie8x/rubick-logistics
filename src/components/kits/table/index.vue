@@ -1,13 +1,18 @@
 <template>
   <table class="min-w-full border-t-0 border border-gray-300 relative">
-    <thead class="sticky top-0">
+    <thead class="sticky top-0 z-10">
       <tr class="bg-slate-300 divide-x divide-gray-200">
         <th v-if="modifiable" scope="col" class="w-10">
           <input
+            v-if="selectAllEnable"
             type="checkbox"
             class="scale-125"
             v-model="isAllSelected"
             @change="selectAllToggle"
+          />
+          <CheckIcon
+            v-else
+            class="w-5 h-5 bg-gray-100 text-gray-500 p-1 rounded-md scale-110 mx-auto"
           />
         </th>
         <th
@@ -42,7 +47,7 @@
       <tr
         v-for="(row, idx) in data"
         :key="idx"
-        @click="rowClicked(row)"
+        @click="rowClicked(row, idx)"
         class="divide-x hover:bg-slate-200 cursor-default"
         :class="{
           '!bg-indigo-100': rowsSelected[idx],
@@ -51,7 +56,16 @@
         }"
       >
         <td v-if="modifiable" class="px-4">
-          <input type="checkbox" class="scale-125" v-model="rowsSelected[idx]" />
+          <input
+            type="checkbox"
+            class="scale-125"
+            v-model="rowsSelected[idx]"
+            @click.stop
+            :disabled="
+              selectedCustomers.filter((item) => item !== undefined).length >= pickLimit &&
+              !rowsSelected[idx]
+            "
+          />
         </td>
         <td
           v-for="header in headers"
@@ -86,7 +100,6 @@
 <script setup>
 import { ref, watch, computed } from 'vue'
 import { NoSymbolIcon, ChevronUpDownIcon, CheckIcon, XMarkIcon } from '@heroicons/vue/24/outline'
-
 const props = defineProps({
   headers: {
     type: Array,
@@ -109,18 +122,41 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  selectAllEnable: {
+    type: Boolean,
+    default: false,
+  },
 })
 
 const emit = defineEmits([
-  'selectedRows',
   'onRowClick',
   'enableSort',
   'confirmIdxSort',
   'rejectIdxSort',
+  'warningPickLimit',
 ])
 
 const isAllSelected = ref(false)
 const rowsSelected = ref(new Array(props.data.length).fill(false))
+const selectedCustomers = ref([])
+const pickLimit = ref(5)
+watch(rowsSelected.value, (newVal) => {
+  selectedCustomers.value = props.data.filter((item, idx) => {
+    if (newVal[idx]) {
+      return item
+    }
+  })
+  if (selectedCustomers.value.filter((item) => item !== undefined).length < pickLimit.value) {
+    emit('onRowClick', selectedCustomers.value)
+  } else if (
+    selectedCustomers.value.filter((item) => item !== undefined).length === pickLimit.value
+  ) {
+    emit('onRowClick', selectedCustomers.value)
+    emit('warningPickLimit', pickLimit.value)
+  } else {
+    return
+  }
+})
 const selectAllToggle = () => {
   rowsSelected.value = new Array(props.data.length).fill(isAllSelected.value)
 }
@@ -129,20 +165,16 @@ const sortIndex = computed(() => {
   return props.data.map((row, idx) => row.sortIdx)
 })
 
-watch(
-  rowsSelected,
-  (newVal) => {
-    emit('selectedRows', newVal)
-  },
-  { deep: true },
-)
+const refreshChecked = () => {
+  rowsSelected.value.fill(false)
+}
+
+defineExpose({
+  refreshChecked,
+})
 
 const rowClicked = (row) => {
-  if (props.rowEvent) {
-    emit('onRowClick', row)
-  } else {
-    return
-  }
+  emit('onRowClick', row)
 }
 
 const enableSort = () => {

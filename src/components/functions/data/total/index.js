@@ -39,14 +39,6 @@ export const customerHeaders = [
     label: 'Mã điều kiện giá hoá đơn',
     key: 'invoicePriceCondition',
   },
-  // {
-  //   label: 'Mã số hàng hoá',
-  //   key: 'goodsCode',
-  // },
-  // {
-  //   label: 'Mô tả hàng hoá',
-  //   key: 'goodsDescription',
-  // },
   {
     label: 'Mã nước xuất xứ',
     key: 'originCountryCode',
@@ -72,6 +64,7 @@ export const customerPool = [
     invoicePriceCondition: 'FOB',
     originCountryCode: 'CN',
     originCountryName: 'CHINA',
+    pickedUp: false,
   },
   {
     mst: 600387327,
@@ -86,6 +79,7 @@ export const customerPool = [
     invoicePriceCondition: 'FOB',
     originCountryCode: 'BE',
     originCountryName: 'BELGIUM',
+    pickedUp: false,
   },
   {
     mst: 102143568,
@@ -100,6 +94,7 @@ export const customerPool = [
     invoicePriceCondition: 'FOB',
     originCountryCode: 'TW',
     originCountryName: 'TAIWAN',
+    pickedUp: false,
   },
   {
     mst: 102304744,
@@ -114,6 +109,7 @@ export const customerPool = [
     invoicePriceCondition: 'FOB',
     originCountryCode: 'CN',
     originCountryName: 'CHINA',
+    pickedUp: false,
   },
   {
     mst: 2500288968,
@@ -128,6 +124,7 @@ export const customerPool = [
     invoicePriceCondition: 'FOB',
     originCountryCode: 'CN',
     originCountryName: 'CHINA',
+    pickedUp: false,
   },
   {
     mst: 313900369,
@@ -142,6 +139,7 @@ export const customerPool = [
     invoicePriceCondition: 'FOB',
     originCountryCode: 'US',
     originCountryName: 'U.S.A.',
+    pickedUp: false,
   },
   {
     mst: 106328665,
@@ -156,6 +154,7 @@ export const customerPool = [
     invoicePriceCondition: 'FOB',
     originCountryCode: 'ID',
     originCountryName: 'INDNSIA',
+    pickedUp: false,
   },
   {
     mst: 100933433,
@@ -170,6 +169,7 @@ export const customerPool = [
     invoicePriceCondition: 'FOB',
     originCountryCode: 'KR',
     originCountryName: 'R.KOREA',
+    pickedUp: false,
   },
   {
     mst: 107065225,
@@ -185,6 +185,7 @@ export const customerPool = [
     invoicePriceCondition: 'FOB',
     originCountryCode: 'CN',
     originCountryName: 'CHINA',
+    pickedUp: false,
   },
   {
     mst: 102655453,
@@ -200,6 +201,7 @@ export const customerPool = [
     invoicePriceCondition: 'FOB',
     originCountryCode: 'ID',
     originCountryName: 'INDNSIA',
+    pickedUp: false,
   },
   {
     mst: 700643278,
@@ -215,6 +217,7 @@ export const customerPool = [
     invoicePriceCondition: 'FOB',
     originCountryCode: 'CN',
     originCountryName: 'CHINA',
+    pickedUp: false,
   },
   {
     mst: 102653752,
@@ -229,6 +232,7 @@ export const customerPool = [
     invoicePriceCondition: 'FOB',
     originCountryCode: 'IT',
     originCountryName: 'ITALY',
+    pickedUp: false,
   },
   {
     mst: 3600659583,
@@ -243,6 +247,7 @@ export const customerPool = [
     invoicePriceCondition: 'FOB',
     originCountryCode: 'KR',
     originCountryName: 'R.KOREA',
+    pickedUp: false,
   },
   {
     mst: 100774342,
@@ -257,6 +262,7 @@ export const customerPool = [
     invoicePriceCondition: 'FOB',
     originCountryCode: 'TH',
     originCountryName: 'THAILND',
+    pickedUp: false,
   },
   {
     mst: 102747337,
@@ -272,6 +278,7 @@ export const customerPool = [
     invoicePriceCondition: 'FOB',
     originCountryCode: 'CN',
     originCountryName: 'CHINA',
+    pickedUp: false,
   },
   {
     mst: 105869735,
@@ -286,6 +293,7 @@ export const customerPool = [
     invoicePriceCondition: 'FOB',
     originCountryCode: 'CN',
     originCountryName: 'CHINA',
+    pickedUp: false,
   },
   {
     mst: 307787891,
@@ -300,6 +308,7 @@ export const customerPool = [
     invoicePriceCondition: 'FOB',
     originCountryCode: 'VN',
     originCountryName: 'VIETNAM',
+    pickedUp: false,
   },
   {
     mst: 106695383,
@@ -315,6 +324,7 @@ export const customerPool = [
     invoicePriceCondition: 'FOB',
     originCountryCode: 'CN',
     originCountryName: 'CHINA',
+    pickedUp: false,
   },
   {
     mst: 201186139,
@@ -329,6 +339,7 @@ export const customerPool = [
     invoicePriceCondition: 'FOB',
     originCountryCode: 'VN',
     originCountryName: 'VIETNAM',
+    pickedUp: false,
   },
   {
     mst: 106860742,
@@ -343,6 +354,7 @@ export const customerPool = [
     invoicePriceCondition: 'FOB',
     originCountryCode: 'CN',
     originCountryName: 'CHINA',
+    pickedUp: false,
   },
   {
     mst: 100774342,
@@ -357,6 +369,7 @@ export const customerPool = [
     invoicePriceCondition: 'FOB',
     originCountryCode: 'ID',
     originCountryName: 'INDNSIA',
+    pickedUp: false,
   },
   {
     mst: 101526991,
@@ -371,6 +384,7 @@ export const customerPool = [
     invoicePriceCondition: 'FOB',
     originCountryCode: 'CN',
     originCountryName: 'CHINA',
+    pickedUp: false,
   },
   {
     mst: 2500150543,
@@ -385,6 +399,7 @@ export const customerPool = [
     invoicePriceCondition: 'FOB',
     originCountryCode: 'TH',
     originCountryName: 'THAILND',
+    pickedUp: false,
   },
   {
     mst: 900637507,
@@ -399,6 +414,7 @@ export const customerPool = [
     invoicePriceCondition: 'FOB',
     originCountryCode: 'KR',
     originCountryName: 'R.KOREA',
+    pickedUp: false,
   },
   {
     mst: 104994500,
@@ -413,6 +429,7 @@ export const customerPool = [
     invoicePriceCondition: 'FOB',
     originCountryCode: 'KR',
     originCountryName: 'R.KOREA',
+    pickedUp: false,
   },
   {
     mst: 105155018,
@@ -427,6 +444,7 @@ export const customerPool = [
     invoicePriceCondition: 'FOB',
     originCountryCode: 'GQ',
     originCountryName: 'EQ.GNEA',
+    pickedUp: false,
   },
   {
     mst: 9999999999998,
@@ -441,6 +459,7 @@ export const customerPool = [
     invoicePriceCondition: 'FOB',
     originCountryCode: 'IT',
     originCountryName: 'ITALY',
+    pickedUp: false,
   },
   {
     mst: 104498189,
@@ -455,6 +474,7 @@ export const customerPool = [
     invoicePriceCondition: 'FOB',
     originCountryCode: 'KR',
     originCountryName: 'R.KOREA',
+    pickedUp: false,
   },
   {
     mst: 104908205,
@@ -469,6 +489,7 @@ export const customerPool = [
     invoicePriceCondition: 'FOB',
     originCountryCode: 'CN',
     originCountryName: 'CHINA',
+    pickedUp: false,
   },
   {
     mst: 107001944,
@@ -483,10 +504,11 @@ export const customerPool = [
     invoicePriceCondition: 'FOB',
     originCountryCode: 'CN',
     originCountryName: 'CHINA',
+    pickedUp: false,
   },
   {
     mst: 3700228661,
-    buyerName: 'CôNG TY TRáCH NHIệM HữU HạN SCHNEIDER ELECTRIC VIệT NAM',
+    buyerName: 'CôNG TY TRáCH NHIệM HữU Hạn SCHNEIDER ELECTRIC VIệT NAM',
     buyerAddress: '364 Cộng Hòa, Quận Tân Bình, Tp Hồ Chí Minh',
     buyerMobile: '84.8.38103103',
     buyerRefCode: '',
@@ -497,6 +519,7 @@ export const customerPool = [
     invoicePriceCondition: 'FOB',
     originCountryCode: 'BG',
     originCountryName: 'BULGAR',
+    pickedUp: false,
   },
   {
     mst: 201577005,
@@ -511,6 +534,7 @@ export const customerPool = [
     invoicePriceCondition: 'FOB',
     originCountryCode: 'NG',
     originCountryName: 'NIGERIA',
+    pickedUp: false,
   },
   {
     mst: 100113381,
@@ -525,6 +549,7 @@ export const customerPool = [
     invoicePriceCondition: 'FOB',
     originCountryCode: 'JP',
     originCountryName: 'JAPAN',
+    pickedUp: false,
   },
   {
     mst: 800352836,
@@ -540,6 +565,7 @@ export const customerPool = [
     invoicePriceCondition: 'FOB',
     originCountryCode: 'PH',
     originCountryName: 'PHILPIN',
+    pickedUp: false,
   },
   {
     mst: 101535883,
@@ -554,6 +580,7 @@ export const customerPool = [
     invoicePriceCondition: 'FOB',
     originCountryCode: 'CN',
     originCountryName: 'CHINA',
+    pickedUp: false,
   },
   {
     mst: 300792187,
@@ -568,6 +595,7 @@ export const customerPool = [
     invoicePriceCondition: 'FOB',
     originCountryCode: 'MY',
     originCountryName: 'MALYSIA',
+    pickedUp: false,
   },
   {
     mst: 105273501,
@@ -583,6 +611,7 @@ export const customerPool = [
     invoicePriceCondition: 'FOB',
     originCountryCode: 'CN',
     originCountryName: 'CHINA',
+    pickedUp: false,
   },
   {
     mst: 801031930,
@@ -597,6 +626,7 @@ export const customerPool = [
     invoicePriceCondition: 'FOB',
     originCountryCode: 'CN',
     originCountryName: 'CHINA',
+    pickedUp: false,
   },
   {
     mst: 100101403,
@@ -611,6 +641,7 @@ export const customerPool = [
     invoicePriceCondition: 'FOB',
     originCountryCode: 'CN',
     originCountryName: 'CHINA',
+    pickedUp: false,
   },
   {
     mst: 201722189,
@@ -625,6 +656,7 @@ export const customerPool = [
     invoicePriceCondition: 'FOB',
     originCountryCode: 'KR',
     originCountryName: 'R.KOREA',
+    pickedUp: false,
   },
   {
     mst: 2700707969,
@@ -639,6 +671,7 @@ export const customerPool = [
     invoicePriceCondition: 'FOB',
     originCountryCode: 'MM',
     originCountryName: 'MYANMAR',
+    pickedUp: false,
   },
   {
     mst: 102655453,
@@ -654,5 +687,6 @@ export const customerPool = [
     invoicePriceCondition: 'FOB',
     originCountryCode: 'TH',
     originCountryName: 'THAILND',
+    pickedUp: false,
   },
 ]
