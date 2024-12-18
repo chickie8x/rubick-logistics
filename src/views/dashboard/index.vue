@@ -54,14 +54,15 @@
                       <ul role="list" class="-mx-2 space-y-1">
                         <li v-for="item in navigation" :key="item.name" class="group">
                           <router-link
-                            :to="item.href"
+                            :to="item.name === 'Data' ? '' : item.href"
                             :class="[
                               currentRoute.includes(item.href)
                                 ? 'bg-gray-800 text-white'
                                 : 'text-gray-400 hover:bg-gray-800 hover:text-white',
-                              'group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold',
+                                'flex items-center gap-x-3 rounded-md p-2 text-sm/6 font-semibold',
                               user.role === 'staff' && item.name === 'Users' ? 'hidden' : '',
                             ]"
+                            @click="item.name === 'Data' ? subMenuOpen = !subMenuOpen : ''"
                           >
                             <div class="flex items-center justify-between gap-x-3">
                               <component
@@ -71,15 +72,17 @@
                               />
                               {{ item.name }}
                             </div>
-                            <ChevronDownIcon
-                              v-if="item.name === 'Data'"
-                              class="size-6 shrink-0 ml-auto"
-                              aria-hidden="true"
-                            />
+                            <ChevronUpIcon
+                                v-if="item.name === 'Data'"
+                                class="size-4 shrink-0 ml-auto rotate-90 transition-all duration-300"
+                                aria-hidden="true"
+                                :class="[subMenuOpen ? 'rotate-180' : 'rotate-90']"
+                              />
                           </router-link>
                           <div
                             v-if="item.name === 'Data'"
-                            class="mt-1 group-hover:h-auto h-0 opacity-0 group-hover:opacity-100 transition-all duration-300 overflow-hidden bg-gray-800 rounded-md"
+                            class="mt-1 max-h-0 opacity-0  transition-all duration-500 overflow-hidden bg-gray-800 rounded-md"
+                            :class="[subMenuOpen ? 'max-h-80 opacity-100' : '']"
                           >
                             <ul role="list" class="space-y-1 rounded-md">
                               <li
@@ -140,9 +143,10 @@
                       currentRoute.includes(item.href)
                         ? 'bg-gray-800 text-white'
                         : 'text-gray-400 hover:bg-gray-800 hover:text-white',
-                      'group flex items-center h-full gap-x-3 rounded-md p-2 text-sm/6 font-semibold',
+                        'flex items-center h-full gap-x-3 rounded-md p-2 text-sm/6 font-semibold',
                       user.role === 'staff' && item.name === 'Users' ? 'hidden' : '',
                     ]"
+                    @click="item.name === 'Data' ? subMenuOpen = !subMenuOpen : ''"
                   >
                     <div class="flex items-center justify-between gap-x-3">
                       <component :is="item.icon" class="size-6 shrink-0" aria-hidden="true" />
@@ -150,13 +154,15 @@
                     </div>
                     <ChevronUpIcon
                       v-if="item.name === 'Data'"
-                      class="size-4 shrink-0 ml-auto rotate-90 group-hover:rotate-180 transition-all duration-300"
+                      class="size-4 shrink-0 ml-auto rotate-90 transition-all duration-300"
                       aria-hidden="true"
+                      :class="[subMenuOpen ? 'rotate-180' : 'rotate-90']"
                     />
                   </router-link>
                   <div
                     v-if="item.name === 'Data'"
-                    class="mt-1 group-hover:max-h-80 max-h-0 opacity-0 group-hover:opacity-100 transition-all duration-500 overflow-hidden bg-gray-800 rounded-md"
+                    class="mt-1 max-h-0 opacity-0  transition-all duration-500 overflow-hidden bg-gray-800 rounded-md"
+                    :class="[subMenuOpen ? 'max-h-80 opacity-100' : '']"
                   >
                     <ul role="list" class="space-y-1 rounded-md">
                       <li
@@ -332,6 +338,7 @@ const userNavigation = [
 ]
 
 const sidebarOpen = ref(false)
+const subMenuOpen = ref(false)
 const router = useRouter()
 const route = useRoute()
 const currentRoute = computed(() => {
