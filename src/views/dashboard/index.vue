@@ -74,7 +74,7 @@
                             </div>
                             <ChevronUpIcon
                                 v-if="item.name === 'Data'"
-                                class="size-4 shrink-0 ml-auto rotate-90 transition-all duration-300"
+                                class="size-4 shrink-0 ml-auto transition-all duration-300"
                                 aria-hidden="true"
                                 :class="[subMenuOpen ? 'rotate-180' : 'rotate-90']"
                               />
@@ -154,7 +154,7 @@
                     </div>
                     <ChevronUpIcon
                       v-if="item.name === 'Data'"
-                      class="size-4 shrink-0 ml-auto rotate-90 transition-all duration-300"
+                      class="size-4 shrink-0 ml-auto transition-all duration-300"
                       aria-hidden="true"
                       :class="[subMenuOpen ? 'rotate-180' : 'rotate-90']"
                     />
