@@ -142,6 +142,10 @@ export const headers = [
   { label: 'Cảng/Kho CFS', key: 'cfsWarehouse' },
   { label: 'Địa chỉ nhận hàng', key: 'deliveryAddress' },
   { label: 'Người nhận', key: 'recipient' },
+  { label: 'PIC name', key: 'picName' },
+  { label: 'PIC phone', key: 'picPhone' },
+  { label: 'PIC email', key: 'picEmail' },
+  { label: 'Ghi chú', key: 'comment' },
 ]
 
 export const generalFields = [
@@ -155,6 +159,10 @@ export const generalFields = [
   { label: 'MUA BẢO HIỂM', key: 'insurance', sortable: false, filterable: true },
   { label: 'Saler', key: 'saler' },
   { label: 'Agent', key: 'agent' },
+  { label: 'PIC name', key: 'picName' },
+  { label: 'PIC phone', key: 'picPhone' },
+  { label: 'PIC email', key: 'picEmail' },
+  { label: 'Ghi chú', key: 'comment' },
 ]
 
 export const docsFields = [

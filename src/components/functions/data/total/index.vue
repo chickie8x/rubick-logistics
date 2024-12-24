@@ -31,6 +31,7 @@
         :rowEvent="true"
         @onRowClick="selectedRows"
         @warningPickLimit="warningPickLimit"
+        :isLimited="true"
       />
     </div>
   </div>

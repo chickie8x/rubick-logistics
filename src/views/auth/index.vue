@@ -1,11 +1,16 @@
 <template>
-  <div class="flex items-center justify-center h-screen bg-indigo-100">
-    <div class="w-1/2 min-h-96 h-fit flex justify-center rounded-lg shadow-md">
-      <div class="w-full max-w-md border-l rounded-l-lg overflow-hidden bg-white">
+  <div class="flex flex-col items-center justify-center h-screen bg-indigo-100">
+    <h1
+      class="text-2xl font-bold bg-slate-700 text-center uppercase text-white px-4 py-1 shadow-md w-1/2 rounded-tl-lg rounded-tr-lg"
+    >
+      Rubick Logistics
+    </h1>
+    <div class="w-1/2 min-h-96 h-fit flex justify-center shadow-md">
+      <div class="w-full rounded-bl-lg overflow-hidden bg-white">
         <img src="/images/bglogin.png" alt="" class="w-full h-full object-cover" />
       </div>
 
-      <div class="w-full max-w-md p-4 bg-white flex flex-col rounded-r-lg px-4">
+      <div class="w-full p-4 bg-white flex flex-col rounded-br-lg px-4">
         <h1 class="text-2xl font-bold mb-4 text-center uppercase text-gray-700">Đăng nhập</h1>
         <div v-if="error" class="flex items-center py-4 space-x-2">
           <ExclamationTriangleIcon class="w-5 h-5 text-red-500" />

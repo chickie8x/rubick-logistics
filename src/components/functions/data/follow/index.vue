@@ -1,6 +1,6 @@
 <template>
   <div class="w-full h-full flex flex-col">
-    <h1 class="text-2xl font-bold mt-2 text-slate-700">Danh sách khách hàng đã lấy</h1>
+    <h1 class="text-2xl font-bold mt-2 text-slate-700">Danh sách khách hàng đã follow</h1>
     <div class="mt-8 w-full overflow-auto flex-1">
       <Table
         :data="customer"

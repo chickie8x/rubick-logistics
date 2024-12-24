@@ -62,7 +62,7 @@
         :headers="headers"
         :data="rowDataByRule"
         :modifiable="actions"
-        @selectedRows="onSelectedRows"
+        @onRowClick="onSelectedRows"
       />
     </div>
   </div>
@@ -178,8 +178,8 @@ const onSelectedRows = (selectedRows) => {
   if (actionRows.value.filter(Boolean).length === 1) {
     actionRows.value.map((item, idx) => {
       if (item) {
+        console.log(idx)
         bookingEdit.value = rowDataByRule.value[idx]
-        console.log(bookingEdit.value)
       }
     })
   }

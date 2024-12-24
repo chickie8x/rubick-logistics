@@ -6,7 +6,12 @@
         >Nhập email bạn đã dùng để đăng ký tài khoản, mật khẩu sẽ được gửi về email này
       </span>
       <label for="email" class="text-xs text-gray-500">Địa chỉ email</label>
-      <input type="email" id="email" class="border-b-2 border-indigo-500 px-4 py-1 outline-none" />
+      <input
+        type="email"
+        id="email"
+        class="border-b-2 border-indigo-500 px-4 py-1 outline-none"
+        v-focus
+      />
       <Button @click="resetPassword" :variant="'primary'" class="w-36 ml-auto mt-6">Gửi</Button>
     </div>
   </div>
@@ -17,5 +22,11 @@ import Button from '@/components/kits/button/index.vue'
 
 const resetPassword = () => {
   console.log('resetPassword')
+}
+
+const vFocus = {
+  mounted: (el) => {
+    el.focus()
+  },
 }
 </script>

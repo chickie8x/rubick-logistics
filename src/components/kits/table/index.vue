@@ -63,7 +63,8 @@
             @click.stop
             :disabled="
               selectedCustomers.filter((item) => item !== undefined).length >= pickLimit &&
-              !rowsSelected[idx]
+              !rowsSelected[idx] &&
+              isLimited
             "
           />
         </td>
@@ -126,6 +127,10 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  isLimited: {
+    type: Boolean,
+    default: false,
+  },
 })
 
 const emit = defineEmits([
@@ -140,25 +145,36 @@ const isAllSelected = ref(false)
 const rowsSelected = ref(new Array(props.data.length).fill(false))
 const selectedCustomers = ref([])
 const pickLimit = ref(5)
+
 watch(rowsSelected.value, (newVal) => {
   selectedCustomers.value = props.data.filter((item, idx) => {
     if (newVal[idx]) {
       return item
     }
   })
-  if (selectedCustomers.value.filter((item) => item !== undefined).length < pickLimit.value) {
-    emit('onRowClick', selectedCustomers.value)
-  } else if (
-    selectedCustomers.value.filter((item) => item !== undefined).length === pickLimit.value
-  ) {
-    emit('onRowClick', selectedCustomers.value)
-    emit('warningPickLimit', pickLimit.value)
+  if (props.isLimited) {
+    if (
+      selectedCustomers.value.length > 0 &&
+      selectedCustomers.value.filter((item) => item !== undefined).length < pickLimit.value
+    ) {
+      emit('onRowClick', selectedCustomers.value)
+    } else if (
+      selectedCustomers.value.length > 0 &&
+      selectedCustomers.value.filter((item) => item !== undefined).length === pickLimit.value
+    ) {
+      emit('onRowClick', selectedCustomers.value)
+      emit('warningPickLimit', pickLimit.value)
+    } else {
+      return
+    }
   } else {
-    return
+    emit('onRowClick', selectedCustomers.value)
   }
 })
+
 const selectAllToggle = () => {
-  rowsSelected.value = new Array(props.data.length).fill(isAllSelected.value)
+  rowsSelected.value.fill(isAllSelected.value)
+  emit('onRowClick', selectedCustomers.value)
 }
 
 const sortIndex = computed(() => {
@@ -174,10 +190,14 @@ defineExpose({
 })
 
 const rowClicked = (row) => {
-  emit('onRowClick', row)
+  if (props.rowEvent) {
+    emit('onRowClick', row)
+  } else return
 }
 
 const enableSort = () => {
-  emit('enableSort', props.data)
+  if (props.rowEvent) {
+    emit('enableSort', props.data)
+  } else return
 }
 </script>

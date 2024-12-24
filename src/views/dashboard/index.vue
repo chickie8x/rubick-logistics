@@ -59,10 +59,10 @@
                               currentRoute.includes(item.href)
                                 ? 'bg-gray-800 text-white'
                                 : 'text-gray-400 hover:bg-gray-800 hover:text-white',
-                                'flex items-center gap-x-3 rounded-md p-2 text-sm/6 font-semibold',
+                              'flex items-center gap-x-3 rounded-md p-2 text-sm/6 font-semibold',
                               user.role === 'staff' && item.name === 'Users' ? 'hidden' : '',
                             ]"
-                            @click="item.name === 'Data' ? subMenuOpen = !subMenuOpen : ''"
+                            @click="item.name === 'Data' ? (subMenuOpen = !subMenuOpen) : ''"
                           >
                             <div class="flex items-center justify-between gap-x-3">
                               <component
@@ -73,15 +73,15 @@
                               {{ item.name }}
                             </div>
                             <ChevronUpIcon
-                                v-if="item.name === 'Data'"
-                                class="size-4 shrink-0 ml-auto transition-all duration-300"
-                                aria-hidden="true"
-                                :class="[subMenuOpen ? 'rotate-180' : 'rotate-90']"
-                              />
+                              v-if="item.name === 'Data'"
+                              class="size-4 shrink-0 ml-auto transition-all duration-300"
+                              aria-hidden="true"
+                              :class="[subMenuOpen ? 'rotate-180' : 'rotate-90']"
+                            />
                           </router-link>
                           <div
                             v-if="item.name === 'Data'"
-                            class="mt-1 max-h-0 opacity-0  transition-all duration-500 overflow-hidden bg-gray-800 rounded-md"
+                            class="mt-1 max-h-0 opacity-0 transition-all duration-500 overflow-hidden bg-gray-800 rounded-md"
                             :class="[subMenuOpen ? 'max-h-80 opacity-100' : '']"
                           >
                             <ul role="list" class="space-y-1 rounded-md">
@@ -143,10 +143,10 @@
                       currentRoute.includes(item.href)
                         ? 'bg-gray-800 text-white'
                         : 'text-gray-400 hover:bg-gray-800 hover:text-white',
-                        'flex items-center h-full gap-x-3 rounded-md p-2 text-sm/6 font-semibold',
+                      'flex items-center h-full gap-x-3 rounded-md p-2 text-sm/6 font-semibold',
                       user.role === 'staff' && item.name === 'Users' ? 'hidden' : '',
                     ]"
-                    @click="item.name === 'Data' ? subMenuOpen = !subMenuOpen : ''"
+                    @click="item.name === 'Data' ? (subMenuOpen = !subMenuOpen) : ''"
                   >
                     <div class="flex items-center justify-between gap-x-3">
                       <component :is="item.icon" class="size-6 shrink-0" aria-hidden="true" />
@@ -161,7 +161,7 @@
                   </router-link>
                   <div
                     v-if="item.name === 'Data'"
-                    class="mt-1 max-h-0 opacity-0  transition-all duration-500 overflow-hidden bg-gray-800 rounded-md"
+                    class="mt-1 max-h-0 opacity-0 transition-all duration-500 overflow-hidden bg-gray-800 rounded-md"
                     :class="[subMenuOpen ? 'max-h-80 opacity-100' : '']"
                   >
                     <ul role="list" class="space-y-1 rounded-md">
