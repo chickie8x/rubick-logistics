@@ -11,95 +11,106 @@ export const typeOptions = [
 
 export const serviceOptions = [
   {
-    value: '1',
+    value: 'both',
     label: 'Both',
   },
   {
-    value: '2',
+    value: 'freight',
     label: 'Freight',
   },
   {
-    value: '3',
+    value: 'customs',
     label: 'Thủ tục hải quan',
   },
   {
-    value: '4',
+    value: 'transport',
     label: 'Vận chuyển',
   },
 ]
 
 export const transportOptions = [
   {
-    value: '1',
+    value: 'air',
     label: 'Air',
   },
   {
-    value: '2',
+    value: 'sea',
     label: 'Sea',
   },
   {
-    value: '3',
+    value: 'border',
     label: 'Border',
   },
   {
-    value: '4',
+    value: 'bulk',
     label: 'Bulk',
   },
 ]
 
 export const termOptions = [
   {
-    value: '1',
+    value: 'exwork',
     label: 'Exwork',
   },
   {
-    value: '2',
+    value: 'fob',
     label: 'FOB',
   },
   {
-    value: '3',
+    value: 'fca',
     label: 'FCA',
   },
   {
-    value: '4',
+    value: 'cif',
     label: 'CIF',
   },
   {
-    value: '5',
+    value: 'ddu',
     label: 'DDU',
   },
   {
-    value: '6',
+    value: 'ddp',
     label: 'DDP',
   },
 ]
 
 export const POL = [
   {
-    value: '1',
+    value: 'haiphong',
     label: 'Hải Phòng',
   },
   {
-    value: '2',
+    value: 'hanoi',
     label: 'Hà Nội',
   },
   {
-    value: '3',
+    value: 'hcm',
     label: 'TP HCM',
   },
 ]
 
 export const POD = [
   {
-    value: '1',
+    value: 'haiphong',
     label: 'Hải Phòng',
   },
   {
-    value: '2',
+    value: 'hanoi',
     label: 'Hà Nội',
   },
   {
-    value: '3',
+    value: 'hcm',
     label: 'TP HCM',
+  },
+]
+
+export const seaOptions = [
+  {
+    value: 'lcl',
+    label: 'Hàng lẻ(LCL)',
+  },
+  {
+    value: 'flc',
+    label: 'Hàng nguyên cont(FCL)',
   },
 ]

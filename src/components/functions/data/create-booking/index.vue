@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-col gap-4 w-[1024px] max-h-[600px]">
     <h1 class="text-2xl font-bold capitalize p-4">Tạo booking mới</h1>
-    <div class="grid grid-cols-2 gap-8 overflow-y-auto p-4">
+    <div class="grid grid-cols-2 gap-x-8 gap-y-6 overflow-y-auto p-4">
       <div>
         <h1 class="text-sm text-gray-700 font-bold">Khách hàng</h1>
         <input
@@ -38,10 +38,6 @@
         <Select v-model="serviceOptions[0].value" :options="serviceOptions" />
       </div>
       <div>
-        <h1 class="text-sm text-gray-700 font-bold">Phương thức vận chuyển</h1>
-        <Select v-model="transportOptions[0].value" :options="transportOptions" />
-      </div>
-      <div>
         <h1 class="text-sm text-gray-700 font-bold">Cảng đi-POL</h1>
         <Select v-model="POL[0].value" :options="POL" />
       </div>
@@ -50,27 +46,39 @@
         <Select v-model="POD[0].value" :options="POD" />
       </div>
       <div>
-        <h1 class="text-sm text-gray-700 font-bold">PIC name</h1>
-        <input
-          type="text"
-          class="w-full rounded-md border border-gray-300 focus:outline focus:outline-indigo-500 p-2 text-sm h-8 text-gray-500"
-        />
-      </div>
-      <div>
-        <h1 class="text-sm text-gray-700 font-bold">PIC phone</h1>
-        <input
-          type="text"
-          class="w-full rounded-md border border-gray-300 focus:outline focus:outline-indigo-500 p-2 text-sm h-8 text-gray-500"
-        />
-      </div>
-      <div>
         <h1 class="text-sm text-gray-700 font-bold">PIC email</h1>
         <input
           type="email"
           class="w-full rounded-md border border-gray-300 focus:outline focus:outline-indigo-500 p-2 text-sm h-8 text-gray-500"
         />
       </div>
-      <div></div>
+      <div class="flex gap-x-4 justify-between">
+        <div>
+          <h1 class="text-sm text-gray-700 font-bold">Phương thức vận chuyển</h1>
+          <Select v-model="transportMethod" :options="transportOptions" />
+        </div>
+        <div class="w-32">
+          <h1 class="text-sm text-gray-700 font-bold">Khối lượng(GW)</h1>
+          <input
+            type="text"
+            class="w-full rounded-md border border-gray-300 p-2 text-sm h-8 text-gray-500 outline-indigo-500"
+          />
+        </div>
+        <div class="w-28">
+          <h1 class="text-sm text-gray-700 font-bold">Số khối(CBM)</h1>
+          <input
+            type="text"
+            class="w-full rounded-md border border-gray-300 p-2 text-sm h-8 text-gray-500 outline-indigo-500"
+          />
+        </div>
+      </div>
+      <div v-if="transportMethod === 'sea'">
+        <h1 class="text-sm text-gray-700 font-bold">SEA option</h1>
+        <Select v-model="seaOptions[0].value" :options="seaOptions" />
+      </div>
+      <div v-else>
+
+      </div>
       <div>
         <h1 class="text-sm text-gray-700 font-bold">Địa chỉ nhận hàng</h1>
         <textarea
@@ -105,6 +113,7 @@ import {
   termOptions,
   POL,
   POD,
+  seaOptions,
 } from '@/components/functions/bookings/add/add.js'
 import Select from '@/components/kits/select/index.vue'
 import Button from '@/components/kits/button/index.vue'
@@ -117,6 +126,8 @@ const props = defineProps({
 })
 
 const emit = defineEmits(['cancelCreateBooking', 'createBookingWithCustomer'])
+
+const transportMethod = ref(transportOptions[0].value)
 
 const note = ref('')
 </script>
