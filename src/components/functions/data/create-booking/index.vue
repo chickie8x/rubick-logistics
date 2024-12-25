@@ -79,6 +79,15 @@
       <div v-else>
 
       </div>
+      <div class="col-span-2">
+        <h1 class="text-sm text-gray-700 font-bold">Người phụ trách bộ phận</h1>
+        <div class="flex items-center justify-between gap-x-4 mt-2">
+          <div v-for="department in departmentOfficer" :key="department.department.value">
+            <h1 class="text-sm text-gray-500 font-semibold">{{ department.department.label }}</h1>
+            <Select v-model="department.officer[0].value" :options="department.officer" />
+          </div>
+        </div>
+      </div>
       <div>
         <h1 class="text-sm text-gray-700 font-bold">Địa chỉ nhận hàng</h1>
         <textarea
@@ -128,6 +137,109 @@ const props = defineProps({
 const emit = defineEmits(['cancelCreateBooking', 'createBookingWithCustomer'])
 
 const transportMethod = ref(transportOptions[0].value)
+
+const departmentOfficer = [
+  {
+    department: {
+      label: 'Cus',
+      value: 'cus',
+    },
+    officer: [
+      {
+        label: 'Nguyễn Văn A',
+        value: 'nguyenvana@gmail.com',
+      },
+      {
+        label: 'Nguyễn Văn B',
+        value: 'nguyenvanb@gmail.com',
+      },
+      {
+        label: 'Nguyễn Văn C',
+        value: 'nguyenvanc@gmail.com',
+      },
+    ],
+  },
+  {
+    department: {
+      label: 'Docs',
+      value: 'docs',
+    },
+    officer: [
+      {
+        label: 'Nguyễn Văn D',
+        value: 'nguyenvand@gmail.com',
+      },
+      {
+        label: 'Nguyễn Văn E',
+        value: 'nguyenvanf@gmail.com',
+      },
+      {
+        label: 'Nguyễn Văn G',
+        value: 'nguyenvang@gmail.com',
+      },
+    ],
+  },
+  {
+    department: {
+      label: 'Docs - Ops',
+      value: 'docsops',
+    },
+    officer: [
+      {
+        label: 'Nguyễn Văn H',
+        value: 'nguyenvanh@gmail.com',
+      },
+      {
+        label: 'Nguyễn Văn I',
+        value: 'nguyenvani@gmail.com',
+      },
+      {
+        label: 'Nguyễn Văn K',
+        value: 'nguyenvank@gmail.com',
+      },
+    ],
+  },
+  {
+    department: {
+      label: 'Ops',
+      value: 'ops',
+    },
+    officer: [
+      {
+        label: 'Nguyễn Văn L',
+        value: 'nguyenvanl@gmail.com',
+      },
+      {
+        label: 'Nguyễn Văn M',
+        value: 'nguyenvanm@gmail.com',
+      },
+      {
+        label: 'Nguyễn Văn N',
+        value: 'nguyenvann@gmail.com',
+      },
+    ],
+  },
+  {
+    department: {
+      label: 'Acc',
+      value: 'acc',
+    },
+    officer: [
+      {
+        label: 'Nguyễn Văn O',
+        value: 'nguyenvano@gmail.com',
+      },
+      {
+        label: 'Nguyễn Văn P',
+        value: 'nguyenvanp@gmail.com',
+      },
+      {
+        label: 'Nguyễn Văn Q',
+        value: 'nguyenvanq@gmail.com',
+      },
+    ],
+  },
+]
 
 const note = ref('')
 </script>
