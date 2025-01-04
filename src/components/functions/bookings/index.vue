@@ -63,6 +63,7 @@
         :data="rowDataByRule"
         :modifiable="actions"
         @onRowClick="onSelectedRows"
+        ref="tableRef"
       />
     </div>
   </div>
@@ -136,7 +137,7 @@ const bookingEdit = ref(null)
 const modalVSlot = ref(null)
 const quotationForm = ref(null)
 const quotationChoice = ref(false)
-
+const tableRef = ref(null)
 const rowDataByRule = computed(() => {
   if (userPermission >= 2) return rows
   const rowsBySaler = rows.filter((row) => row.saler === username)
@@ -149,6 +150,7 @@ const onSelect = () => {
 
 const onCancel = () => {
   actions.value = false
+  tableRef.value.refreshChecked()
 }
 
 const onSubmitDelete = () => {
@@ -178,7 +180,6 @@ const onSelectedRows = (selectedRows) => {
   if (actionRows.value.filter(Boolean).length === 1) {
     actionRows.value.map((item, idx) => {
       if (item) {
-        console.log(idx)
         bookingEdit.value = rowDataByRule.value[idx]
       }
     })

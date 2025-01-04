@@ -54,6 +54,17 @@ export const users = [
     active: true,
     password: '12345678',
   },
+  {
+    id: 6,
+    username: 'accounting',
+    email: 'accounting@gmail.com',
+    role: 'leader',
+    department: 'Accountant',
+    createdAt: '2021-01-01',
+    updatedAt: '2021-01-01',
+    active: true,
+    password: '12345678',
+  },
 ]
 
 export const departments = [

@@ -76,9 +76,7 @@
         <h1 class="text-sm text-gray-700 font-bold">SEA option</h1>
         <Select v-model="seaOptions[0].value" :options="seaOptions" />
       </div>
-      <div v-else>
-
-      </div>
+      <div v-else></div>
       <div class="col-span-2">
         <h1 class="text-sm text-gray-700 font-bold">Người phụ trách bộ phận</h1>
         <div class="flex items-center justify-between gap-x-4 mt-2">

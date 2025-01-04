@@ -116,6 +116,7 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
   const isAuthenticated = localStorage.getItem('user')
+  console.log(isAuthenticated)
   const permission = isAuthenticated
     ? permissions.find((permission) => permission.key === JSON.parse(isAuthenticated).role).value
     : 0
