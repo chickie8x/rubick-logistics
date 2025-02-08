@@ -1,5 +1,5 @@
 <template>
-  <div class="p-4">
+  <div class="p-4 rounded-lg bg-white">
     <div class="w-[1024px] p-4" id="my-node">
       <div class="flex border-b border-slate-300 pb-4">
         <div class="mr-10 h-40">

@@ -1,5 +1,5 @@
 <template>
-  <div class="px-4 py-2 w-96">
+  <div class="px-4 py-2 w-96 rounded-lg bg-white">
     <h1 class="text-gray-600 text-lg font-bold">Xác nhận</h1>
     <div class="mt-4">
       <span class="text-gray-600 text-sm">Bạn có chắc chắn muốn xóa booking này không?</span>

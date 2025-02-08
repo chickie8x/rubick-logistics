@@ -1,5 +1,5 @@
 <template>
-  <div class="w-80 p-4">
+  <div class="w-80 p-4 rounded-lg bg-white">
     <span class="text-lg font-semibold">Chọn báo giá</span>
     <Select v-model="choice" :options="quotationChoices" class="w-full" />
     <div class="flex justify-end gap-2 mt-4">
