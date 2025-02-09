@@ -124,13 +124,13 @@
       <span class="font-medium text-slate-700 block min-w-36">Danh sách báo giá</span>
       <hr class="w-full border-slate-300" />
     </div>
-    <div>
-      <!-- {{ modalVSlot }} -->
+    <div class="mt-4 overflow-auto">
+      <Table :headers="headers" :data="quotations" :dblClickEvent="true" @rowDblClick="handleRowDblClick" />
     </div>
   </div>
   <Modal :open="openModal">
-    <AirFreight v-if="quotationType === 'air'" @closeModal="handleCloseModal" />
-    <SeaFreight v-if="quotationType === 'sea'" @closeModal="handleCloseModal" />
+    <AirFreight v-if="quotationType === 'air'" :quotation="newQuotation" @closeModal="handleCloseModal" />
+    <SeaFreight v-if="quotationType === 'sea'" :quotation="newQuotation" @closeModal="handleCloseModal" />
   </Modal>
 </template>
 
@@ -142,6 +142,9 @@ import Modal from '@/components/kits/modal/index.vue'
 import SeaFreight from './sea-freight/index.vue'
 import AirFreight from './air-freight/index.vue'
 import Select from '@/components/kits/select/index.vue'
+import { quotationDB, quotationDBHeaders } from './index.js'
+import Table from '@/components/kits/table/table3.vue'
+
 const quotationNo = ref('')
 const pol = ref('')
 const dest = ref('')
@@ -153,6 +156,7 @@ const customer = ref('')
 const from = ref(null)
 const to = ref(null)
 const openModal = ref(false)
+const newQuotation = ref({})
 
 const handleOpenModal = () => {
   openModal.value = true
@@ -160,6 +164,11 @@ const handleOpenModal = () => {
 
 const handleCloseModal = () => {
   openModal.value = false
+}
+
+const handleRowDblClick = (idx) => {
+  newQuotation.value = quotations.value[idx]
+  openModal.value = true
 }
 
 const quotationTypes = [
@@ -174,5 +183,12 @@ const quotationTypes = [
 ]
 
 const quotationType = ref(quotationTypes[0].value)
+const quotations = computed(() => {
+  return quotationDB[quotationType.value]
+})
+
+const headers = computed(() => {
+  return quotationDBHeaders[quotationType.value]
+})
 
 </script>

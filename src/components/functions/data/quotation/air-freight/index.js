@@ -80,9 +80,4 @@ export const dataLocalCharges = [
 
 export const headersOtherCharges = [...headersLocalCharges, { key: 'payable', label: 'Payable' }]
 
-export const dataOtherCharges = [
-  ...dataLocalCharges,
-  {
-    payable: '',
-  },
-]
+export const dataOtherCharges = [{ ...dataLocalCharges, payable: '' }]

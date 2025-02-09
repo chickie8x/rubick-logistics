@@ -1,5 +1,5 @@
 <template>
-  <div class="h-full w-full bg-white p-4 flex flex-col gap-y-4">
+  <div class="h-full w-full bg-white p-4 flex flex-col gap-y-4 relative">
     <div class="flex justify-between mt-4">
       <h1 class="text-2xl font-bold text-slate-700">Air Freight Quotation</h1>
       <div class="flex items-center gap-x-4">
@@ -17,6 +17,7 @@
         </button>
         <button
           class="flex items-center gap-x-2 bg-indigo-500 hover:bg-indigo-600 text-white px-2 py-1 rounded-md duration-300 shadow-sm"
+          @click="handleSave"
         >
           <CheckCircleIcon class="w-6 h-6" />
           Save
@@ -34,74 +35,118 @@
       <div class="flex flex-col gap-y-2 p-2 rounded-md">
         <span class="font-bold text-slate-700 text-lg">Thông tin chứng từ</span>
         <div class="grid grid-cols-4 gap-x-6 gap-y-2 bg-gray-100 p-2 rounded-md">
-          <div>
+          <div v-if="quotation.qNo">
             <span class="text-sm font-semibold text-slate-900">Quotation No.</span>
             <input
               type="text"
-              class="w-full border border-slate-300 rounded-md px-2 py-1 outline-indigo-500 text-slate-700"
-            />
+              class="w-full border border-slate-300 rounded-md px-2 h-8 outline-indigo-500 text-slate-700"
+              disabled
+              :value="quotation.qNo"
+            />  
           </div>
           <div>
             <span class="text-sm font-semibold text-slate-900">Customer</span>
-            <input
-              type="text"
-              class="w-full border border-slate-300 rounded-md px-2 py-1 outline-indigo-500 text-slate-700"
-            />
+            <div class="flex items-center gap-x-2 border border-slate-300 rounded-md h-8 bg-white">
+              <input
+                type="text"
+                class="w-full text-slate-700 outline-none px-2"
+                v-model="customer"
+                disabled
+              />
+              <button
+                @click="handleFetch('customer')"
+                class="h-full hover:bg-gray-300 px-2 rounded-r-md bg-gray-200"
+              >
+                <UserGroupIcon class="w-6 h-6" />
+              </button>
+            </div>
           </div>
           <div>
             <span class="text-sm font-semibold text-slate-900">Customer Tel/Fax</span>
             <input
               type="text"
-              class="w-full border border-slate-300 rounded-md px-2 py-1 outline-indigo-500 text-slate-700"
+              class="w-full border border-slate-300 bg-white rounded-md px-2 h-8 outline-indigo-500 text-slate-700"
+              v-model="customerPhone"
+              disabled
             />
           </div>
           <div>
             <span class="text-sm font-semibold text-slate-900">Commondity</span>
-            <input
-              type="text"
-              class="w-full border border-slate-300 rounded-md px-2 py-1 outline-indigo-500 text-slate-700"
-            />
+            <div class="flex items-center gap-x-2 border border-slate-300 rounded-md h-8 bg-white">
+              <input
+                type="text"
+                class="w-full text-slate-700 outline-none px-2"
+                v-model="commondity"
+                disabled
+              />
+              <button
+                @click="handleFetch('commondity')"
+                class="h-full hover:bg-gray-300 px-2 rounded-r-md bg-gray-200"
+              >
+                <ShoppingCartIcon class="w-6 h-6" />
+              </button>
+            </div>
           </div>
           <div>
             <span class="text-sm font-semibold text-slate-900">ATTN</span>
             <input
               type="text"
-              class="w-full border border-slate-300 rounded-md px-2 py-1 outline-indigo-500 text-slate-700"
+              class="w-full border border-slate-300 rounded-md px-2 h-8 outline-indigo-500 text-slate-700"
             />
           </div>
           <div>
             <span class="text-sm font-semibold text-slate-900">Shipper</span>
-            <input
-              type="text"
-              class="w-full border border-slate-300 rounded-md px-2 py-1 outline-indigo-500 text-slate-700"
-            />
+            <div class="flex items-center gap-x-2 border border-slate-300 rounded-md h-8 bg-white">
+              <input
+                type="text"
+                class="w-full text-slate-700 outline-none px-2"
+                v-model="shipper"
+                disabled
+              />
+              <button
+                @click="handleFetch('shipper')"
+                class="h-full hover:bg-gray-300 px-2 rounded-r-md bg-gray-200"
+              >
+                <GlobeAltIcon class="w-6 h-6" />
+              </button>
+            </div>
           </div>
           <div>
             <span class="text-sm font-semibold text-slate-900">Consignee</span>
-            <input
-              type="text"
-              class="w-full border border-slate-300 rounded-md px-2 py-1 outline-indigo-500 text-slate-700"
-            />
+            <div class="flex items-center gap-x-2 border border-slate-300 rounded-md h-8 bg-white">
+              <input
+                type="text"
+                class="w-full text-slate-700 outline-none px-2"
+                v-model="consignee"
+                disabled
+              />
+              <button
+                @click="handleFetch('consignee')"
+                class="h-full hover:bg-gray-300 px-2 rounded-r-md bg-gray-200"
+              >
+                <UserIcon class="w-6 h-6" />
+              </button>
+            </div>
           </div>
           <div>
             <span class="text-sm font-semibold text-slate-900">Service</span>
             <input
               type="text"
-              class="w-full border border-slate-300 rounded-md px-2 py-1 outline-indigo-500 text-slate-700"
+              class="w-full border border-slate-300 rounded-md px-2 h-8 outline-indigo-500 text-slate-700"
             />
           </div>
           <div>
             <span class="text-sm font-semibold text-slate-900">Valid In</span>
             <input
               type="date"
-              class="w-full border border-slate-300 rounded-md px-2 py-1 outline-indigo-500 text-slate-700"
+              class="w-full border border-slate-300 rounded-md px-2 h-8 outline-indigo-500 text-slate-700"
             />
           </div>
           <div>
             <span class="text-sm font-semibold text-slate-900">Date of Q</span>
             <input
               type="date"
-              class="w-full border border-slate-300 rounded-md px-2 py-1 outline-indigo-500 text-slate-700"
+              class="w-full border border-slate-300 rounded-md px-2 h-8 outline-indigo-500 text-slate-700"
             />
           </div>
         </div>
@@ -111,7 +156,7 @@
           <span class="text-sm font-semibold text-slate-900">Container Type</span>
           <input
             type="text"
-            class="border border-slate-300 rounded-md px-2 py-1 outline-indigo-500 text-slate-700"
+            class="border border-slate-300 rounded-md px-2 h-8 outline-indigo-500 text-slate-700"
           />
         </div>
         <div class="flex flex-col gap-y-2">
@@ -188,12 +233,24 @@
         </div>
       </div>
     </div>
+    <Dialog :open="openDialog" @close="closeDialog" :target="target" @select="handleSelect" />
   </div>
 </template>
 
 <script setup>
-import { XCircleIcon, CheckCircleIcon, PrinterIcon, PaperAirplaneIcon } from '@heroicons/vue/24/outline'
+import { ref } from 'vue'
+import {
+  XCircleIcon,
+  CheckCircleIcon,
+  PrinterIcon,
+  PaperAirplaneIcon,
+  UserGroupIcon,
+  ShoppingCartIcon,
+  GlobeAltIcon,
+  UserIcon,
+} from '@heroicons/vue/24/outline'
 import SecondaryTable from '@/components/kits/table/secondary.vue'
+import Dialog from '@/components/kits/modal/dialog.vue'
 import {
   headersLocalCharges,
   dataLocalCharges,
@@ -202,10 +259,59 @@ import {
   headersOtherCharges,
   dataOtherCharges,
 } from './index.js'
+import {
+  customers,
+  commondities,
+  shippers,
+  consignees,
+} from '@/components/functions/data/quotation/index.js'
+
+const props = defineProps({
+  quotation: {
+    type: Object,
+    required: true,
+  },
+})
 
 const emit = defineEmits(['closeModal'])
 
+const customer = ref(props.quotation.customer ? props.quotation.customer : null)
+const customerPhone = ref(props.quotation.customerPhone ? props.quotation.customerPhone : null)
+const commondity = ref(props.quotation.commondity ? props.quotation.commondity : null)
+const shipper = ref(props.quotation.shipper ? props.quotation.shipper : null)
+const consignee = ref(props.quotation.consignee ? props.quotation.consignee : null)
+const openDialog = ref(false)
+const target = ref('')
+
+const handleFetch = (tg) => {
+  openDialog.value = true
+  target.value = tg
+}
+
+const closeDialog = () => {
+  openDialog.value = false
+  target.value = ''
+}
+
 const closeModal = () => {
+  emit('closeModal')
+}
+
+const handleSelect = (data) => {
+  if (target.value === 'customer') {
+    customer.value = data.name
+    customerPhone.value = data.phone
+  } else if (target.value === 'commondity') {
+    commondity.value = data.name
+  } else if (target.value === 'shipper') {
+    shipper.value = data.name
+  } else if (target.value === 'consignee') {
+    consignee.value = data.name
+  }
+}
+
+const handleSave = () => {
+  console.log(dataAirFreight)
   emit('closeModal')
 }
 </script>

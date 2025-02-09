@@ -29,9 +29,9 @@
             class="outline-none outline-indigo-500 read-only:outline-none px-2 text-slate-700"
             :size="row[header.key]?.length ? row[header.key]?.length : 6"
             :class="[header.key === 'KB' || header.key === 'TTO' ? 'scale-125' : '']"
-            :readonly="!editable[idx].editable"
-            @click="editOn(idx, header.key)"
-            @blur="editOff(idx, header.key)"
+            readonly
+            @click="editOn($event)"
+            @blur="editOff($event)"
           />
         </td>
       </tr>
@@ -54,20 +54,11 @@ const props = defineProps({
 })
 
 const rows = ref(props.data)
-const editable = ref(
-  rows.value.map((row) => {
-    return {
-      ...row,
-      editable: false,
-    }
-  }),
-)
-
-const editOn = (idx, key) => {
-  editable.value[idx].editable = true
+const editOn = (e) => {
+  e.target.readOnly = false
 }
 
-const editOff = (idx, key) => {
-  editable.value[idx].editable = false
+const editOff = (e) => {
+  e.target.readOnly = true
 }
 </script>
