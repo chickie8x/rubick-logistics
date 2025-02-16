@@ -10,6 +10,7 @@
           Internal Booking
         </button>
         <button
+          @click="handlePrint"
           class="flex items-center gap-x-2 bg-indigo-500 hover:bg-indigo-600 text-white px-2 py-1 rounded-md duration-300 shadow-sm"
         >
           <PrinterIcon class="w-6 h-6" />
@@ -234,6 +235,7 @@
       </div>
     </div>
     <Dialog :open="openDialog" @close="closeDialog" :target="target" @select="handleSelect" />
+    <QuotationForm v-if="openQuotationForm" @cancelExportQuotation="handleCancel" />
   </div>
 </template>
 
@@ -251,6 +253,7 @@ import {
 } from '@heroicons/vue/24/outline'
 import SecondaryTable from '@/components/kits/table/secondary.vue'
 import Dialog from '@/components/kits/modal/dialog.vue'
+import QuotationForm from '@/components/functions/bookings/quotation-form/type3/index.vue'
 import {
   headersLocalCharges,
   dataLocalCharges,
@@ -273,7 +276,7 @@ const props = defineProps({
   },
 })
 
-const emit = defineEmits(['closeModal'])
+const emit = defineEmits(['closeModal', 'print'])
 
 const customer = ref(props.quotation.customer ? props.quotation.customer : null)
 const customerPhone = ref(props.quotation.customerPhone ? props.quotation.customerPhone : null)
@@ -282,7 +285,7 @@ const shipper = ref(props.quotation.shipper ? props.quotation.shipper : null)
 const consignee = ref(props.quotation.consignee ? props.quotation.consignee : null)
 const openDialog = ref(false)
 const target = ref('')
-
+const openQuotationForm = ref(false)
 const handleFetch = (tg) => {
   openDialog.value = true
   target.value = tg
@@ -313,5 +316,13 @@ const handleSelect = (data) => {
 const handleSave = () => {
   console.log(dataAirFreight)
   emit('closeModal')
+}
+
+const handlePrint = () => {
+  openQuotationForm.value = true
+}
+
+const handleCancel = () => {
+  openQuotationForm.value = false
 }
 </script>

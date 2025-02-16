@@ -1,5 +1,5 @@
 <template>
-  <div class="p-4 rounded-lg bg-white">
+  <div class="p-4 rounded-lg bg-white overflow-auto">
     <div class="w-[1024px] p-4" id="my-node">
       <div class="flex border-b border-slate-300 pb-4">
         <div class="mr-10 h-40">
@@ -103,7 +103,7 @@
               <span class="font-bold">Nơi giao</span>
             </div>
             <div class="col-span-2 px-2 py-1 text-center">
-              <span>Hà Nội</span>
+              <span>Nansha</span>
             </div>
             <div class="col-span-1 px-2 py-1">
               <span class="font-bold">Nơi nhận</span>
@@ -115,7 +115,7 @@
               <span class="font-bold">Điều kiện giao nhận hàng</span>
             </div>
             <div class="col-span-2 px-2 py-1 text-center">
-              <span>Incoterms FCL</span>
+              <span>FOB FCL</span>
             </div>
             <div class="col-span-1 px-2 py-1">
               <span class="font-bold">Điều kiện đặc biệt khác</span>
@@ -127,19 +127,19 @@
               <span class="font-bold">Tên hàng</span>
             </div>
             <div class="col-span-2 px-2 py-1 text-center">
-              <span></span>
+              <span>Quạt thông gió , quạt cắt gió</span>
             </div>
             <div class="col-span-1 px-2 py-1">
               <span class="font-bold">Số lượng/Loại container</span>
             </div>
             <div class="col-span-2 px-2 py-1 text-center">
-              <span></span>
+              <span>1.61 x CBM</span>
             </div>
             <div class="col-span-1 px-2 py-1">
               <span class="font-bold">Trọng lượng</span>
             </div>
             <div class="col-span-2 px-2 py-1 text-center">
-              <span></span>
+              <span>Kgs</span>
             </div>
           </div>
           <span class="text-lg font-bold uppercase block bg-slate-700 text-white px-2 py-1"
@@ -180,138 +180,33 @@
           >
             <!-- I - Exwork fee -->
             <div
-              class="col-span-1 row-span-4 px-2 py-1 border-l border-t border-slate-300 flex items-center justify-center"
+              class="col-span-1 px-2 py-1 border-l border-t border-slate-300 flex items-center justify-center"
             >
               <span class="font-bold">I</span>
             </div>
+
             <div class="col-span-3 px-2 py-1 flex items-center justify-center">
-              <span class="font-bold">Exwork fee</span>
+              <span class="font-semibold">Cước biển Nansha - TP HCM</span>
             </div>
-            <div class="col-span-2 px-2 py-1">
-              <span></span>
+            <div class="col-span-1 px-2 py-1 flex items-center justify-end">
+              <span>1</span>
             </div>
-            <div class="col-span-1 px-2 py-1">
-              <span></span>
-            </div>
-            <div class="col-span-1 px-2 py-1">
-              <span class="italic">USD</span>
-            </div>
-            <div class="col-span-2 px-2 py-1">
-              <span></span>
-            </div>
-            <div class="col-span-1 px-2 py-1">
-              <span>Charges per</span>
-            </div>
-            <div class="col-span-2 px-2 py-1">
-              <span>x(loại cont)</span>
-            </div>
-            <div class="col-span-1 px-2 py-1">
-              <span></span>
-            </div>
-            <div class="col-span-1 px-2 py-1">
-              <span>USD/cont</span>
-            </div>
-            <div class="col-span-1 px-2 py-1">
-              <span></span>
-            </div>
-            <div class="col-span-1 px-2 py-1">
-              <span>USD</span>
-            </div>
-            <div class="col-span-2 px-2 py-1">
-              <span></span>
-            </div>
-
-            <div class="col-span-1 px-2 py-1">
-              <span>Charges per</span>
-            </div>
-            <div class="col-span-2 px-2 py-1">
-              <span>Bill</span>
-            </div>
-            <div class="col-span-1 px-2 py-1">
-              <span></span>
-            </div>
-            <div class="col-span-1 px-2 py-1">
+            <div class="col-span-1 px-2 py-1 flex items-center justify-start">
               <span>USD/Lô</span>
             </div>
-            <div class="col-span-1 px-2 py-1">
-              <span></span>
+            <div class="col-span-1 px-2 py-1 flex items-center justify-end">
+              <span>1,00</span>
             </div>
-            <div class="col-span-1 px-2 py-1">
+            <div class="col-span-1 px-2 py-1 flex items-center justify-start">
               <span>USD</span>
             </div>
-            <div class="col-span-2 px-2 py-1">
-              <span></span>
-            </div>
-
-            <div class="col-span-1 px-2 py-1">
-              <span>Other fee</span>
-            </div>
-            <div class="col-span-2 px-2 py-1">
-              <span>Bill</span>
-            </div>
-            <div class="col-span-1 px-2 py-1">
-              <span></span>
-            </div>
-            <div class="col-span-1 px-2 py-1">
-              <span>USD/Lô</span>
-            </div>
-            <div class="col-span-1 px-2 py-1">
-              <span></span>
-            </div>
-            <div class="col-span-1 px-2 py-1">
-              <span>USD</span>
-            </div>
-            <div class="col-span-2 px-2 py-1">
-              <span></span>
-            </div>
-
-            <div class="col-span-1 px-2 py-1">
-              <span></span>
-            </div>
-            <div class="col-span-3 px-2 py-1">
-              <span></span>
-            </div>
-            <div class="col-span-1 px-2 py-1">
-              <span></span>
-            </div>
-            <div class="col-span-1 px-2 py-1">
-              <span></span>
-            </div>
-            <div class="col-span-1 px-2 py-1">
-              <span></span>
-            </div>
-            <div class="col-span-1 px-2 py-1">
-              <span>USD</span>
-            </div>
-            <div class="col-span-2 px-2 py-1">
-              <span></span>
-            </div>
-
-            <div class="col-span-1 px-2 py-1">
-              <span></span>
-            </div>
-            <div class="col-span-3 px-2 py-1">
-              <span></span>
-            </div>
-            <div class="col-span-1 px-2 py-1">
-              <span></span>
-            </div>
-            <div class="col-span-1 px-2 py-1">
-              <span></span>
-            </div>
-            <div class="col-span-1 px-2 py-1">
-              <span></span>
-            </div>
-            <div class="col-span-1 px-2 py-1">
-              <span>USD</span>
-            </div>
-            <div class="col-span-2 px-2 py-1">
-              <span></span>
+            <div class="col-span-2 px-2 py-1 flex items-center justify-center font-semibold">
+              <span> 3-4 days</span>
             </div>
 
             <!-- II - OF-Cước biển FCL/LCL -->
 
-            <div class="col-span-1 px-2 py-1 flex items-center justify-center">
+            <!-- <div class="col-span-1 px-2 py-1 flex items-center justify-center">
               <span class="font-bold">II</span>
             </div>
             <div class="col-span-3 px-2 py-1 flex items-center justify-center">
@@ -331,14 +226,14 @@
             </div>
             <div class="col-span-2 px-2 py-1">
               <span></span>
-            </div>
+            </div> -->
 
             <!-- III - Phí local charge -->
             <div
-              class="col-span-1 row-span-7 px-2 py-1 border-l border-t border-slate-300 flex items-center justify-center text-center"
+              class="col-span-1 row-span-4 px-2 py-1 border-l border-t border-slate-300 flex items-center justify-center text-center"
             >
               <span class="font-bold"
-                >III <br />
+                >II <br />
                 Phí local charge</span
               >
             </div>
@@ -346,134 +241,77 @@
             <div class="col-span-3 px-2 py-1 flex items-center justify-center">
               <span>CFS - Phí khai thác</span>
             </div>
-            <div class="col-span-1 px-2 py-1">
-              <span></span>
+            <div class="col-span-1 px-2 py-1 flex items-center justify-end">
+              <span>15</span>
             </div>
-            <div class="col-span-1 px-2 py-1">
-              <span>USD/cont</span>
+            <div class="col-span-1 px-2 py-1 flex items-center justify-start">
+              <span>USD/Cbm</span>
             </div>
-            <div class="col-span-1 px-2 py-1">
-              <span></span>
+            <div class="col-span-1 px-2 py-1 flex items-center justify-end">
+              <span>24,5</span>
             </div>
-            <div class="col-span-1 px-2 py-1">
+            <div class="col-span-1 px-2 py-1 flex items-center justify-start">
               <span>USD</span>
             </div>
-            <div class="col-span-2 px-2 py-1">
-              <span></span>
+            <div class="col-span-2 px-2 py-1 flex items-center justify-center font-semibold">
+              <span>Chưa bao gồm VAT 8%</span>
             </div>
 
             <div class="col-span-3 px-2 py-1 flex items-center justify-center">
               <span>THC - Phí cầu cảng</span>
             </div>
-            <div class="col-span-1 px-2 py-1">
-              <span></span>
+            <div class="col-span-1 px-2 py-1 flex items-center justify-end">
+              <span>5</span>
             </div>
-            <div class="col-span-1 px-2 py-1">
-              <span>USD/cont</span>
+            <div class="col-span-1 px-2 py-1 flex items-center justify-start">
+              <span>USD/Cbm</span>
             </div>
-            <div class="col-span-1 px-2 py-1">
-              <span></span>
+            <div class="col-span-1 px-2 py-1 flex items-center justify-end">
+              <span>8,05</span>
             </div>
-            <div class="col-span-1 px-2 py-1">
+            <div class="col-span-1 px-2 py-1 flex items-center justify-start">
               <span>USD</span>
             </div>
-            <div class="col-span-2 px-2 py-1">
-              <span></span>
+            <div class="col-span-2 px-2 py-1 flex items-center justify-center font-semibold">
+              <span>Chưa bao gồm VAT 8%</span>
             </div>
 
             <div class="col-span-3 px-2 py-1 flex items-center justify-center">
-              <span>CIC - Phí phụ trội</span>
+              <span>CIC - Phí cân đối cont rỗng</span>
             </div>
-            <div class="col-span-1 px-2 py-1">
-              <span></span>
+            <div class="col-span-1 px-2 py-1 flex items-center justify-end">
+              <span>4</span>
             </div>
-            <div class="col-span-1 px-2 py-1">
+            <div class="col-span-1 px-2 py-1 flex items-center justify-start">
               <span>USD/cont</span>
             </div>
-            <div class="col-span-1 px-2 py-1">
-              <span></span>
+            <div class="col-span-1 px-2 py-1 flex items-center justify-end">
+              <span>6,44</span>
             </div>
-            <div class="col-span-1 px-2 py-1">
+            <div class="col-span-1 px-2 py-1 flex items-center justify-start">
               <span>USD</span>
             </div>
-            <div class="col-span-2 px-2 py-1">
-              <span></span>
+            <div class="col-span-2 px-2 py-1 flex items-center justify-center font-semibold">
+              <span>Chưa bao gồm VAT 8%</span>
             </div>
 
             <div class="col-span-3 px-2 py-1 flex items-center justify-center">
-              <span>LSS - Phụ phí lưu huỳnh</span>
+              <span>D/O - Phí chứng từ</span>
             </div>
             <div class="col-span-1 px-2 py-1">
-              <span></span>
-            </div>
-            <div class="col-span-1 px-2 py-1">
-              <span>USD/cont</span>
-            </div>
-            <div class="col-span-1 px-2 py-1">
-              <span></span>
-            </div>
-            <div class="col-span-1 px-2 py-1">
-              <span>USD</span>
-            </div>
-            <div class="col-span-2 px-2 py-1">
-              <span></span>
-            </div>
-
-            <div class="col-span-3 px-2 py-1 flex items-center justify-center">
-              <span>Cleaning fee - Phí vệ sinh</span>
-            </div>
-            <div class="col-span-1 px-2 py-1">
-              <span></span>
-            </div>
-            <div class="col-span-1 px-2 py-1">
-              <span>USD/cont</span>
-            </div>
-            <div class="col-span-1 px-2 py-1">
-              <span></span>
-            </div>
-            <div class="col-span-1 px-2 py-1">
-              <span>USD</span>
-            </div>
-            <div class="col-span-2 px-2 py-1">
-              <span></span>
-            </div>
-
-            <div class="col-span-3 px-2 py-1 flex items-center justify-center">
-              <span>Handling fee - Phí đại lý</span>
-            </div>
-            <div class="col-span-1 px-2 py-1">
-              <span></span>
+              <span>30</span>
             </div>
             <div class="col-span-1 px-2 py-1">
               <span>USD/Bill</span>
             </div>
-            <div class="col-span-1 px-2 py-1">
-              <span></span>
+            <div class="col-span-1 px-2 py-1 flex items-center justify-end">
+              <span>30,00</span>
             </div>
-            <div class="col-span-1 px-2 py-1">
+            <div class="col-span-1 px-2 py-1 flex items-center justify-start">
               <span>USD</span>
             </div>
-            <div class="col-span-2 px-2 py-1">
-              <span></span>
-            </div>
-
-            <div class="col-span-3 px-2 py-1 flex items-center justify-center">
-              <span>D/O Phí chứng từ</span>
-            </div>
-            <div class="col-span-1 px-2 py-1">
-              <span></span>
-            </div>
-            <div class="col-span-1 px-2 py-1">
-              <span>USD/Bill</span>
-            </div>
-            <div class="col-span-1 px-2 py-1">
-              <span></span>
-            </div>
-            <div class="col-span-1 px-2 py-1">
-              <span>USD</span>
-            </div>
-            <div class="col-span-2 px-2 py-1">
-              <span></span>
+            <div class="col-span-2 px-2 py-1 flex items-center justify-center font-semibold">
+              <span>Chưa bao gồm VAT 8%</span>
             </div>
 
             <div class="col-span-1 row-span-2 px-2 py-1">
@@ -488,14 +326,14 @@
             <div class="col-span-1 px-2 py-1">
               <span></span>
             </div>
-            <div class="col-span-1 px-2 py-1">
-              <span></span>
+            <div class="col-span-1 px-2 py-1 flex items-center justify-end">
+              <span>69,64</span>
             </div>
-            <div class="col-span-1 px-2 py-1">
+            <div class="col-span-1 px-2 py-1 flex items-center justify-start">
               <span class="font-bold">USD</span>
             </div>
-            <div class="col-span-2 px-2 py-1">
-              <span class="font-bold">Ex: rate: </span>
+            <div class="col-span-2 px-2 py-1 flex items-center justify-center font-semibold">
+              <span>Chưa bao gồm VAT 8%</span>
             </div>
             <div class="col-span-1 px-2 py-1">
               <span></span>
@@ -503,121 +341,188 @@
             <div class="col-span-1 px-2 py-1">
               <span></span>
             </div>
-            <div class="col-span-1 px-2 py-1">
-              <span></span>
+            <div class="col-span-1 px-2 py-1 flex items-center justify-end">
+              <span>1.779.998</span>
             </div>
-            <div class="col-span-1 px-2 py-1">
+            <div class="col-span-1 px-2 py-1 flex items-center justify-start">
               <span class="font-bold">VND</span>
             </div>
-            <div class="col-span-2 px-2 py-1">
-              <span></span>
+            <div class="col-span-2 px-2 py-1 flex items-center justify-center font-semibold">
+              <span>Tỉ giá tạm tính: 25560</span>
             </div>
 
-            <!-- IV  -->
+            
+            <!-- III - Inland Charge -->
             <div
-              class="col-span-1 row-span-4 px-2 py-1 border-l border-t border-slate-300 flex items-center justify-center text-center"
+              class="col-span-1 row-span-3 px-2 py-1 border-l border-t border-slate-300 flex items-center justify-center text-center"
             >
-              <span class="font-bold">IV</span>
+              <span class="font-bold"
+                >III <br />
+                Inland Charge</span
+              >
             </div>
 
             <div class="col-span-3 px-2 py-1 flex items-center justify-center">
               <span>Phí thủ tục hải quan</span>
             </div>
-            <div class="col-span-1 px-2 py-1">
-              <span></span>
+            <div class="col-span-1 px-2 py-1 flex items-center justify-end">
+              <span>900.000</span>
             </div>
-            <div class="col-span-1 px-2 py-1">
-              <span>/cont</span>
+            <div class="col-span-1 px-2 py-1 flex items-center justify-start">
+              <span>/Tờ khai</span>
             </div>
-            <div class="col-span-1 px-2 py-1">
-              <span></span>
+            <div class="col-span-1 px-2 py-1 flex items-center justify-end">
+              <span>900.000</span>
             </div>
-            <div class="col-span-1 px-2 py-1">
+            <div class="col-span-1 px-2 py-1 flex items-center justify-start">
               <span>VND</span>
             </div>
-            <div class="col-span-2 px-2 py-1">
-              <span></span>
+            <div class="col-span-2 px-2 py-1 flex items-center justify-center font-semibold">
+              <span>Chưa bao gồm VAT 8%</span>
             </div>
 
             <div class="col-span-3 px-2 py-1 flex items-center justify-center">
-              <span>Kiểm hoá (Nếu có)</span>
+              <span>Trucking HCM - C22 Phường 12</span>
             </div>
-            <div class="col-span-1 px-2 py-1">
-              <span></span>
+            <div class="col-span-1 px-2 py-1 flex items-center justify-end">
+              <span>1.000.000</span>
             </div>
-            <div class="col-span-1 px-2 py-1">
-              <span>/cont</span>
+            <div class="col-span-1 px-2 py-1 flex items-center justify-start">
+              <span>Lô</span>
             </div>
-            <div class="col-span-1 px-2 py-1">
-              <span></span>
+            <div class="col-span-1 px-2 py-1 flex items-center justify-end">
+              <span>1.000.000</span>
             </div>
-            <div class="col-span-1 px-2 py-1">
+            <div class="col-span-1 px-2 py-1 flex items-center justify-start">
               <span>VND</span>
             </div>
-            <div class="col-span-2 px-2 py-1">
-              <span></span>
+            <div class="col-span-2 px-2 py-1 flex items-center justify-center font-semibold">
+              <span>Chưa bao gồm VAT 8%</span>
             </div>
 
             <div class="col-span-3 px-2 py-1 flex items-center justify-center">
-              <span>Vận tải (từ...đến...)</span>
+              <span>Phí đường cấm (nếu có)</span>
             </div>
-            <div class="col-span-1 px-2 py-1">
+            <div class="col-span-1 px-2 py-1 flex items-center justify-end">
+              <span>700.000</span>
+            </div>
+            <div class="col-span-1 px-2 py-1 flex items-center justify-start">
+              <span>/Tờ khai</span>
+            </div>
+            <div class="col-span-1 px-2 py-1 flex items-center justify-end">
               <span></span>
             </div>
-            <div class="col-span-1 px-2 py-1">
-              <span>/cont</span>
-            </div>
-            <div class="col-span-1 px-2 py-1">
-              <span></span>
-            </div>
-            <div class="col-span-1 px-2 py-1">
+            <div class="col-span-1 px-2 py-1 flex items-center justify-start">
               <span>VND</span>
             </div>
-            <div class="col-span-2 px-2 py-1">
+            <div class="col-span-2 px-2 py-1 flex items-center justify-center font-semibold">
               <span></span>
+            </div>
+
+
+            <!-- IV  -->
+            <div
+              class="col-span-1 row-span-5 px-2 py-1 border-l border-t border-slate-300 flex items-center justify-center text-center"
+            >
+              <span class="font-bold">IV <br /> Phí chi hộ</span>
             </div>
 
             <div class="col-span-3 px-2 py-1 flex items-center justify-center">
-              <span>Đường cấm (Nếu có)</span>
+              <span>Phí kiểm hoá (nếu có)</span>
             </div>
-            <div class="col-span-1 px-2 py-1">
-              <span></span>
+            <div class="col-span-1 px-2 py-1 flex items-center justify-end">
+              <span>700.000</span>
             </div>
-            <div class="col-span-1 px-2 py-1">
-              <span>/cont</span>
+            <div class="col-span-1 px-2 py-1 flex items-center justify-start">
+              <span>/Tờ khai</span>
             </div>
-            <div class="col-span-1 px-2 py-1">
-              <span></span>
+            <div class="col-span-1 px-2 py-1 flex items-center justify-end">
+              <span>700.000</span>
             </div>
-            <div class="col-span-1 px-2 py-1">
+            <div class="col-span-1 px-2 py-1 flex items-center justify-start">
               <span>VND</span>
             </div>
-            <div class="col-span-2 px-2 py-1">
-              <span></span>
+            <div class="col-span-2 px-2 py-1 flex items-center justify-center font-semibold">
+              <span class="text-red-500">Dự kiến (theo hoá đơn kho)</span>
             </div>
 
-            <div class="col-span-1 px-2 py-1">
-              <span class="block h-5"></span>
+            <div class="col-span-3 px-2 py-1 flex items-center justify-center">
+              <span>Giao nhận</span>
             </div>
-            <div class="col-span-3 px-2 py-1">
+            <div class="col-span-1 px-2 py-1 flex items-center justify-end">
+              <span>150.000</span>
+            </div>
+            <div class="col-span-1 px-2 py-1 flex items-center justify-start">
+              <span>/Lô</span>
+            </div>
+            <div class="col-span-1 px-2 py-1 flex items-center justify-end">
               <span></span>
             </div>
-            <div class="col-span-1 px-2 py-1">
-              <span></span>
+            <div class="col-span-1 px-2 py-1 flex items-center justify-start">
+              <span>VND</span>
             </div>
-            <div class="col-span-1 px-2 py-1">
-              <span></span>
-            </div>
-            <div class="col-span-1 px-2 py-1">
-              <span></span>
-            </div>
-            <div class="col-span-1 px-2 py-1">
-              <span></span>
-            </div>
-            <div class="col-span-2 px-2 py-1">
-              <span></span>
+            <div class="col-span-2 px-2 py-1 flex items-center justify-center font-semibold">
+              <span class="text-red-500">Dự kiến (theo hoá đơn kho)</span>
             </div>
 
+            <div class="col-span-3 px-2 py-1 flex items-center justify-center">
+              <span>Lưu kho</span>
+            </div>
+            <div class="col-span-1 px-2 py-1 flex items-center justify-end">
+              <span>11.000</span>
+            </div>
+            <div class="col-span-1 px-2 py-1 flex items-center justify-start">
+              <span>/CBM/Ngày</span>
+            </div>
+            <div class="col-span-1 px-2 py-1 flex items-center justify-end">
+              <span></span>
+            </div>
+            <div class="col-span-1 px-2 py-1 flex items-center justify-start">
+              <span>VND</span>
+            </div>
+            <div class="col-span-2 px-2 py-1 flex items-center justify-center font-semibold">
+              <span class="text-red-500">Dự kiến (theo hoá đơn kho)</span>
+            </div>
+
+            <div class="col-span-3 px-2 py-1 flex items-center justify-center">
+              <span>Cơ sở hạ tầng</span>
+            </div>
+            <div class="col-span-1 px-2 py-1 flex items-center justify-end">
+              <span>16.000</span>
+            </div>
+            <div class="col-span-1 px-2 py-1 flex items-center justify-start">
+              <span>/Tons</span>
+            </div>
+            <div class="col-span-1 px-2 py-1 flex items-center justify-end">
+              <span></span>
+            </div>
+            <div class="col-span-1 px-2 py-1 flex items-center justify-start">
+              <span>VND</span>
+            </div>
+            <div class="col-span-2 px-2 py-1 flex items-center justify-center font-semibold">
+              <span class="text-red-500">Dự kiến (theo hoá đơn kho)</span>
+            </div>
+
+            <div class="col-span-3 px-2 py-1 flex items-center justify-center">
+              <span>Bốc xếp</span>
+            </div>
+            <div class="col-span-1 px-2 py-1 flex items-center justify-end">
+              <span>200.000</span>
+            </div>
+            <div class="col-span-1 px-2 py-1 flex items-center justify-start">
+              <span>/CBM</span>
+            </div>
+            <div class="col-span-1 px-2 py-1 flex items-center justify-end">
+              <span></span>
+            </div>
+            <div class="col-span-1 px-2 py-1 flex items-center justify-start">
+              <span>VND</span>
+            </div>
+            <div class="col-span-2 px-2 py-1 flex items-center justify-center font-semibold">
+              <span class="text-red-500">Dự kiến (theo hoá đơn kho)</span>
+            </div>
+
+            <!-- Tổng chi phí lô hàng -->
             <div class="col-span-4 px-2 py-1 flex items-center justify-center">
               <span class="font-bold uppercase">Tổng chi phí lô hàng</span>
             </div>
@@ -628,13 +533,13 @@
               <span></span>
             </div>
             <div class="col-span-1 px-2 py-1">
-              <span class="font-bold"></span>
+              <span class="font-bold">3.679.998</span>
             </div>
             <div class="col-span-1 px-2 py-1">
               <span class="font-bold">VND</span>
             </div>
             <div class="col-span-2 px-2 py-1">
-              <span class="font-bold">Chưa bao gồm VAT ... %</span>
+              <span class="font-bold">Chưa bao gồm VAT 8%</span>
             </div>
           </div>
 
@@ -642,13 +547,13 @@
             >III - Ghi chú</span
           >
           <ol class="list-decimal list-inside text-sm mb-4">
-            <li>Báo giá chưa bao gồm VAT ... %</li>
+            <li>Báo giá chưa bao gồm VAT 8 %</li>
             <li>
-              Báo giá chưa bao gồm các chi phí nâng, hạ, lưu cont, lưu kho,kiểm tra chất lượng, kiểm
-              hóa (nếu có)…
+              Báo giá chưa bao gồm các chi phí kiểm tra chất lượng, kiểm hoá (nếu có)…
             </li>
             <li>Báo giá chưa bao gồm chi phí đường cấm (nếu có)</li>
-            <li>Thời gian báo giá (Thời gian muốn ấn định giá)</li>
+            <li>Chưa bao gồm phí dừng đỗ (nếu có)</li>
+            <li>Thời hạn báo giá: 15/02/2025</li>
           </ol>
 
           <div class="border-t border-slate-300 py-2 flex justify-center space-x-80 border-b h-40">
