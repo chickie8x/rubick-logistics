@@ -1,4 +1,4 @@
-export const headersAirFreight = [
+export const headersAirFreight = () => [
   { key: 'origin', label: 'Origin' },
   { key: 'destination', label: 'Destination' },
   { key: 'carrier', label: 'Carrier' },
@@ -20,7 +20,7 @@ export const headersAirFreight = [
   { key: 'note', label: 'Note' },
 ]
 
-export const dataAirFreight = [
+export const dataAirFreight = () => [
   {
     origin: '',
     destination: '',
@@ -44,7 +44,7 @@ export const dataAirFreight = [
   },
 ]
 
-export const headersLocalCharges = [
+export const headersLocalCharges = () => [
   { key: 'desc', label: 'Description' },
   { key: 'currency', label: 'Currency' },
   { key: 'unit', label: 'Unit' },
@@ -60,7 +60,7 @@ export const headersLocalCharges = [
   { key: 'note', label: 'Note' },
 ]
 
-export const dataLocalCharges = [
+export const dataLocalCharges = () => [
   {
     desc: '',
     currency: '',
@@ -78,6 +78,14 @@ export const dataLocalCharges = [
   },
 ]
 
-export const headersOtherCharges = [...headersLocalCharges, { key: 'payable', label: 'Payable' }]
+export const headersOtherCharges = () => {
+  const headers = headersLocalCharges()
+  headers.push({ key: 'payable', label: 'Payable' })
+  return headers
+}
 
-export const dataOtherCharges = [{ ...dataLocalCharges, payable: '' }]
+export const dataOtherCharges = () => {
+  const data = dataLocalCharges()
+  data.push({ payable: '' })
+  return data
+}

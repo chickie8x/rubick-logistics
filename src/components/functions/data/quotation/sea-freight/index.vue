@@ -10,6 +10,7 @@
           Internal Booking
         </button>
         <button
+          @click="handlePrint"
           class="flex items-center gap-x-2 bg-indigo-500 hover:bg-indigo-600 text-white px-2 py-1 rounded-md duration-300 shadow-sm"
         >
           <PrinterIcon class="w-6 h-6" />
@@ -215,28 +216,44 @@
       <div class="flex flex-col gap-y-2">
         <span class="font-bold text-slate-700 text-lg">Ocean Freight</span>
         <div class="w-full overflow-auto">
-          <SecondaryTable :headers="headersSeaFreight" :data="dataSeaFreight" />
+          <SecondaryTable :headers="seaFreightHeaders" :data="seaFreightRows" />
+          <button
+            class="bg-indigo-500 text-white px-2 py-1 rounded-md duration-300 shadow-sm mt-2"
+            @click="handleAddRow('seaFreight')"
+          >
+            <PlusIcon class="w-4 h-4" />
+          </button>
         </div>
       </div>
 
       <div class="flex flex-col gap-y-2">
         <span class="font-bold text-slate-700 text-lg">Other Charges</span>
         <div class="w-full overflow-auto">
-          <SecondaryTable :headers="headersOtherCharges" :data="dataOtherCharges" />
+          <SecondaryTable :headers="otherChargesHeaders" :data="otherChargesRows" />
+          <button
+            class="bg-indigo-500 text-white px-2 py-1 rounded-md duration-300 shadow-sm mt-2"
+            @click="handleAddRow('otherCharges')"
+          >
+            <PlusIcon class="w-4 h-4" />
+          </button>
         </div>
       </div>
 
       <div class="flex flex-col gap-y-2">
         <span class="font-bold text-slate-700 text-lg">Custom Clearance Charges</span>
         <div class="w-full overflow-auto">
-          <SecondaryTable
-            :headers="headersCustomClearanceCharges"
-            :data="dataCustomClearanceCharges"
-          />
+          <SecondaryTable :headers="customClearanceChargesHeaders" :data="customClearanceChargesRows" />
+          <button
+            class="bg-indigo-500 text-white px-2 py-1 rounded-md duration-300 shadow-sm mt-2"
+            @click="handleAddRow('customClearanceCharges')"
+          >
+            <PlusIcon class="w-4 h-4" />
+          </button>
         </div>
       </div>
     </div>
     <Dialog :open="openDialog" @close="closeDialog" :target="target" @select="handleSelect" />
+    <QuotationForm v-if="openQuotationForm" @cancelExportQuotation="handleCancel" />
   </div>
 </template>
 
@@ -262,6 +279,10 @@ import {
   headersCustomClearanceCharges,
   dataCustomClearanceCharges,
 } from './index.js'
+import { PlusIcon } from '@heroicons/vue/20/solid'
+import QuotationForm from '@/components/functions/bookings/quotation-form/type3/index.vue'
+
+const openQuotationForm = ref(false)
 
 const props = defineProps({
   quotation: {
@@ -270,7 +291,6 @@ const props = defineProps({
   },
 })
 
-console.log(props.quotation)
 const emit = defineEmits(['closeModal'])
 
 const closeModal = () => {
@@ -282,6 +302,14 @@ const customerPhone = ref(props.quotation.customerPhone ? props.quotation.custom
 const commondity = ref(props.quotation.commondity ? props.quotation.commondity : null)
 const shipper = ref(props.quotation.shipper ? props.quotation.shipper : null)
 const consignee = ref(props.quotation.consignee ? props.quotation.consignee : null)
+
+const seaFreightHeaders = ref(headersSeaFreight())
+const otherChargesHeaders = ref(headersOtherCharges())
+const customClearanceChargesHeaders = ref(headersCustomClearanceCharges())
+
+const seaFreightRows = ref([dataSeaFreight()[0]])
+const otherChargesRows = ref([dataOtherCharges()[0]])
+const customClearanceChargesRows = ref([dataCustomClearanceCharges()[0]])
 
 const handleFetch = (tg) => {
   openDialog.value = true
@@ -311,5 +339,26 @@ const handleSelect = (data) => {
 const handleSave = () => {
   console.log(dataSeaFreight)
   emit('closeModal')
+}
+
+const handleAddRow = (type) => {
+  if (type === 'seaFreight') {
+    seaFreightRows.value.push(dataSeaFreight()[0])
+    console.log(seaFreightRows.value)
+  } else if (type === 'otherCharges') {
+    otherChargesRows.value.push(dataOtherCharges()[0])
+    console.log(otherChargesRows.value)
+  } else if (type === 'customClearanceCharges') {
+    customClearanceChargesRows.value.push(dataCustomClearanceCharges()[0])
+    console.log(customClearanceChargesRows.value)
+  }
+}
+
+const handlePrint = () => {
+    openQuotationForm.value = true
+  }
+
+  const handleCancel = () => {
+    openQuotationForm.value = false
 }
 </script>

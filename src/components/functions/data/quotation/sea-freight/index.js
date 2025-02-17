@@ -1,4 +1,4 @@
-export const headersSeaFreight = [
+export const headersSeaFreight = () => [
   { key: 'POL', label: 'POL' },
   { key: 'POD', label: 'POD' },
   { key: 'Carrier', label: 'Carrier' },
@@ -21,7 +21,7 @@ export const headersSeaFreight = [
   { key: 'Note', label: 'Note' },
 ]
 
-export const dataSeaFreight = [
+export const dataSeaFreight = () => [
   {
     POL: '',
     POD: '',
@@ -46,7 +46,7 @@ export const dataSeaFreight = [
   },
 ]
 
-export const headersOtherCharges = [
+export const headersOtherCharges = () => [
   { key: 'POL', label: 'POL' },
   { key: 'POD', label: 'POD' },
   { key: 'Carrier', label: 'Carrier' },
@@ -62,7 +62,7 @@ export const headersOtherCharges = [
   { key: 'Note', label: 'Note' },
 ]
 
-export const dataOtherCharges = [
+export const dataOtherCharges = () => [
   {
     POL: '',
     POD: '',
@@ -80,7 +80,7 @@ export const dataOtherCharges = [
   },
 ]
 
-export const headersCustomClearanceCharges = [
+export const headersCustomClearanceCharges = () => [
   { key: 'POL', label: 'POL' },
   { key: 'POD', label: 'POD' },
   { key: 'Carrier', label: 'Carrier' },
@@ -99,17 +99,17 @@ export const headersCustomClearanceCharges = [
   { key: 'Note', label: 'Note' },
 ]
 
-export const dataCustomClearanceCharges = [
+export const dataCustomClearanceCharges = () => [
   {
     POL: '',
     POD: '',
     Carrier: '',
     Min: '',
     LCL: '',
-    20: '',
-    40: '',
+    '20': '',
+    '40': '',
     '40HC': '',
-    45: '',
+    '45': '',
     VAT: '',
     Payee: '',
     KB: '',

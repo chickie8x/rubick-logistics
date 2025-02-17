@@ -216,21 +216,33 @@
       <div class="flex flex-col gap-y-2">
         <span class="font-bold text-slate-700 text-lg">Air Freight</span>
         <div class="w-full overflow-auto">
-          <SecondaryTable :headers="headersAirFreight" :data="dataAirFreight" />
+          <SecondaryTable :headers="airfreightHeaders" :data="airFreightRows" />
+          <button @click="handleAddRow('airFreight')" class="bg-indigo-500 hover:bg-indigo-600 text-white p-1 rounded-md duration-300 shadow-sm mt-2">
+            <PlusIcon class="w-4 h-4" />
+          </button>
         </div>
       </div>
 
       <div class="flex flex-col gap-y-2">
         <span class="font-bold text-slate-700 text-lg">Local Charges</span>
         <div class="w-full overflow-auto">
-          <SecondaryTable :headers="headersLocalCharges" :data="dataLocalCharges" />
+          <SecondaryTable :headers="localChargesHeaders" :data="localChargesRows" />
+          <button @click="handleAddRow('localCharges')" class="bg-indigo-500 hover:bg-indigo-600 text-white p-1 rounded-md duration-300 shadow-sm mt-2">
+            <PlusIcon class="w-4 h-4" />
+          </button>
         </div>
       </div>
 
       <div class="flex flex-col gap-y-2">
         <span class="font-bold text-slate-700 text-lg">Other Charges</span>
         <div class="w-full overflow-auto">
-          <SecondaryTable :headers="headersOtherCharges" :data="dataOtherCharges" />
+          <SecondaryTable :headers="otherChargesHeaders" :data="otherChargesRows" />
+          <button
+            @click="handleAddRow('otherCharges')"
+            class="bg-indigo-500 hover:bg-indigo-600 text-white p-1 rounded-md duration-300 shadow-sm mt-2"
+          >
+            <PlusIcon class="w-4 h-4" />
+          </button>
         </div>
       </div>
     </div>
@@ -250,6 +262,7 @@ import {
   ShoppingCartIcon,
   GlobeAltIcon,
   UserIcon,
+  PlusIcon,
 } from '@heroicons/vue/24/outline'
 import SecondaryTable from '@/components/kits/table/secondary.vue'
 import Dialog from '@/components/kits/modal/dialog.vue'
@@ -286,6 +299,16 @@ const consignee = ref(props.quotation.consignee ? props.quotation.consignee : nu
 const openDialog = ref(false)
 const target = ref('')
 const openQuotationForm = ref(false)
+
+const airfreightHeaders = ref(headersAirFreight())
+const localChargesHeaders = ref(headersLocalCharges())
+const otherChargesHeaders = ref(headersOtherCharges())
+
+const airFreightRows = ref([dataAirFreight()[0]])
+const localChargesRows = ref([dataLocalCharges()[0]])
+const otherChargesRows = ref([dataOtherCharges()[0]])
+
+
 const handleFetch = (tg) => {
   openDialog.value = true
   target.value = tg
@@ -324,5 +347,18 @@ const handlePrint = () => {
 
 const handleCancel = () => {
   openQuotationForm.value = false
+}
+
+const handleAddRow = (type) => {
+  if (type === 'airFreight') {
+    airFreightRows.value.push(dataAirFreight()[0])
+    console.log(airFreightRows.value)
+  } else if (type === 'localCharges') {
+    localChargesRows.value.push(dataLocalCharges()[0])
+    console.log(localChargesRows.value)
+  } else if (type === 'otherCharges') {
+    otherChargesRows.value.push(dataOtherCharges()[0])
+    console.log(otherChargesRows.value)
+  }
 }
 </script>
