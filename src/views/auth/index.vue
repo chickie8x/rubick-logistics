@@ -3,7 +3,7 @@
     <h1
       class="text-2xl font-bold bg-slate-700 text-center uppercase text-white px-4 py-1 shadow-md w-1/2 rounded-tl-lg rounded-tr-lg"
     >
-      Rubick Logistics
+      Rubik Logistics
     </h1>
     <div class="w-1/2 min-h-96 h-fit flex justify-center shadow-md">
       <div class="w-full rounded-bl-lg overflow-hidden bg-white">

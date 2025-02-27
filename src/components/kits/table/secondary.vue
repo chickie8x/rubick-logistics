@@ -22,16 +22,15 @@
           v-for="header in headers"
           :key="header.key"
           class="p-2 text-sm border-r border-slate-300"
+          :class="[header.key === 'unit' ? 'flex items-center' : '']"
         >
+          <span v-if="header.key === 'unit'">{{ currency }}/</span>
           <input
             :type="header.key === 'KB' || header.key === 'TTO' ? 'checkbox' : 'text'"
             v-model="row[header.key]"
-            class="outline-none outline-indigo-500 read-only:outline-none px-2 text-slate-700"
+            class="outline-none focus:outline-indigo-500 focus:ml-2 read-only:outline-none text-slate-700"
             :size="row[header.key]?.length ? row[header.key]?.length : 6"
-            :class="[header.key === 'KB' || header.key === 'TTO' ? 'scale-125' : '']"
-            readonly
-            @click="editOn($event)"
-            @blur="editOff($event)"
+            :class="[header.key === 'KB' || header.key === 'TTO' ? 'scale-125' : '', header.key === 'unit' ? 'hover:outline-indigo-500' : 'px-2']"
           />
         </td>
       </tr>
@@ -51,14 +50,11 @@ const props = defineProps({
     type: Array,
     required: true,
   },
+  currency: {
+    type: String,
+    required: true,
+  },
 })
 
 const rows = ref(props.data)
-const editOn = (e) => {
-  e.target.readOnly = false
-}
-
-const editOff = (e) => {
-  e.target.readOnly = true
-}
 </script>

@@ -125,12 +125,25 @@
       <hr class="w-full border-slate-300" />
     </div>
     <div class="mt-4 overflow-auto">
-      <Table :headers="headers" :data="quotations" :dblClickEvent="true" @rowDblClick="handleRowDblClick" />
+      <Table
+        :headers="headers"
+        :data="quotations"
+        :dblClickEvent="true"
+        @rowDblClick="handleRowDblClick"
+      />
     </div>
   </div>
   <Modal :open="openModal">
-    <AirFreight v-if="quotationType === 'air'" :quotation="newQuotation" @closeModal="handleCloseModal" />
-    <SeaFreight v-if="quotationType === 'sea'" :quotation="newQuotation" @closeModal="handleCloseModal" />
+    <AirFreight
+      v-if="quotationType === 'air'"
+      :quotation="newQuotation"
+      @closeModal="handleCloseModal"
+    />
+    <SeaFreight
+      v-if="quotationType === 'sea'"
+      :quotation="newQuotation"
+      @closeModal="handleCloseModal"
+    />
   </Modal>
 </template>
 
@@ -190,5 +203,4 @@ const quotations = computed(() => {
 const headers = computed(() => {
   return quotationDBHeaders[quotationType.value]
 })
-
 </script>

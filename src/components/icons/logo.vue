@@ -11,7 +11,7 @@
       <span class="block w-1 h-1 bg-white"></span>
       <span class="block w-1 h-1 bg-white"></span>
     </div>
-    <span class="text-white text-2xl font-bold uppercase">Rubick Logistic</span>
+    <span class="text-white text-2xl font-bold uppercase">Rubik Logistic</span>
   </div>
 </template>
 

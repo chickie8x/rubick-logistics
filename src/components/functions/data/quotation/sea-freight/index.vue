@@ -242,7 +242,10 @@
       <div class="flex flex-col gap-y-2">
         <span class="font-bold text-slate-700 text-lg">Custom Clearance Charges</span>
         <div class="w-full overflow-auto">
-          <SecondaryTable :headers="customClearanceChargesHeaders" :data="customClearanceChargesRows" />
+          <SecondaryTable
+            :headers="customClearanceChargesHeaders"
+            :data="customClearanceChargesRows"
+          />
           <button
             class="bg-indigo-500 text-white px-2 py-1 rounded-md duration-300 shadow-sm mt-2"
             @click="handleAddRow('customClearanceCharges')"
@@ -355,10 +358,10 @@ const handleAddRow = (type) => {
 }
 
 const handlePrint = () => {
-    openQuotationForm.value = true
-  }
+  openQuotationForm.value = true
+}
 
-  const handleCancel = () => {
-    openQuotationForm.value = false
+const handleCancel = () => {
+  openQuotationForm.value = false
 }
 </script>

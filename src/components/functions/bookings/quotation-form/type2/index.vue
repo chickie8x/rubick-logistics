@@ -8,7 +8,7 @@
         <div class="text-slate-700 flex flex-col gap-y-2">
           <div>
             <h1 class="text-2xl font-bold uppercase text-center">
-              Rubick Logistics Joint Stock Company
+              Rubik Logistics Joint Stock Company
             </h1>
           </div>
           <div class="space-x-2 max-w-[700px] whitespace-pre-wrap text-center">
@@ -32,7 +32,7 @@
             </div>
             <div class="flex justify-center space-x-2">
               <span>Email:</span>
-              <a href="mailto:Kevin@rubicklogs.vn" class="text-blue-500">Kevin@rubicklogs.vn</a>
+              <a href="mailto:Kevin@rubiklogs.vn" class="text-blue-500">Kevin@rubiklogs.vn</a>
             </div>
           </div>
         </div>
@@ -60,7 +60,7 @@
               <span class="font-bold">Công ty</span>
             </div>
             <div class="col-span-3 px-2 py-1">
-              <span class="whitespace-pre-wrap">Rubick Logistics Joint Stock Company </span>
+              <span class="whitespace-pre-wrap">Rubik Logistics Joint Stock Company </span>
             </div>
             <div class="col-span-1 px-2 py-1">
               <span class="font-bold">Người liên hệ</span>
@@ -90,7 +90,7 @@
               <span class="font-bold">Email</span>
             </div>
             <div class="col-span-2 px-2 py-1">
-              <span>Kevin@rubicklogs.vn</span>
+              <span>Kevin@rubiklogs.vn</span>
             </div>
           </div>
           <span class="text-md font-bold uppercase block bg-slate-200 px-2 py-1"

@@ -20,7 +20,11 @@
         class="hover:bg-gray-200 cursor-pointer text-slate-700 border-b border-slate-300"
         :class="{ '!bg-indigo-200': itemIdx === idx }"
       >
-        <td v-for="header in headers" :key="header.key" class="text-left p-2 border-r border-slate-300">
+        <td
+          v-for="header in headers"
+          :key="header.key"
+          class="text-left p-2 border-r border-slate-300"
+        >
           {{ row[header.key] }}
         </td>
       </tr>
@@ -59,8 +63,7 @@ const handleRowClick = (idx) => {
   if (props.clickEvent) {
     itemIdx.value = idx
     emit('rowClick', idx)
-  }
-  else {
+  } else {
     return
   }
 }
@@ -69,8 +72,7 @@ const handleRowDblClick = (idx) => {
   if (props.dblClickEvent) {
     itemIdx.value = idx
     emit('rowDblClick', idx)
-  }
-  else {
+  } else {
     return
   }
 }

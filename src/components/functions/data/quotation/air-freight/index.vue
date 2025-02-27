@@ -43,7 +43,7 @@
               class="w-full border border-slate-300 rounded-md px-2 h-8 outline-indigo-500 text-slate-700"
               disabled
               :value="quotation.qNo"
-            />  
+            />
           </div>
           <div>
             <span class="text-sm font-semibold text-slate-900">Customer</span>
@@ -78,7 +78,6 @@
                 type="text"
                 class="w-full text-slate-700 outline-none px-2"
                 v-model="commondity"
-                disabled
               />
               <button
                 @click="handleFetch('commondity')"
@@ -158,6 +157,7 @@
           <input
             type="text"
             class="border border-slate-300 rounded-md px-2 h-8 outline-indigo-500 text-slate-700"
+            v-model="containerType"
           />
         </div>
         <div class="flex flex-col gap-y-2">
@@ -183,13 +183,23 @@
         </div>
         <div class="flex flex-col">
           <span class="text-sm font-semibold text-slate-900">Currency</span>
-          <select
+          <Select v-model="currency" :options="currencySelect" />
+        </div>
+        <div class="flex flex-col">
+          <span class="text-sm font-semibold text-slate-900">Conversion Rate</span>
+          <input
             type="text"
-            class="border border-slate-300 rounded-md px-2 py-1 outline-indigo-500 text-slate-700 min-w-24"
-          >
-            <option value="USD">USD</option>
-            <option value="VND">VND</option>
-          </select>
+            class="border border-slate-300 rounded-md px-2 py-1 outline-indigo-500 text-slate-700 min-w-24 w-28"
+            v-model="transferRate"
+          />
+        </div>
+        <div class="flex flex-col">
+          <span class="text-sm font-semibold text-slate-900">CW</span>
+          <input
+            type="text"
+            class="border border-slate-300 rounded-md px-2 py-1 outline-indigo-500 text-slate-700 min-w-24 w-28"
+            v-model="cw"
+          />
         </div>
         <div class="flex flex-col justify-between gap-y-2">
           <div class="flex items-center gap-x-2 w-full">
@@ -216,8 +226,11 @@
       <div class="flex flex-col gap-y-2">
         <span class="font-bold text-slate-700 text-lg">Air Freight</span>
         <div class="w-full overflow-auto">
-          <SecondaryTable :headers="airfreightHeaders" :data="airFreightRows" />
-          <button @click="handleAddRow('airFreight')" class="bg-indigo-500 hover:bg-indigo-600 text-white p-1 rounded-md duration-300 shadow-sm mt-2">
+          <SecondaryTable :headers="airfreightHeaders" :data="airFreightRows" :currency="currency" />
+          <button
+            @click="handleAddRow('airFreight')"
+            class="bg-indigo-500 hover:bg-indigo-600 text-white p-1 rounded-md duration-300 shadow-sm mt-2"
+          >
             <PlusIcon class="w-4 h-4" />
           </button>
         </div>
@@ -226,17 +239,20 @@
       <div class="flex flex-col gap-y-2">
         <span class="font-bold text-slate-700 text-lg">Local Charges</span>
         <div class="w-full overflow-auto">
-          <SecondaryTable :headers="localChargesHeaders" :data="localChargesRows" />
-          <button @click="handleAddRow('localCharges')" class="bg-indigo-500 hover:bg-indigo-600 text-white p-1 rounded-md duration-300 shadow-sm mt-2">
+          <SecondaryTable :headers="localChargesHeaders" :data="localChargesRows" :currency="currency" />
+          <button
+            @click="handleAddRow('localCharges')"
+            class="bg-indigo-500 hover:bg-indigo-600 text-white p-1 rounded-md duration-300 shadow-sm mt-2"
+          >
             <PlusIcon class="w-4 h-4" />
           </button>
         </div>
       </div>
 
       <div class="flex flex-col gap-y-2">
-        <span class="font-bold text-slate-700 text-lg">Other Charges</span>
+        <span class="font-bold text-slate-700 text-lg">Inland Charges</span>
         <div class="w-full overflow-auto">
-          <SecondaryTable :headers="otherChargesHeaders" :data="otherChargesRows" />
+          <SecondaryTable :headers="otherChargesHeaders" :data="otherChargesRows" :currency="currency" />
           <button
             @click="handleAddRow('otherCharges')"
             class="bg-indigo-500 hover:bg-indigo-600 text-white p-1 rounded-md duration-300 shadow-sm mt-2"
@@ -245,14 +261,33 @@
           </button>
         </div>
       </div>
+
+      <div class="flex flex-col gap-y-2">
+        <span class="font-bold text-slate-700 text-lg">Phí chi hộ</span>
+        <div class="w-full overflow-auto">
+          <SecondaryTable :headers="disbursementFeeHeaders" :data="disbursementFeeRows" :currency="currency" />
+          <button
+            @click="handleAddRow('disbursementFee')"
+            class="bg-indigo-500 hover:bg-indigo-600 text-white p-1 rounded-md duration-300 shadow-sm mt-2"
+          >
+            <PlusIcon class="w-4 h-4" />
+          </button>
+        </div>
+      </div>
+
     </div>
     <Dialog :open="openDialog" @close="closeDialog" :target="target" @select="handleSelect" />
-    <QuotationForm v-if="openQuotationForm" @cancelExportQuotation="handleCancel" />
+    <QuotationForm
+      v-if="openQuotationForm"
+      @cancelExportQuotation="handleCancel"
+      :data="airFreightQuotationObject"
+      :quotationType="'air'"
+    />
   </div>
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import {
   XCircleIcon,
   CheckCircleIcon,
@@ -267,6 +302,7 @@ import {
 import SecondaryTable from '@/components/kits/table/secondary.vue'
 import Dialog from '@/components/kits/modal/dialog.vue'
 import QuotationForm from '@/components/functions/bookings/quotation-form/type3/index.vue'
+import Select from '@/components/kits/select/index.vue'
 import {
   headersLocalCharges,
   dataLocalCharges,
@@ -274,6 +310,9 @@ import {
   dataAirFreight,
   headersOtherCharges,
   dataOtherCharges,
+  headersDisbursementFee,
+  dataDisbursementFee,
+  currencySelect,
 } from './index.js'
 import {
   customers,
@@ -296,18 +335,22 @@ const customerPhone = ref(props.quotation.customerPhone ? props.quotation.custom
 const commondity = ref(props.quotation.commondity ? props.quotation.commondity : null)
 const shipper = ref(props.quotation.shipper ? props.quotation.shipper : null)
 const consignee = ref(props.quotation.consignee ? props.quotation.consignee : null)
+const containerType = ref(props.quotation.containerType ? props.quotation.containerType : null)
+const transferRate = ref(null)
+const cw = ref(null)
 const openDialog = ref(false)
 const target = ref('')
 const openQuotationForm = ref(false)
-
+const currency = ref(currencySelect[0].value)
 const airfreightHeaders = ref(headersAirFreight())
 const localChargesHeaders = ref(headersLocalCharges())
 const otherChargesHeaders = ref(headersOtherCharges())
+const disbursementFeeHeaders = ref(headersDisbursementFee())
 
 const airFreightRows = ref([dataAirFreight()[0]])
 const localChargesRows = ref([dataLocalCharges()[0]])
 const otherChargesRows = ref([dataOtherCharges()[0]])
-
+const disbursementFeeRows = ref([dataDisbursementFee()[0]])
 
 const handleFetch = (tg) => {
   openDialog.value = true
@@ -329,6 +372,7 @@ const handleSelect = (data) => {
     customerPhone.value = data.phone
   } else if (target.value === 'commondity') {
     commondity.value = data.name
+    console.log(commondity.value)
   } else if (target.value === 'shipper') {
     shipper.value = data.name
   } else if (target.value === 'consignee') {
@@ -359,6 +403,21 @@ const handleAddRow = (type) => {
   } else if (type === 'otherCharges') {
     otherChargesRows.value.push(dataOtherCharges()[0])
     console.log(otherChargesRows.value)
+  } else if (type === 'disbursementFee') {
+    disbursementFeeRows.value.push(dataDisbursementFee()[0])
+    console.log(disbursementFeeRows.value)
   }
 }
+
+const airFreightQuotationObject = computed(() => ({
+  airfreight: airFreightRows.value,
+  localcharge: localChargesRows.value,
+  othercharges: otherChargesRows.value,
+  disbursementfee: disbursementFeeRows.value,
+  product: commondity.value,
+  containerType: containerType.value,
+  transferRate: transferRate.value,
+  cw: cw.value,
+  currency: currency.value,
+}))
 </script>
