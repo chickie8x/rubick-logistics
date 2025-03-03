@@ -130,8 +130,9 @@
             </div>
           </div>
           <div>
-            <span class="text-sm font-semibold text-slate-900">Service</span>
+            <span class="text-sm font-semibold text-slate-900">Term</span>
             <input
+              v-model="term"
               type="text"
               class="w-full border border-slate-300 rounded-md px-2 h-8 outline-indigo-500 text-slate-700"
             />
@@ -408,6 +409,7 @@ const dateOfQ = ref(
 const PICName = ref(props.quotation.PICName ? props.quotation.PICName : null)
 const PICPhone = ref(props.quotation.PICPhone ? props.quotation.PICPhone : null)
 const PICEmail = ref(props.quotation.PICEmail ? props.quotation.PICEmail : null)
+const term = ref(props.quotation.term ? props.quotation.term : null)
 
 const airFreightRows = ref([dataAirFreight()[0]])
 const localChargesRows = ref([dataLocalCharges()[0]])
@@ -508,5 +510,6 @@ const airFreightQuotationObject = computed(() => ({
   customerPhone: customerPhone.value,
   shipper: shipper.value,
   consignee: consignee.value,
+  term: term.value,
 }))
 </script>

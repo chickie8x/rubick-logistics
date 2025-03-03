@@ -107,23 +107,19 @@
                 <span class="font-bold">Nơi giao</span>
               </div>
               <div class="col-span-2 px-2 py-1 text-center">
-                <span>{{
-                  quotationType === 'air' ? data.airfreight[0].origin : data.seafreight[0].POL
-                }}</span>
+                <span>{{ data.airfreight[0].origin }}</span>
               </div>
               <div class="col-span-1 px-2 py-1">
                 <span class="font-bold">Nơi nhận</span>
               </div>
               <div class="col-span-2 px-2 py-1 text-center">
-                <span>{{
-                  quotationType === 'air' ? data.airfreight[0].destination : data.seafreight[0].POD
-                }}</span>
+                <span>{{ data.airfreight[0].destination }}</span>
               </div>
               <div class="col-span-1 px-2 py-1">
                 <span class="font-bold">Điều kiện giao nhận hàng</span>
               </div>
               <div class="col-span-2 px-2 py-1 text-center">
-                <span>FOB FCL</span>
+                <span>{{ data.term }}</span>
               </div>
               <div class="col-span-1 px-2 py-1">
                 <span class="font-bold">Điều kiện đặc biệt khác</span>
@@ -147,7 +143,7 @@
                 <span class="font-bold">Trọng lượng</span>
               </div>
               <div class="col-span-2 px-2 py-1 text-center">
-                <span>Kgs</span>
+                <span>{{ data.gw }} Kgs</span>
               </div>
             </div>
             <span class="text-lg font-bold uppercase block bg-slate-700 text-white px-2 py-1"
@@ -202,7 +198,7 @@
                   >
                 </div>
                 <div class="col-span-1 px-2 py-1 flex items-center justify-end">
-                  <span>{{ data.gw }}</span>
+                  <span>{{ item.cost }}</span>
                 </div>
                 <div class="col-span-1 px-2 py-1 flex items-center justify-start">
                   <span>{{ item.currency }}/{{ item.unit }}</span>
@@ -243,7 +239,17 @@
                   <span>{{ item.currency }}/{{ item.unit }}</span>
                 </div>
                 <div class="col-span-1 px-2 py-1 flex items-center justify-end">
-                  <span>{{ toMoney(item, false, false, props.data.containerType, props.data.cw, null, props.data.transferRate).toFixed(2) }}</span>
+                  <span>{{
+                    toMoney(
+                      item,
+                      false,
+                      false,
+                      props.data.containerType,
+                      props.data.cw,
+                      null,
+                      props.data.transferRate,
+                    ).toFixed(2)
+                  }}</span>
                 </div>
                 <div class="col-span-1 px-2 py-1 flex items-center justify-start">
                   <span>{{ item.currency }}</span>
@@ -447,59 +453,89 @@ const props = defineProps({
   },
 })
 
+console.log(props.data)
+
 const user = localStorage.getItem('user')
 const userData = JSON.parse(user)
 
-const toMoney = (item, convert = false,revert = false, containerType = "", cw = 1,gw = 0, transferRate = 1) => {
-  let money = item.cost?item.cost:Number(gw)?Number(gw):0;
+const toMoney = (
+  item,
+  convert = false,
+  revert = false,
+  containerType = '',
+  cw = 1,
+  transferRate = 1,
+) => {
+  let money = item.cost?item.cost:0
   try {
-    const unit = item.unit?.toLowerCase() || "";
-    const type = containerType?.toLowerCase() || "";
+    const unit = item.unit?.toLowerCase() || ''
+    const type = containerType?.toLowerCase() || ''
 
     // Convert weight if applicable
-    if(item.weight){
-      money = Number(item.weight)*Number(item.cost)
+    if (item.weight && Number(item.weight) > 0) {
+      money = Number(item.weight) * Number(item.cost)
     }
 
     // Multiply cost by cw if unit matches containerType
     if (unit.includes(type)) {
-      money *= Number(cw) || 1;
+      money *= Number(cw) || 1
     }
 
     // Apply VAT
     if (item.vat) {
-      money *= 1 + Number(item.vat) / 100;
+      money *= 1 + Number(item.vat) / 100
     }
 
     // Convert currency if applicable
-    if (item.currency === "USD" && convert) {
-      money *= Number(transferRate) || 1;
+    if (item.currency === 'USD' && convert) {
+      money *= Number(transferRate) || 1
     }
 
-    if(revert && item.currency === "VND"){
-      money = money/Number(transferRate) || 1;
+    if (revert && item.currency === 'VND') {
+      money = money / Number(transferRate) || 1
     }
-    return money;
+    return money
   } catch (error) {
-    return 0;
+    return 0
   }
 }
 
 const airfreightCost = computed(() => {
-  return toMoney(props.data.airfreight[0], false, false, props.data.containerType, props.data.cw, props.data.gw, props.data.transferRate)  
+  return toMoney(
+    props.data.airfreight[0],
+    false,
+    false,
+    props.data.containerType,
+    props.data.cw,
+    props.data.transferRate,
+  )
 })
 
 const totalCost = computed(() => {
   let total = 0
   try {
     props.data.airfreight.forEach((item) => {
-      total += toMoney(item, false, false, props.data.containerType, props.data.cw, props.data.gw, props.data.transferRate)
+      total += toMoney(
+        item,
+        false,
+        false,
+        props.data.containerType,
+        props.data.cw,
+        props.data.transferRate,
+      )
     })
     props.data.localcharge.forEach((item) => {
-      total += toMoney(item, false, true, props.data.containerType, props.data.cw, null, props.data.transferRate)
+      total += toMoney(
+        item,
+        false,
+        true,
+        props.data.containerType,
+        props.data.cw,
+        props.data.transferRate,
+      )
     })
-    
-    return {total, totalVND: total * props.data.transferRate}
+
+    return { total, totalVND: total * props.data.transferRate }
   } catch (error) {
     return 0
   }
@@ -509,13 +545,34 @@ const totalCostVND = computed(() => {
   let total = 0
   try {
     props.data.airfreight.forEach((item) => {
-      total += toMoney(item, false, false, props.data.containerType, props.data.cw, props.data.gw, props.data.transferRate)
+      total += toMoney(
+        item,
+        false,
+        false,
+        props.data.containerType,
+        props.data.cw,
+        props.data.transferRate,
+      )
     })
     props.data.localcharge.forEach((item) => {
-      total += toMoney(item, false, true, props.data.containerType, props.data.cw, null, props.data.transferRate)
+      total += toMoney(
+        item,
+        false,
+        true,
+        props.data.containerType,
+        props.data.cw,
+        props.data.transferRate,
+      )
     })
-    props.data.othercharges.forEach((item) => { 
-      total += toMoney(item, false, true, props.data.containerType, props.data.cw, null, props.data.transferRate)
+    props.data.othercharges.forEach((item) => {
+      total += toMoney(
+        item,
+        false,
+        true,
+        props.data.containerType,
+        props.data.cw,
+        props.data.transferRate,
+      )
     })
     console.log(total)
 
@@ -524,8 +581,6 @@ const totalCostVND = computed(() => {
     return 0
   }
 })
-
-
 
 const emit = defineEmits(['submitExportQuotation', 'cancelExportQuotation'])
 

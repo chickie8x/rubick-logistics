@@ -3,6 +3,7 @@ export const headersSeaFreight = () => [
   { key: 'pod', label: 'POD' },
   { key: 'currency', label: 'Currency' },
   { key: 'unit', label: 'Unit' },
+  { key: 'cost', label: 'Cost' },
   { key: 'vat', label: 'VAT %' },
   { key: 'weight', label: 'Weight(Kgs)' },
   { key: 'carrier', label: 'Carrier' },
@@ -21,6 +22,7 @@ export const dataSeaFreight = () => [
     pod: '',
     unit: '',
     currency: '',
+    cost: '',
     carrier: '',
     weight: '',
     vat: '',
@@ -77,4 +79,3 @@ export const headersDisbursementFee = () => {
 export const dataDisbursementFee = () => {
   return dataLocalCharges()
 }
-
