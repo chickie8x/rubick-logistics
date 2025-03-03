@@ -24,13 +24,45 @@
           class="p-2 text-sm border-r border-slate-300"
           :class="[header.key === 'unit' ? 'flex items-center' : '']"
         >
-          <span v-if="header.key === 'unit'">{{ currency }}/</span>
+          <div v-if="header.key === 'currency'" class="flex items-center gap-x-4">
+            <div class="flex items-center gap-x-1">
+              <input
+                v-model="row[header.key]"
+                value="USD"
+                type="radio"
+                :name="`currency-${idx}-${type}`"
+                :id="`currency-${idx}-${type}`"
+                class="scale-110 mt-1"
+              />
+              <label :for="`currency-${idx}-${type}`">USD</label>
+            </div>
+            <div class="flex items-center gap-x-1">
+              <input
+                v-model="row[header.key]"
+                value="VND"
+                type="radio"
+                :name="`currency-${idx}-${type}`"
+                :id="`currency-${idx}-${type}`"
+                class="scale-110 mt-1"
+              />
+              <label :for="`currency-${idx}-${type}`">VND</label>
+            </div>
+          </div>
           <input
-            :type="header.key === 'KB' || header.key === 'TTO' ? 'checkbox' : 'text'"
+            v-else
+            :type="
+              header.key === 'gw' || header.key === 'vat' || header.key === 'cost'
+                ? 'number'
+                : 'text'
+            "
             v-model="row[header.key]"
-            class="outline-none focus:outline-indigo-500 focus:ml-2 read-only:outline-none text-slate-700"
-            :size="row[header.key]?.length ? row[header.key]?.length : 6"
-            :class="[header.key === 'KB' || header.key === 'TTO' ? 'scale-125' : '', header.key === 'unit' ? 'hover:outline-indigo-500' : 'px-2']"
+            class="outline-none focus:outline-indigo-500 hover:outline-indigo-500 read-only:outline-none text-slate-700"
+            :size="row[header.key]?.length ? row[header.key]?.length : 18"
+            :class="[
+              header.key === 'gw' || header.key === 'vat' || header.key === 'cost'
+                ? 'w-24 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none'
+                : '',
+            ]"
           />
         </td>
       </tr>
@@ -50,7 +82,7 @@ const props = defineProps({
     type: Array,
     required: true,
   },
-  currency: {
+  type: {
     type: String,
     required: true,
   },

@@ -1,115 +1,80 @@
 export const headersSeaFreight = () => [
-  { key: 'POL', label: 'POL' },
-  { key: 'POD', label: 'POD' },
-  { key: 'Unit', label: 'Unit' },
-  { key: 'Quantity', label: 'Quantity' },
-  { key: 'Carrier', label: 'Carrier' },
-  { key: 'Min', label: 'Min' },
-  { key: 'LCL', label: 'LCL' },
-  { key: '20', label: '20' },
-  { key: '40', label: '40' },
-  { key: '40HC', label: '40HC' },
-  { key: '45', label: '45' },
-  { key: 'Other', label: 'Other' },
-  { key: 'M.Weight', label: 'M.Weight' },
-  { key: 'Via', label: 'Via' },
-  { key: 'Freq', label: 'Freq' },
-  { key: 'TT', label: 'TT' },
-  { key: 'PORcpt', label: 'Place of Receipt' },
-  { key: 'PODel', label: 'Place of Delivery' },
-  { key: 'Vendor', label: 'Vendor' },
-  { key: 'Note', label: 'Note' },
+  { key: 'pol', label: 'POL' },
+  { key: 'pod', label: 'POD' },
+  { key: 'currency', label: 'Currency' },
+  { key: 'unit', label: 'Unit' },
+  { key: 'vat', label: 'VAT %' },
+  { key: 'weight', label: 'Weight(Kgs)' },
+  { key: 'carrier', label: 'Carrier' },
+  { key: 'min', label: 'Min' },
+  { key: 'minQty', label: 'Min(Qty)' },
+  { key: 'freq', label: 'Freq' },
+  { key: 'tt', label: 'TT' },
+  { key: 'cutoff', label: 'Cutoff' },
+  { key: 'vendor', label: 'Vendor' },
+  { key: 'note', label: 'Note' },
 ]
 
 export const dataSeaFreight = () => [
   {
-    POL: '',
-    POD: '',
-    Carrier: '',
-    Min: '',
-    LCL: '',
-    20: '',
-    40: '',
-    '40HC': '',
-    45: '',
-    Other: '',
-    Unit: '',
-    Quantity: '',
-    MWeight: '',
-    Via: '',
-    Freq: '',
-    TT: '',
-    'Place of Receipt': '',
-    'Place of Delivery': '',
-    Notes: '',
-    Vendor: '',
+    pol: '',
+    pod: '',
+    unit: '',
+    currency: '',
+    carrier: '',
+    weight: '',
+    vat: '',
+    min: '',
+    minQty: '',
+    freq: '',
+    tt: '',
+    cutoff: '',
+    vendor: '',
+    note: '',
   },
 ]
 
-export const headersOtherCharges = () => [
+export const headersLocalCharges = () => [
   { key: 'desc', label: 'Description' },
   { key: 'currency', label: 'Currency' },
   { key: 'unit', label: 'Unit' },
-  { key: 'quantity', label: 'Quantity' },
-  { key: 'under10kg', label: '-10KG' },
-  { key: 'under45kg', label: '-45KG' },
-  { key: 'upper45kg', label: '+45KG' },
-  { key: 'e100kg', label: '100KG' },
-  { key: 'e300kg', label: '300KG' },
-  { key: 'e1000kg', label: '1000KG' },
-  { key: 'vat', label: 'VAT' },
+  { key: 'cost', label: 'Cost' },
+  { key: 'vat', label: 'VAT %' },
+  { key: 'weight', label: 'Weight(Kgs)' },
   { key: 'exception', label: 'Exception' },
   { key: 'note', label: 'Note' },
 ]
 
-export const dataOtherCharges = () => [
+export const dataLocalCharges = () => [
   {
     desc: '',
-    currency: '',
     unit: '',
-    quantity: '',
-    under10kg: '',
-    under45kg: '',
-    upper45kg: '',
-    e100kg: '',
-    e300kg: '',
-    e1000kg: '',
+    currency: '',
+    cost: '',
     vat: '',
+    weight: '',
     exception: '',
     note: '',
   },
 ]
 
-export const headersCustomClearanceCharges = () => [
-  { key: 'desc', label: 'Description' },
-  { key: 'currency', label: 'Currency' },
-  { key: 'unit', label: 'Unit' },
-  { key: 'quantity', label: 'Quantity' },
-  { key: 'under10kg', label: '-10KG' },
-  { key: 'under45kg', label: '-45KG' },
-  { key: 'upper45kg', label: '+45KG' },
-  { key: 'e100kg', label: '100KG' },
-  { key: 'e300kg', label: '300KG' },
-  { key: 'e1000kg', label: '1000KG' },
-  { key: 'vat', label: 'VAT' },
-  { key: 'exception', label: 'Exception' },
-  { key: 'note', label: 'Note' },
-]
+export const headersOtherCharges = () => {
+  const headers = headersLocalCharges()
+  headers.push({ key: 'payable', label: 'Payable' })
+  return headers
+}
 
-export const dataCustomClearanceCharges = () => [
-  {
-    desc: '',
-    currency: '',
-    unit: '',
-    quantity: '',
-    under10kg: '',
-    under45kg: '',
-    upper45kg: '',
-    e100kg: '',
-    e300kg: '',
-    e1000kg: '',
-    vat: '',
-    exception: '',
-    note: '',
-  },
-]
+export const dataOtherCharges = () => {
+  const data = dataLocalCharges()
+  data.push({ payable: '' })
+  return data
+}
+
+export const headersDisbursementFee = () => {
+  return headersLocalCharges()
+}
+
+export const dataDisbursementFee = () => {
+  return dataLocalCharges()
+}
+

@@ -65,6 +65,9 @@ export const customerPool = [
     originCountryCode: 'CN',
     originCountryName: 'CHINA',
     pickedUp: false,
+    PICName: 'Nguyễn Văn A',
+    PICPhone: '0978362053',
+    PICEmail: 'nguyenvana@gmail.com',
   },
   {
     mst: 600387327,
@@ -80,6 +83,9 @@ export const customerPool = [
     originCountryCode: 'BE',
     originCountryName: 'BELGIUM',
     pickedUp: false,
+    PICName: 'Nguyễn Văn A',
+    PICPhone: '0978362053',
+    PICEmail: 'nguyenvana@gmail.com',
   },
   {
     mst: 102143568,
@@ -95,6 +101,9 @@ export const customerPool = [
     originCountryCode: 'TW',
     originCountryName: 'TAIWAN',
     pickedUp: false,
+    PICName: 'Nguyễn Văn A',
+    PICPhone: '0978362053',
+    PICEmail: 'nguyenvana@gmail.com',
   },
   {
     mst: 102304744,
@@ -110,6 +119,9 @@ export const customerPool = [
     originCountryCode: 'CN',
     originCountryName: 'CHINA',
     pickedUp: false,
+    PICName: 'Nguyễn Văn A',
+    PICPhone: '0978362053',
+    PICEmail: 'nguyenvana@gmail.com',
   },
   {
     mst: 2500288968,
@@ -125,6 +137,9 @@ export const customerPool = [
     originCountryCode: 'CN',
     originCountryName: 'CHINA',
     pickedUp: false,
+    PICName: 'Nguyễn Văn A',
+    PICPhone: '0978362053',
+    PICEmail: 'nguyenvana@gmail.com',
   },
   {
     mst: 313900369,
@@ -140,6 +155,9 @@ export const customerPool = [
     originCountryCode: 'US',
     originCountryName: 'U.S.A.',
     pickedUp: false,
+    PICName: 'Nguyễn Văn A',
+    PICPhone: '0978362053',
+    PICEmail: 'nguyenvana@gmail.com',
   },
   {
     mst: 106328665,
@@ -155,6 +173,9 @@ export const customerPool = [
     originCountryCode: 'ID',
     originCountryName: 'INDNSIA',
     pickedUp: false,
+    PICName: 'Nguyễn Văn A',
+    PICPhone: '0978362053',
+    PICEmail: 'nguyenvana@gmail.com',
   },
   {
     mst: 100933433,
@@ -170,6 +191,9 @@ export const customerPool = [
     originCountryCode: 'KR',
     originCountryName: 'R.KOREA',
     pickedUp: false,
+    PICName: 'Nguyễn Văn A',
+    PICPhone: '0978362053',
+    PICEmail: 'nguyenvana@gmail.com',
   },
   {
     mst: 107065225,
@@ -186,6 +210,9 @@ export const customerPool = [
     originCountryCode: 'CN',
     originCountryName: 'CHINA',
     pickedUp: false,
+    PICName: 'Nguyễn Văn A',
+    PICPhone: '0978362053',
+    PICEmail: 'nguyenvana@gmail.com',
   },
   {
     mst: 102655453,
@@ -202,6 +229,9 @@ export const customerPool = [
     originCountryCode: 'ID',
     originCountryName: 'INDNSIA',
     pickedUp: false,
+    PICName: 'Nguyễn Văn A',
+    PICPhone: '0978362053',
+    PICEmail: 'nguyenvana@gmail.com',
   },
   {
     mst: 700643278,
@@ -218,6 +248,9 @@ export const customerPool = [
     originCountryCode: 'CN',
     originCountryName: 'CHINA',
     pickedUp: false,
+    PICName: 'Nguyễn Văn A',
+    PICPhone: '0978362053',
+    PICEmail: 'nguyenvana@gmail.com',
   },
   {
     mst: 102653752,
@@ -233,6 +266,9 @@ export const customerPool = [
     originCountryCode: 'IT',
     originCountryName: 'ITALY',
     pickedUp: false,
+    PICName: 'Nguyễn Văn A',
+    PICPhone: '0978362053',
+    PICEmail: 'nguyenvana@gmail.com',
   },
   {
     mst: 3600659583,
@@ -248,6 +284,9 @@ export const customerPool = [
     originCountryCode: 'KR',
     originCountryName: 'R.KOREA',
     pickedUp: false,
+    PICName: 'Nguyễn Văn A',
+    PICPhone: '0978362053',
+    PICEmail: 'nguyenvana@gmail.com',
   },
   {
     mst: 100774342,
@@ -263,6 +302,9 @@ export const customerPool = [
     originCountryCode: 'TH',
     originCountryName: 'THAILND',
     pickedUp: false,
+    PICName: 'Nguyễn Văn A',
+    PICPhone: '0978362053',
+    PICEmail: 'nguyenvana@gmail.com',
   },
   {
     mst: 102747337,
@@ -279,6 +321,9 @@ export const customerPool = [
     originCountryCode: 'CN',
     originCountryName: 'CHINA',
     pickedUp: false,
+    PICName: 'Nguyễn Văn A',
+    PICPhone: '0978362053',
+    PICEmail: 'nguyenvana@gmail.com',
   },
   {
     mst: 105869735,
@@ -294,6 +339,9 @@ export const customerPool = [
     originCountryCode: 'CN',
     originCountryName: 'CHINA',
     pickedUp: false,
+    PICName: 'Nguyễn Văn A',
+    PICPhone: '0978362053',
+    PICEmail: 'nguyenvana@gmail.com',
   },
   {
     mst: 307787891,
@@ -309,6 +357,9 @@ export const customerPool = [
     originCountryCode: 'VN',
     originCountryName: 'VIETNAM',
     pickedUp: false,
+    PICName: 'Nguyễn Văn A',
+    PICPhone: '0978362053',
+    PICEmail: 'nguyenvana@gmail.com',
   },
   {
     mst: 106695383,
@@ -325,6 +376,9 @@ export const customerPool = [
     originCountryCode: 'CN',
     originCountryName: 'CHINA',
     pickedUp: false,
+    PICName: 'Nguyễn Văn A',
+    PICPhone: '0978362053',
+    PICEmail: 'nguyenvana@gmail.com',
   },
   {
     mst: 201186139,
@@ -340,6 +394,9 @@ export const customerPool = [
     originCountryCode: 'VN',
     originCountryName: 'VIETNAM',
     pickedUp: false,
+    PICName: 'Nguyễn Văn A',
+    PICPhone: '0978362053',
+    PICEmail: 'nguyenvana@gmail.com',
   },
   {
     mst: 106860742,
@@ -355,6 +412,9 @@ export const customerPool = [
     originCountryCode: 'CN',
     originCountryName: 'CHINA',
     pickedUp: false,
+    PICName: 'Nguyễn Văn A',
+    PICPhone: '0978362053',
+    PICEmail: 'nguyenvana@gmail.com',
   },
   {
     mst: 100774342,
@@ -370,6 +430,9 @@ export const customerPool = [
     originCountryCode: 'ID',
     originCountryName: 'INDNSIA',
     pickedUp: false,
+    PICName: 'Nguyễn Văn A',
+    PICPhone: '0978362053',
+    PICEmail: 'nguyenvana@gmail.com',
   },
   {
     mst: 101526991,
@@ -385,6 +448,9 @@ export const customerPool = [
     originCountryCode: 'CN',
     originCountryName: 'CHINA',
     pickedUp: false,
+    PICName: 'Nguyễn Văn A',
+    PICPhone: '0978362053',
+    PICEmail: 'nguyenvana@gmail.com',
   },
   {
     mst: 2500150543,
@@ -400,6 +466,9 @@ export const customerPool = [
     originCountryCode: 'TH',
     originCountryName: 'THAILND',
     pickedUp: false,
+    PICName: 'Nguyễn Văn A',
+    PICPhone: '0978362053',
+    PICEmail: 'nguyenvana@gmail.com',
   },
   {
     mst: 900637507,
@@ -415,6 +484,9 @@ export const customerPool = [
     originCountryCode: 'KR',
     originCountryName: 'R.KOREA',
     pickedUp: false,
+    PICName: 'Nguyễn Văn A',
+    PICPhone: '0978362053',
+    PICEmail: 'nguyenvana@gmail.com',
   },
   {
     mst: 104994500,
@@ -430,6 +502,9 @@ export const customerPool = [
     originCountryCode: 'KR',
     originCountryName: 'R.KOREA',
     pickedUp: false,
+    PICName: 'Nguyễn Văn A',
+    PICPhone: '0978362053',
+    PICEmail: 'nguyenvana@gmail.com',
   },
   {
     mst: 105155018,
@@ -445,6 +520,9 @@ export const customerPool = [
     originCountryCode: 'GQ',
     originCountryName: 'EQ.GNEA',
     pickedUp: false,
+    PICName: 'Nguyễn Văn A',
+    PICPhone: '0978362053',
+    PICEmail: 'nguyenvana@gmail.com',
   },
   {
     mst: 9999999999998,
@@ -460,6 +538,9 @@ export const customerPool = [
     originCountryCode: 'IT',
     originCountryName: 'ITALY',
     pickedUp: false,
+    PICName: 'Nguyễn Văn A',
+    PICPhone: '0978362053',
+    PICEmail: 'nguyenvana@gmail.com',
   },
   {
     mst: 104498189,
@@ -475,6 +556,9 @@ export const customerPool = [
     originCountryCode: 'KR',
     originCountryName: 'R.KOREA',
     pickedUp: false,
+    PICName: 'Nguyễn Văn A',
+    PICPhone: '0978362053',
+    PICEmail: 'nguyenvana@gmail.com',
   },
   {
     mst: 104908205,
@@ -490,6 +574,9 @@ export const customerPool = [
     originCountryCode: 'CN',
     originCountryName: 'CHINA',
     pickedUp: false,
+    PICName: 'Nguyễn Văn A',
+    PICPhone: '0978362053',
+    PICEmail: 'nguyenvana@gmail.com',
   },
   {
     mst: 107001944,
@@ -505,10 +592,13 @@ export const customerPool = [
     originCountryCode: 'CN',
     originCountryName: 'CHINA',
     pickedUp: false,
+    PICName: 'Nguyễn Văn A',
+    PICPhone: '0978362053',
+    PICEmail: 'nguyenvana@gmail.com',
   },
   {
     mst: 3700228661,
-    buyerName: 'CôNG TY TRáCH NHIệM HữU Hạn SCHNEIDER ELECTRIC VIệT NAM',
+    buyerName: 'CôNG TY TRáCH NHIệM Hữu Hạn SCHNEIDER ELECTRIC VIệT NAM',
     buyerAddress: '364 Cộng Hòa, Quận Tân Bình, Tp Hồ Chí Minh',
     buyerMobile: '84.8.38103103',
     buyerRefCode: '',
@@ -520,6 +610,9 @@ export const customerPool = [
     originCountryCode: 'BG',
     originCountryName: 'BULGAR',
     pickedUp: false,
+    PICName: 'Nguyễn Văn A',
+    PICPhone: '0978362053',
+    PICEmail: 'nguyenvana@gmail.com',
   },
   {
     mst: 201577005,
@@ -535,6 +628,9 @@ export const customerPool = [
     originCountryCode: 'NG',
     originCountryName: 'NIGERIA',
     pickedUp: false,
+    PICName: 'Nguyễn Văn A',
+    PICPhone: '0978362053',
+    PICEmail: 'nguyenvana@gmail.com',
   },
   {
     mst: 100113381,
@@ -550,6 +646,9 @@ export const customerPool = [
     originCountryCode: 'JP',
     originCountryName: 'JAPAN',
     pickedUp: false,
+    PICName: 'Nguyễn Văn A',
+    PICPhone: '0978362053',
+    PICEmail: 'nguyenvana@gmail.com',
   },
   {
     mst: 800352836,
@@ -566,6 +665,9 @@ export const customerPool = [
     originCountryCode: 'PH',
     originCountryName: 'PHILPIN',
     pickedUp: false,
+    PICName: 'Nguyễn Văn A',
+    PICPhone: '0978362053',
+    PICEmail: 'nguyenvana@gmail.com',
   },
   {
     mst: 101535883,
@@ -581,6 +683,9 @@ export const customerPool = [
     originCountryCode: 'CN',
     originCountryName: 'CHINA',
     pickedUp: false,
+    PICName: 'Nguyễn Văn A',
+    PICPhone: '0978362053',
+    PICEmail: 'nguyenvana@gmail.com',
   },
   {
     mst: 300792187,
@@ -596,6 +701,9 @@ export const customerPool = [
     originCountryCode: 'MY',
     originCountryName: 'MALYSIA',
     pickedUp: false,
+    PICName: 'Nguyễn Văn A',
+    PICPhone: '0978362053',
+    PICEmail: 'nguyenvana@gmail.com',
   },
   {
     mst: 105273501,
@@ -612,6 +720,9 @@ export const customerPool = [
     originCountryCode: 'CN',
     originCountryName: 'CHINA',
     pickedUp: false,
+    PICName: 'Nguyễn Văn A',
+    PICPhone: '0978362053',
+    PICEmail: 'nguyenvana@gmail.com',
   },
   {
     mst: 801031930,
@@ -627,6 +738,9 @@ export const customerPool = [
     originCountryCode: 'CN',
     originCountryName: 'CHINA',
     pickedUp: false,
+    PICName: 'Nguyễn Văn A',
+    PICPhone: '0978362053',
+    PICEmail: 'nguyenvana@gmail.com',
   },
   {
     mst: 100101403,
@@ -642,6 +756,9 @@ export const customerPool = [
     originCountryCode: 'CN',
     originCountryName: 'CHINA',
     pickedUp: false,
+    PICName: 'Nguyễn Văn A',
+    PICPhone: '0978362053',
+    PICEmail: 'nguyenvana@gmail.com',
   },
   {
     mst: 201722189,
@@ -657,6 +774,9 @@ export const customerPool = [
     originCountryCode: 'KR',
     originCountryName: 'R.KOREA',
     pickedUp: false,
+    PICName: 'Nguyễn Văn A',
+    PICPhone: '0978362053',
+    PICEmail: 'nguyenvana@gmail.com',
   },
   {
     mst: 2700707969,
@@ -672,6 +792,9 @@ export const customerPool = [
     originCountryCode: 'MM',
     originCountryName: 'MYANMAR',
     pickedUp: false,
+    PICName: 'Nguyễn Văn A',
+    PICPhone: '0978362053',
+    PICEmail: 'nguyenvana@gmail.com',
   },
   {
     mst: 102655453,
@@ -688,5 +811,8 @@ export const customerPool = [
     originCountryCode: 'TH',
     originCountryName: 'THAILND',
     pickedUp: false,
+    PICName: 'Nguyễn Văn A',
+    PICPhone: '0978362053',
+    PICEmail: 'nguyenvana@gmail.com',
   },
 ]

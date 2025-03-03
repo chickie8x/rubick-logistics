@@ -9,6 +9,8 @@ export const users = [
     updatedAt: '2021-01-01',
     active: true,
     password: '12345678',
+    fullName: 'Nguyễn Văn C',
+    phone: '0909090909',
   },
   {
     id: 2,
@@ -20,6 +22,8 @@ export const users = [
     updatedAt: '2021-01-01',
     active: true,
     password: '12345678',
+    fullName: 'Nguyễn Văn L',
+    phone: '0909090909',
   },
   {
     id: 3,
@@ -31,6 +35,8 @@ export const users = [
     updatedAt: '2021-01-01',
     active: true,
     password: '12345678',
+    fullName: 'Nguyễn Văn H',
+    phone: '0909090909',
   },
   {
     id: 4,
@@ -42,6 +48,8 @@ export const users = [
     updatedAt: '2021-01-01',
     active: true,
     password: '12345678',
+    fullName: 'Nguyễn Văn D',
+    phone: '0909090909',
   },
   {
     id: 5,
@@ -53,6 +61,8 @@ export const users = [
     updatedAt: '2021-01-01',
     active: true,
     password: '12345678',
+    fullName: 'Nguyễn Văn E',
+    phone: '0909090909',
   },
   {
     id: 6,
@@ -64,6 +74,8 @@ export const users = [
     updatedAt: '2021-01-01',
     active: true,
     password: '12345678',
+    fullName: 'Nguyễn Văn F',
+    phone: '0909090909',
   },
 ]
 

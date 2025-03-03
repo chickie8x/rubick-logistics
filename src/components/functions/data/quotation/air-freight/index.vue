@@ -45,12 +45,12 @@
               :value="quotation.qNo"
             />
           </div>
-          <div>
+          <div class="col-span-2">
             <span class="text-sm font-semibold text-slate-900">Customer</span>
             <div class="flex items-center gap-x-2 border border-slate-300 rounded-md h-8 bg-white">
               <input
                 type="text"
-                class="w-full text-slate-700 outline-none px-2"
+                class="w-full text-slate-700 outline-none px-2 bg-white"
                 v-model="customer"
                 disabled
               />
@@ -88,8 +88,9 @@
             </div>
           </div>
           <div>
-            <span class="text-sm font-semibold text-slate-900">ATTN</span>
+            <span class="text-sm font-semibold text-slate-900">PIC</span>
             <input
+              v-model="PICName"
               type="text"
               class="w-full border border-slate-300 rounded-md px-2 h-8 outline-indigo-500 text-slate-700"
             />
@@ -99,7 +100,7 @@
             <div class="flex items-center gap-x-2 border border-slate-300 rounded-md h-8 bg-white">
               <input
                 type="text"
-                class="w-full text-slate-700 outline-none px-2"
+                class="w-full text-slate-700 outline-none px-2 bg-white"
                 v-model="shipper"
                 disabled
               />
@@ -116,7 +117,7 @@
             <div class="flex items-center gap-x-2 border border-slate-300 rounded-md h-8 bg-white">
               <input
                 type="text"
-                class="w-full text-slate-700 outline-none px-2"
+                class="w-full text-slate-700 outline-none px-2 bg-white"
                 v-model="consignee"
                 disabled
               />
@@ -136,15 +137,17 @@
             />
           </div>
           <div>
-            <span class="text-sm font-semibold text-slate-900">Valid In</span>
+            <span class="text-sm font-semibold text-slate-900">Date of Q</span>
             <input
+              v-model="dateOfQ"
               type="date"
               class="w-full border border-slate-300 rounded-md px-2 h-8 outline-indigo-500 text-slate-700"
             />
           </div>
           <div>
-            <span class="text-sm font-semibold text-slate-900">Date of Q</span>
+            <span class="text-sm font-semibold text-slate-900">Valid In</span>
             <input
+              v-model="validIn"
               type="date"
               class="w-full border border-slate-300 rounded-md px-2 h-8 outline-indigo-500 text-slate-700"
             />
@@ -182,22 +185,26 @@
           </div>
         </div>
         <div class="flex flex-col">
-          <span class="text-sm font-semibold text-slate-900">Currency</span>
-          <Select v-model="currency" :options="currencySelect" />
-        </div>
-        <div class="flex flex-col">
           <span class="text-sm font-semibold text-slate-900">Conversion Rate</span>
           <input
-            type="text"
-            class="border border-slate-300 rounded-md px-2 py-1 outline-indigo-500 text-slate-700 min-w-24 w-28"
+            type="number"
+            class="border border-slate-300 rounded-md px-2 py-1 outline-indigo-500 text-slate-700 min-w-24 w-28 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
             v-model="transferRate"
+          />
+        </div>
+        <div class="flex flex-col">
+          <span class="text-sm font-semibold text-slate-900">GW</span>
+          <input
+            type="number"
+            class="border border-slate-300 rounded-md px-2 py-1 outline-indigo-500 text-slate-700 min-w-24 w-28 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+            v-model="gw"
           />
         </div>
         <div class="flex flex-col">
           <span class="text-sm font-semibold text-slate-900">CW</span>
           <input
-            type="text"
-            class="border border-slate-300 rounded-md px-2 py-1 outline-indigo-500 text-slate-700 min-w-24 w-28"
+            type="number"
+            class="border border-slate-300 rounded-md px-2 py-1 outline-indigo-500 text-slate-700 min-w-24 w-28 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
             v-model="cw"
           />
         </div>
@@ -226,55 +233,102 @@
       <div class="flex flex-col gap-y-2">
         <span class="font-bold text-slate-700 text-lg">Air Freight</span>
         <div class="w-full overflow-auto">
-          <SecondaryTable :headers="airfreightHeaders" :data="airFreightRows" :currency="currency" />
-          <button
-            @click="handleAddRow('airFreight')"
-            class="bg-indigo-500 hover:bg-indigo-600 text-white p-1 rounded-md duration-300 shadow-sm mt-2"
-          >
-            <PlusIcon class="w-4 h-4" />
-          </button>
+          <SecondaryTable
+            :headers="airfreightHeaders"
+            :data="airFreightRows"
+            :type="'airFreight'"
+          />
+          <div class="flex items-center gap-x-2 py-2">
+            <button
+              @click="handleAddRow('airFreight')"
+              class="bg-indigo-500 hover:bg-indigo-600 text-white p-1 rounded-md duration-300 shadow-sm mt-2"
+            >
+              <PlusIcon class="w-4 h-4" />
+            </button>
+            <button
+              @click="handleDeleteRow('airFreight')"
+              class="bg-red-500 hover:bg-red-600 text-white p-1 rounded-md duration-300 shadow-sm mt-2"
+            >
+              <MinusIcon class="w-4 h-4" />
+            </button>
+          </div>
         </div>
       </div>
 
       <div class="flex flex-col gap-y-2">
         <span class="font-bold text-slate-700 text-lg">Local Charges</span>
         <div class="w-full overflow-auto">
-          <SecondaryTable :headers="localChargesHeaders" :data="localChargesRows" :currency="currency" />
-          <button
-            @click="handleAddRow('localCharges')"
-            class="bg-indigo-500 hover:bg-indigo-600 text-white p-1 rounded-md duration-300 shadow-sm mt-2"
-          >
-            <PlusIcon class="w-4 h-4" />
-          </button>
+          <SecondaryTable
+            :headers="localChargesHeaders"
+            :data="localChargesRows"
+            :type="'localCharges'"
+          />
+          <div class="flex items-center gap-x-2 py-2">
+            <button
+              @click="handleAddRow('localCharges')"
+              class="bg-indigo-500 hover:bg-indigo-600 text-white p-1 rounded-md duration-300 shadow-sm mt-2"
+            >
+              <PlusIcon class="w-4 h-4" />
+            </button>
+            <button
+              @click="handleDeleteRow('localCharges')"
+              class="bg-red-500 hover:bg-red-600 text-white p-1 rounded-md duration-300 shadow-sm mt-2"
+            >
+              <MinusIcon class="w-4 h-4" />
+            </button>
+          </div>
         </div>
       </div>
 
       <div class="flex flex-col gap-y-2">
         <span class="font-bold text-slate-700 text-lg">Inland Charges</span>
         <div class="w-full overflow-auto">
-          <SecondaryTable :headers="otherChargesHeaders" :data="otherChargesRows" :currency="currency" />
-          <button
-            @click="handleAddRow('otherCharges')"
-            class="bg-indigo-500 hover:bg-indigo-600 text-white p-1 rounded-md duration-300 shadow-sm mt-2"
-          >
-            <PlusIcon class="w-4 h-4" />
-          </button>
+          <SecondaryTable
+            :headers="otherChargesHeaders"
+            :data="otherChargesRows"
+            :type="'otherCharges'"
+          />
+          <div class="flex items-center gap-x-2 py-2">
+            <button
+              @click="handleAddRow('otherCharges')"
+              class="bg-indigo-500 hover:bg-indigo-600 text-white p-1 rounded-md duration-300 shadow-sm mt-2"
+            >
+              <PlusIcon class="w-4 h-4" />
+            </button>
+            <button
+              @click="handleDeleteRow('otherCharges')"
+              class="bg-red-500 hover:bg-red-600 text-white p-1 rounded-md duration-300 shadow-sm mt-2"
+            >
+              <MinusIcon class="w-4 h-4" />
+            </button>
+          </div>
         </div>
       </div>
 
       <div class="flex flex-col gap-y-2">
         <span class="font-bold text-slate-700 text-lg">Phí chi hộ</span>
         <div class="w-full overflow-auto">
-          <SecondaryTable :headers="disbursementFeeHeaders" :data="disbursementFeeRows" :currency="currency" />
-          <button
-            @click="handleAddRow('disbursementFee')"
-            class="bg-indigo-500 hover:bg-indigo-600 text-white p-1 rounded-md duration-300 shadow-sm mt-2"
-          >
-            <PlusIcon class="w-4 h-4" />
-          </button>
+          <SecondaryTable
+            :headers="disbursementFeeHeaders"
+            :data="disbursementFeeRows"
+            :type="'disbursementFee'"
+          />
+          <div class="flex items-center gap-x-2 py-2">
+            <button
+              @click="handleAddRow('disbursementFee')"
+              class="bg-indigo-500 hover:bg-indigo-600 text-white p-1 rounded-md duration-300 shadow-sm mt-2"
+            >
+              <PlusIcon class="w-4 h-4" />
+            </button>
+            <button
+              @click="handleDeleteRow('disbursementFee')"
+              class="bg-red-500 hover:bg-red-600 text-white p-1 rounded-md duration-300 shadow-sm mt-2"
+            >
+              <MinusIcon class="w-4 h-4" />
+            </button>
+          </div>
         </div>
       </div>
-
     </div>
     <Dialog :open="openDialog" @close="closeDialog" :target="target" @select="handleSelect" />
     <QuotationForm
@@ -288,6 +342,7 @@
 
 <script setup>
 import { ref, computed } from 'vue'
+import { format } from 'date-fns'
 import {
   XCircleIcon,
   CheckCircleIcon,
@@ -298,11 +353,11 @@ import {
   GlobeAltIcon,
   UserIcon,
   PlusIcon,
+  MinusIcon,
 } from '@heroicons/vue/24/outline'
 import SecondaryTable from '@/components/kits/table/secondary.vue'
 import Dialog from '@/components/kits/modal/dialog.vue'
 import QuotationForm from '@/components/functions/bookings/quotation-form/type3/index.vue'
-import Select from '@/components/kits/select/index.vue'
 import {
   headersLocalCharges,
   dataLocalCharges,
@@ -312,7 +367,6 @@ import {
   dataOtherCharges,
   headersDisbursementFee,
   dataDisbursementFee,
-  currencySelect,
 } from './index.js'
 import {
   customers,
@@ -331,6 +385,7 @@ const props = defineProps({
 const emit = defineEmits(['closeModal', 'print'])
 
 const customer = ref(props.quotation.customer ? props.quotation.customer : null)
+const customerMST = ref(props.quotation.customerMST ? props.quotation.customerMST : null)
 const customerPhone = ref(props.quotation.customerPhone ? props.quotation.customerPhone : null)
 const commondity = ref(props.quotation.commondity ? props.quotation.commondity : null)
 const shipper = ref(props.quotation.shipper ? props.quotation.shipper : null)
@@ -338,14 +393,21 @@ const consignee = ref(props.quotation.consignee ? props.quotation.consignee : nu
 const containerType = ref(props.quotation.containerType ? props.quotation.containerType : null)
 const transferRate = ref(null)
 const cw = ref(null)
+const gw = ref(null)
 const openDialog = ref(false)
 const target = ref('')
 const openQuotationForm = ref(false)
-const currency = ref(currencySelect[0].value)
 const airfreightHeaders = ref(headersAirFreight())
 const localChargesHeaders = ref(headersLocalCharges())
 const otherChargesHeaders = ref(headersOtherCharges())
 const disbursementFeeHeaders = ref(headersDisbursementFee())
+const validIn = ref(props.quotation.validIn ? props.quotation.validIn : null)
+const dateOfQ = ref(
+  props.quotation.dateOfQ ? props.quotation.dateOfQ : format(new Date(), 'yyyy-MM-dd'),
+)
+const PICName = ref(props.quotation.PICName ? props.quotation.PICName : null)
+const PICPhone = ref(props.quotation.PICPhone ? props.quotation.PICPhone : null)
+const PICEmail = ref(props.quotation.PICEmail ? props.quotation.PICEmail : null)
 
 const airFreightRows = ref([dataAirFreight()[0]])
 const localChargesRows = ref([dataLocalCharges()[0]])
@@ -369,7 +431,12 @@ const closeModal = () => {
 const handleSelect = (data) => {
   if (target.value === 'customer') {
     customer.value = data.name
+    customerMST.value = data.mst
     customerPhone.value = data.phone
+    PICName.value = data.PICName
+    PICPhone.value = data.PICPhone
+    PICEmail.value = data.PICEmail
+    console.log(data)
   } else if (target.value === 'commondity') {
     commondity.value = data.name
     console.log(commondity.value)
@@ -409,6 +476,18 @@ const handleAddRow = (type) => {
   }
 }
 
+const handleDeleteRow = (type) => {
+  if (type === 'airFreight') {
+    airFreightRows.value.pop()
+  } else if (type === 'localCharges') {
+    localChargesRows.value.pop()
+  } else if (type === 'otherCharges') {
+    otherChargesRows.value.pop()
+  } else if (type === 'disbursementFee') {
+    disbursementFeeRows.value.pop()
+  }
+}
+
 const airFreightQuotationObject = computed(() => ({
   airfreight: airFreightRows.value,
   localcharge: localChargesRows.value,
@@ -417,7 +496,17 @@ const airFreightQuotationObject = computed(() => ({
   product: commondity.value,
   containerType: containerType.value,
   transferRate: transferRate.value,
+  gw: gw.value,
   cw: cw.value,
-  currency: currency.value,
+  validIn: validIn.value,
+  dateOfQ: dateOfQ.value,
+  PICName: PICName.value,
+  PICPhone: PICPhone.value,
+  PICEmail: PICEmail.value,
+  customer: customer.value,
+  customerMST: customerMST.value,
+  customerPhone: customerPhone.value,
+  shipper: shipper.value,
+  consignee: consignee.value,
 }))
 </script>

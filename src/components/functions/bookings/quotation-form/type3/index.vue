@@ -38,12 +38,15 @@
             </div>
           </div>
         </div>
-        <div class="flex flex-col gap-y-4 mt-4 text-slate-700">
+        <div class="flex flex-col mt-4 text-slate-700">
           <div class="flex flex-col text-center">
             <h3 class="text-xl font-bold uppercase">Báo giá</h3>
             <span class="text-lg font-bold uppercase">Vận tải hàng hoá</span>
-            <div class="flex justify-evenly">
-              <span>Ngày báo giá: 05/12/2024</span>
+            <div class="flex justify-evenly text-sm">
+              <span
+                >Ngày báo giá:
+                <span class="font-bold">{{ format(data.dateOfQ, 'dd/MM/yyyy') }}</span></span
+              >
               <span>NO. 250701/2024RUBIK</span>
             </div>
           </div>
@@ -61,37 +64,37 @@
                 <span class="font-bold">Công ty</span>
               </div>
               <div class="col-span-3 px-2 py-1">
-                <span class="whitespace-pre-wrap">Rubik Logistics Joint Stock Company </span>
+                <span class="whitespace-pre-wrap">{{ data.customer }}</span>
               </div>
               <div class="col-span-1 px-2 py-1">
                 <span class="font-bold">Người liên hệ</span>
               </div>
               <div class="col-span-2 px-2 py-1">
-                <span>Mr. Kevin</span>
+                <span>{{ data.PICName }}</span>
               </div>
               <div class="col-span-1 px-2 py-1">
                 <span class="font-bold">MST</span>
               </div>
               <div class="col-span-3 px-2 py-1">
-                <span>0316987429</span>
+                <span>{{ data.customerMST }}</span>
               </div>
               <div class="col-span-1 px-2 py-1">
                 <span class="font-bold">Di động</span>
               </div>
               <div class="col-span-2 px-2 py-1">
-                <span>+84 983 350 400</span>
+                <span>{{ data.PICPhone }}</span>
               </div>
               <div class="col-span-1 px-2 py-1">
                 <span class="font-bold">Phone/Fax</span>
               </div>
               <div class="col-span-3 px-2 py-1">
-                <span>024 3777 3333</span>
+                <span>{{ data.customerPhone }}</span>
               </div>
               <div class="col-span-1 px-2 py-1">
                 <span class="font-bold">Email</span>
               </div>
               <div class="col-span-2 px-2 py-1">
-                <span>Kevin@rubiklogs.vn</span>
+                <span>{{ data.PICEmail }}</span>
               </div>
             </div>
             <span class="text-md font-bold uppercase block bg-slate-200 px-2 py-1"
@@ -199,16 +202,16 @@
                   >
                 </div>
                 <div class="col-span-1 px-2 py-1 flex items-center justify-end">
-                  <span>{{ item.gw }}</span>
+                  <span>{{ data.gw }}</span>
                 </div>
                 <div class="col-span-1 px-2 py-1 flex items-center justify-start">
-                  <span>{{ data.currency }}/{{ item.unit }}</span>
+                  <span>{{ item.currency }}/{{ item.unit }}</span>
                 </div>
                 <div class="col-span-1 px-2 py-1 flex items-center justify-end">
                   <span>{{ airfreightCost.toFixed(2) || '' }}</span>
                 </div>
                 <div class="col-span-1 px-2 py-1 flex items-center justify-start">
-                  <span>{{ data.currency }}</span>
+                  <span>{{ item.currency }}</span>
                 </div>
                 <div
                   class="col-span-2 px-2 py-1 flex flex-col items-center justify-center font-semibold"
@@ -218,7 +221,7 @@
                 </div>
               </template>
 
-              <!-- III - Phí local charge -->
+              <!-- II - Phí local charge -->
               <div
                 class="col-span-1 px-2 py-1 border-l border-t border-slate-300 flex items-center justify-center text-center"
                 :class="[`row-span-${data.localcharge.length}`]"
@@ -237,13 +240,13 @@
                   <span>{{ item.cost }}</span>
                 </div>
                 <div class="col-span-1 px-2 py-1 flex items-center justify-start">
-                  <span>{{ data.currency }}/{{ item.unit }}</span>
+                  <span>{{ item.currency }}/{{ item.unit }}</span>
                 </div>
                 <div class="col-span-1 px-2 py-1 flex items-center justify-end">
-                  <span>{{ toMoney(item).toFixed(2) }}</span>
+                  <span>{{ toMoney(item, false, false, props.data.containerType, props.data.cw, null, props.data.transferRate).toFixed(2) }}</span>
                 </div>
                 <div class="col-span-1 px-2 py-1 flex items-center justify-start">
-                  <span>{{ data.currency }}</span>
+                  <span>{{ item.currency }}</span>
                 </div>
                 <div
                   class="col-span-2 px-2 py-1 flex flex-col items-center justify-center font-semibold"
@@ -266,7 +269,7 @@
                 <span></span>
               </div>
               <div class="col-span-1 px-2 py-1 flex items-center justify-end">
-                <span>{{ formatNumber(totalCost.toFixed(2)) }}</span>
+                <span>{{ formatNumber(totalCost.total) }}</span>
               </div>
               <div class="col-span-1 px-2 py-1 flex items-center justify-start">
                 <span class="font-bold">USD</span>
@@ -281,7 +284,7 @@
                 <span></span>
               </div>
               <div class="col-span-1 px-2 py-1 flex items-center justify-end">
-                <span>{{ formatNumber((totalCost * props.data.transferRate).toFixed(2)) }}</span>
+                <span>{{ formatNumber(totalCost.totalVND) }}</span>
               </div>
               <div class="col-span-1 px-2 py-1 flex items-center justify-start">
                 <span class="font-bold">VND</span>
@@ -309,17 +312,13 @@
                   <span>{{ item.cost }}</span>
                 </div>
                 <div class="col-span-1 px-2 py-1 flex items-center justify-start">
-                  <span>{{ data.currency }}/{{ item.unit }}</span>
+                  <span>{{ item.currency }}/{{ item.unit }}</span>
                 </div>
                 <div class="col-span-1 px-2 py-1 flex items-center justify-end">
-                  <span>{{
-                    item.unit.includes(data.containerType)
-                      ? parseFloat(item.cost) * parseFloat(data.cw)
-                      : parseFloat(item.cost) || ''
-                  }}</span>
+                  <span>{{ toMoney(item).toFixed(2) }}</span>
                 </div>
                 <div class="col-span-1 px-2 py-1 flex items-center justify-start">
-                  <span>{{ data.currency }}</span>
+                  <span>{{ item.currency }}</span>
                 </div>
                 <div class="col-span-2 px-2 py-1 flex items-center justify-center font-semibold">
                   <span v-if="item.vat">Đã bao gồm VAT {{ item.vat }}%</span>
@@ -346,13 +345,13 @@
                   <span>{{ item.cost }}</span>
                 </div>
                 <div class="col-span-1 px-2 py-1 flex items-center justify-start">
-                  <span>{{ data.currency }}/{{ item.unit }}</span>
+                  <span>{{ item.currency }}/{{ item.unit }}</span>
                 </div>
                 <div class="col-span-1 px-2 py-1 flex items-center justify-end">
                   <span></span>
                 </div>
                 <div class="col-span-1 px-2 py-1 flex items-center justify-start">
-                  <span>{{ data.currency }}</span>
+                  <span>{{ item.currency }}</span>
                 </div>
                 <div class="col-span-2 px-2 py-1 flex items-center justify-center font-semibold">
                   <span v-if="item.vat">Đã bao gồm VAT {{ item.vat }}%</span>
@@ -371,7 +370,9 @@
                 <span></span>
               </div>
               <div class="col-span-1 px-2 py-1 flex items-center justify-end">
-                <span class="font-bold">{{ formatNumber((totalCostVND * props.data.transferRate).toFixed(2)) }}</span>
+                <span class="font-bold">{{
+                  formatNumber((totalCostVND * props.data.transferRate).toFixed(2))
+                }}</span>
               </div>
               <div class="col-span-1 px-2 py-1">
                 <span class="font-bold">VND</span>
@@ -385,11 +386,16 @@
               >III - Ghi chú</span
             >
             <ol class="list-decimal list-inside text-sm mb-4">
-              <li>Báo giá chưa bao gồm VAT 8 %</li>
+              <li>Báo giá chưa bao gồm VAT</li>
               <li>Báo giá chưa bao gồm các chi phí kiểm tra chất lượng, kiểm hoá (nếu có)…</li>
               <li>Báo giá chưa bao gồm chi phí đường cấm (nếu có)</li>
               <li>Chưa bao gồm phí dừng đỗ (nếu có)</li>
-              <li>Thời hạn báo giá: 15/02/2025</li>
+              <li>
+                Thời hạn báo giá:
+                <span class="font-bold">{{
+                  data.validIn ? format(data.validIn, 'dd/MM/yyyy') : ''
+                }}</span>
+              </li>
             </ol>
 
             <div
@@ -404,8 +410,8 @@
               </div>
             </div>
             <div class="text-sm flex flex-col">
-              <span>Người báo giá: Trần Đức Trung</span>
-              <span>Điện thoại: 0906972904</span>
+              <span>Người báo giá: {{ userData.fullName }}</span>
+              <span>Điện thoại: {{ userData.phone }}</span>
             </div>
             <div class="mt-4 text-center italic">
               <span>~ Professional advice & Best solution logistics ~</span>
@@ -427,6 +433,7 @@ import Button from '@/components/kits/button/index.vue'
 import domtoimage from 'dom-to-image'
 import html2pdf from 'html2pdf.js'
 import { formatNumber } from '@/utils'
+import { format } from 'date-fns'
 const props = defineProps({
   data: {
     type: Object,
@@ -440,129 +447,85 @@ const props = defineProps({
   },
 })
 
-console.log(props.data.currency)
+const user = localStorage.getItem('user')
+const userData = JSON.parse(user)
+
+const toMoney = (item, convert = false,revert = false, containerType = "", cw = 1,gw = 0, transferRate = 1) => {
+  let money = item.cost?item.cost:Number(gw)?Number(gw):0;
+  try {
+    const unit = item.unit?.toLowerCase() || "";
+    const type = containerType?.toLowerCase() || "";
+
+    // Convert weight if applicable
+    if(item.weight){
+      money = Number(item.weight)*Number(item.cost)
+    }
+
+    // Multiply cost by cw if unit matches containerType
+    if (unit.includes(type)) {
+      money *= Number(cw) || 1;
+    }
+
+    // Apply VAT
+    if (item.vat) {
+      money *= 1 + Number(item.vat) / 100;
+    }
+
+    // Convert currency if applicable
+    if (item.currency === "USD" && convert) {
+      money *= Number(transferRate) || 1;
+    }
+
+    if(revert && item.currency === "VND"){
+      money = money/Number(transferRate) || 1;
+    }
+    return money;
+  } catch (error) {
+    return 0;
+  }
+}
 
 const airfreightCost = computed(() => {
-  let cost = 0
-  try {
-    props.data.airfreight.forEach((item) => {
-      if (item.unit.toLowerCase().includes(props.data.containerType.toLowerCase())) {
-        cost += item.vat
-          ? parseFloat(item.gw || 0) *
-            parseFloat(props.data.cw || 1) *
-            (1 + parseFloat(item.vat) / 100)
-          : parseFloat(item.gw || 0) * parseFloat(props.data.cw || 1)
-      } else {
-        cost += item.vat
-          ? parseFloat(item.gw || 0) * (1 + parseFloat(item.vat) / 100)
-          : parseFloat(item.gw || 0)
-      }
-    })
-    return cost
-  } catch (error) {
-    return 0
-  }
+  return toMoney(props.data.airfreight[0], false, false, props.data.containerType, props.data.cw, props.data.gw, props.data.transferRate)  
 })
 
 const totalCost = computed(() => {
-  let cost = 0
+  let total = 0
   try {
     props.data.airfreight.forEach((item) => {
-      if (item.unit.toLowerCase().includes(props.data.containerType.toLowerCase())) {
-        cost += item.vat
-          ? parseFloat(item.gw || 0) *
-            parseFloat(props.data.cw || 1) *
-            (1 + parseFloat(item.vat) / 100)
-          : parseFloat(item.gw || 0) * parseFloat(props.data.cw || 1)
-      } else {
-        cost += item.vat
-          ? parseFloat(item.gw || 0) * (1 + parseFloat(item.vat) / 100)
-          : parseFloat(item.gw || 0)
-      }
+      total += toMoney(item, false, false, props.data.containerType, props.data.cw, props.data.gw, props.data.transferRate)
     })
     props.data.localcharge.forEach((item) => {
-      if (item.unit.toLowerCase().includes(props.data.containerType.toLowerCase())) {
-        cost += item.vat
-          ? parseFloat(item.cost || 1) *
-            parseFloat(props.data.cw || 1) *
-            (1 + parseFloat(item.vat) / 100)
-          : parseFloat(item.cost || 1) * parseFloat(props.data.cw || 1)
-      } else {
-        cost += item.vat
-          ? parseFloat(item.cost || 0) * (1 + parseFloat(item.vat) / 100)
-          : parseFloat(item.cost || 0)
-      }
+      total += toMoney(item, false, true, props.data.containerType, props.data.cw, null, props.data.transferRate)
     })
-    return cost
+    
+    return {total, totalVND: total * props.data.transferRate}
   } catch (error) {
     return 0
   }
 })
 
 const totalCostVND = computed(() => {
-  let cost = 0
+  let total = 0
   try {
     props.data.airfreight.forEach((item) => {
-      if (item.unit.toLowerCase().includes(props.data.containerType.toLowerCase())) {
-        cost += item.vat
-          ? parseFloat(item.gw || 0) *
-            parseFloat(props.data.cw || 1) *
-            (1 + parseFloat(item.vat) / 100)
-          : parseFloat(item.gw || 0) * parseFloat(props.data.cw || 1)
-      } else {
-        cost += item.vat
-          ? parseFloat(item.gw || 0) * (1 + parseFloat(item.vat) / 100)
-          : parseFloat(item.gw || 0)
-      }
+      total += toMoney(item, false, false, props.data.containerType, props.data.cw, props.data.gw, props.data.transferRate)
     })
     props.data.localcharge.forEach((item) => {
-      if (item.unit.toLowerCase().includes(props.data.containerType.toLowerCase())) {
-        cost += item.vat
-          ? parseFloat(item.cost || 1) *
-            parseFloat(props.data.cw || 1) *
-            (1 + parseFloat(item.vat) / 100)
-          : parseFloat(item.cost || 1) * parseFloat(props.data.cw || 1)
-      } else {
-        cost += item.vat
-          ? parseFloat(item.cost || 0) * (1 + parseFloat(item.vat) / 100)
-          : parseFloat(item.cost || 0)
-      }
+      total += toMoney(item, false, true, props.data.containerType, props.data.cw, null, props.data.transferRate)
     })
-    props.data.othercharges.forEach((item) => {
-      if (item.unit.toLowerCase().includes(props.data.containerType.toLowerCase())) {
-        cost += item.vat
-          ? parseFloat(item.cost || 1) *
-            parseFloat(props.data.cw || 1) *
-            (1 + parseFloat(item.vat) / 100)
-          : parseFloat(item.cost || 1) * parseFloat(props.data.cw || 1)
-      } else {
-        cost += item.vat
-          ? parseFloat(item.cost || 0) * (1 + parseFloat(item.vat) / 100)
-          : parseFloat(item.cost || 0)
-      }
+    props.data.othercharges.forEach((item) => { 
+      total += toMoney(item, false, true, props.data.containerType, props.data.cw, null, props.data.transferRate)
     })
-    return cost
+    console.log(total)
+
+    return total
   } catch (error) {
     return 0
   }
 })
 
-const toMoney = (item) => {
-  let money = 0
-  try {
-    if (item.unit.toLowerCase().includes(props.data.containerType.toLowerCase())) {
-      money = parseFloat(item.cost || 0) * parseFloat(props.data.cw || 1)
-    } else {
-      money = parseFloat(item.cost || 0)
-    }
-  if (item.vat) {
-      money = money * (1 + parseFloat(item.vat) / 100)
-    }
-    return money
-  } catch (error) {
-    return 0
-  }
-}
+
 
 const emit = defineEmits(['submitExportQuotation', 'cancelExportQuotation'])
 

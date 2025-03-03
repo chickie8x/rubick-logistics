@@ -40,6 +40,7 @@ import { ref, watch } from 'vue'
 import Loading from '@/components/icons/loading.vue'
 import Table from '@/components/kits/table/table3.vue'
 import { XMarkIcon } from '@heroicons/vue/24/outline'
+import { customerPool } from '@/components/functions/data/total'
 
 const isLoading = ref(false)
 const data = ref([])
@@ -57,35 +58,19 @@ const props = defineProps({
   },
 })
 
-const mockData = {
-  customer: [
-    {
-      name: 'Customer 1',
-      mst: '1234567890',
-      phone: '1234567890',
-    },
+const customers = customerPool.map((customer) => {
+  return {
+    name: customer.buyerName,
+    mst: customer.mst,
+    phone: customer.buyerMobile,
+    PICName: customer.PICName,
+    PICPhone: customer.PICPhone,
+    PICEmail: customer.PICEmail,
+  }
+})
 
-    {
-      name: 'Customer 2',
-      mst: '1234567890',
-      phone: '1234567890',
-    },
-    {
-      name: 'Customer 3',
-      mst: '1234567890',
-      phone: '1234567890',
-    },
-    {
-      name: 'Customer 4',
-      mst: '1234567890',
-      phone: '1234567890',
-    },
-    {
-      name: 'Customer 5',
-      mst: '1234567890',
-      phone: '1234567890',
-    },
-  ],
+const mockData = {
+  customer: customers,
 
   commondity: [
     {
