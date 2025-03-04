@@ -24,30 +24,18 @@
           class="p-2 text-sm border-r border-slate-300"
           :class="[header.key === 'unit' ? 'flex items-center' : '']"
         >
-          <div v-if="header.key === 'currency'" class="flex items-center gap-x-4">
-            <div class="flex items-center gap-x-1">
-              <input
-                v-model="row[header.key]"
-                value="USD"
-                type="radio"
-                :name="`currency-${idx}-${type}`"
-                :id="`currency-${idx}-${type}`"
-                class="scale-110 mt-1"
-              />
-              <label :for="`currency-${idx}-${type}`">USD</label>
-            </div>
-            <div class="flex items-center gap-x-1">
-              <input
-                v-model="row[header.key]"
-                value="VND"
-                type="radio"
-                :name="`currency-${idx}-${type}`"
-                :id="`currency-${idx}-${type}`"
-                class="scale-110 mt-1"
-              />
-              <label :for="`currency-${idx}-${type}`">VND</label>
-            </div>
-          </div>
+          <Select
+            v-if="header.key === 'currency'"
+            v-model="row[header.key]"
+            :options="unitPriceOptions"
+            class="min-w-20"
+          />
+          <Select
+            v-else-if="header.key === 'unit'"
+            v-model="row[header.key]"
+            :options="chargePerOptions"
+            class="min-w-32"
+          />
           <input
             v-else
             :type="
@@ -71,8 +59,9 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
-
+import { reactive } from 'vue'
+import Select from '@/components/kits/select/index.vue'
+import { unitPriceOptions, chargePerOptions } from '@/components/functions/bookings/edit'
 const props = defineProps({
   headers: {
     type: Array,
@@ -88,5 +77,5 @@ const props = defineProps({
   },
 })
 
-const rows = ref(props.data)
+const rows = reactive(props.data)
 </script>

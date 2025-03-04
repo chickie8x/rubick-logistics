@@ -157,12 +157,8 @@
       </div>
       <div class="flex items-end gap-x-8 bg-gray-100 p-2 rounded-md">
         <div class="flex flex-col">
-          <span class="text-sm font-semibold text-slate-900">Container Type</span>
-          <input
-            type="text"
-            class="border border-slate-300 rounded-md px-2 h-8 outline-indigo-500 text-slate-700"
-            v-model="containerType"
-          />
+          <span class="text-sm font-semibold text-slate-900">Unit Charge</span>
+          <Select :options="chargePerOptions" v-model="containerType" />
         </div>
         <div class="flex flex-col gap-y-2">
           <div class="flex items-center gap-x-2">
@@ -356,6 +352,7 @@ import {
   PlusIcon,
   MinusIcon,
 } from '@heroicons/vue/24/outline'
+import Select from '@/components/kits/select/index.vue'
 import SecondaryTable from '@/components/kits/table/secondary.vue'
 import Dialog from '@/components/kits/modal/dialog.vue'
 import QuotationForm from '@/components/functions/bookings/quotation-form/type3/index.vue'
@@ -375,6 +372,7 @@ import {
   shippers,
   consignees,
 } from '@/components/functions/data/quotation/index.js'
+import { unitPriceOptions, chargePerOptions } from '@/components/functions/bookings/edit/index.js'
 
 const props = defineProps({
   quotation: {
@@ -391,7 +389,9 @@ const customerPhone = ref(props.quotation.customerPhone ? props.quotation.custom
 const commondity = ref(props.quotation.commondity ? props.quotation.commondity : null)
 const shipper = ref(props.quotation.shipper ? props.quotation.shipper : null)
 const consignee = ref(props.quotation.consignee ? props.quotation.consignee : null)
-const containerType = ref(props.quotation.containerType ? props.quotation.containerType : null)
+const containerType = ref(
+  props.quotation.containerType ? props.quotation.containerType : chargePerOptions[0].value,
+)
 const transferRate = ref(null)
 const cw = ref(null)
 const gw = ref(null)

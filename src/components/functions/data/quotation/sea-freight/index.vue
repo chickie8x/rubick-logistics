@@ -158,11 +158,7 @@
       <div class="flex items-end gap-x-8 bg-gray-100 p-2 rounded-md">
         <div class="flex flex-col">
           <span class="text-sm font-semibold text-slate-900">Container Type</span>
-          <input
-            type="text"
-            class="border border-slate-300 rounded-md px-2 h-8 outline-indigo-500 text-slate-700"
-            v-model="containerType"
-          />
+          <Select v-model="containerType" :options="chargePerOptions" />
         </div>
         <div class="flex flex-col gap-y-2">
           <div class="flex items-center gap-x-2">
@@ -375,6 +371,8 @@ import {
   shippers,
   consignees,
 } from '@/components/functions/data/quotation/index.js'
+import { unitPriceOptions, chargePerOptions } from '@/components/functions/bookings/edit/index.js'
+import Select from '@/components/kits/select/index.vue'
 
 const props = defineProps({
   quotation: {

@@ -203,7 +203,17 @@
                   <span>{{ item.currency }}/{{ item.unit }}</span>
                 </div>
                 <div class="col-span-1 px-2 py-1 flex items-center justify-end">
-                  <span>{{ formatNumber(seafreightCost) || '' }}</span>
+                  <span>{{
+                    formatNumber(
+                      toMoney(
+                        item,
+                        false,
+                        false,
+                        props.data.containerType,
+                        props.data.cw,
+                        props.data.transferRate,
+                    ))
+                  }}</span>
                 </div>
                 <div class="col-span-1 px-2 py-1 flex items-center justify-start">
                   <span>{{ item.currency }}</span>
@@ -475,7 +485,7 @@ const toMoney = (
   cw = 1,
   transferRate = 1,
 ) => {
-  let money = item.cost?item.cost:0
+  let money = item.cost ? item.cost : 0
   try {
     const unit = item.unit?.toLowerCase() || ''
     const type = containerType?.toLowerCase() || ''
@@ -527,7 +537,7 @@ const totalCost = computed(() => {
       total += toMoney(
         item,
         false,
-        false,
+        true,
         props.data.containerType,
         props.data.cw,
         props.data.transferRate,
@@ -557,7 +567,7 @@ const totalCostVND = computed(() => {
       total += toMoney(
         item,
         false,
-        false,
+        true,
         props.data.containerType,
         props.data.cw,
         props.data.transferRate,
