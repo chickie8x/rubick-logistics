@@ -168,9 +168,11 @@ const isAllSelected = ref(false)
 const rowsSelected = ref(new Array(props.data.length).fill(false))
 const selectedCustomers = ref([])
 const pickLimit = ref(5)
+const cusHeaders = ref([])
+const cusData = ref([])
 
-const cusHeaders = ref([...props.headers])
-const cusData = ref([...props.data])
+cusHeaders.value = [...props.headers]
+cusData.value = [...props.data]
 
 watch(rowsSelected.value, (newVal) => {
   selectedCustomers.value = props.data.filter((item, idx) => {
@@ -241,4 +243,20 @@ const colHidden = (col) => {
   })
   cusData.value = retData
 }
+
+watch(
+  () => props.headers,
+  (newHeaders) => {
+    cusHeaders.value = [...newHeaders]
+  },
+  { deep: true }
+)
+
+watch(
+  () => props.data,
+  (newData) => {
+    cusData.value = [...newData]
+  },
+  { deep: true }
+)
 </script>

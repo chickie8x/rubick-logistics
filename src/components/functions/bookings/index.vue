@@ -57,10 +57,7 @@
       <div>
         <span class="text-sm">Department</span>
         <Select v-model="department" :options="departments" />
-      </div>
-      <div>
-        <span class="text-sm">Permission</span>
-        <Select v-model="right" :options="rights" />
+        {{ department }}
       </div>
     </div>
 
@@ -146,10 +143,8 @@ const rights = [
 ]
 
 const department = ref(departments[0].value)
-const right = ref(rights[0].value)
 
 const tbHeaders = computed(() => {
-  if (right.value >= 2) return headers
   if (department.value === 'Sale')
     return headers.filter((header) => header.dep === 'Sale' || header.dep === 'all')
   if (department.value === 'Cus')
