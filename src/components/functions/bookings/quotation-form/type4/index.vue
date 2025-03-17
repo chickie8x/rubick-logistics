@@ -212,7 +212,8 @@
                         props.data.containerType,
                         props.data.cw,
                         props.data.transferRate,
-                    ))
+                      ),
+                    )
                   }}</span>
                 </div>
                 <div class="col-span-1 px-2 py-1 flex items-center justify-start">

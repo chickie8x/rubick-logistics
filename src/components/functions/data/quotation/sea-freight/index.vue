@@ -373,6 +373,9 @@ import {
 } from '@/components/functions/data/quotation/index.js'
 import { unitPriceOptions, chargePerOptions } from '@/components/functions/bookings/edit/index.js'
 import Select from '@/components/kits/select/index.vue'
+import { db } from '@/firebase'
+import { collection, addDoc } from 'firebase/firestore'
+import { toast } from 'vue-sonner'
 
 const props = defineProps({
   quotation: {
@@ -413,6 +416,8 @@ const seaFreightRows = ref([dataSeaFreight()[0]])
 const localChargesRows = ref([dataLocalCharges()[0]])
 const otherChargesRows = ref([dataOtherCharges()[0]])
 const disbursementFeeRows = ref([dataDisbursementFee()[0]])
+const user = localStorage.getItem('user')
+const username = ref(user ? JSON.parse(user).username : null)
 
 const handleFetch = (tg) => {
   openDialog.value = true
@@ -448,7 +453,7 @@ const handleSelect = (data) => {
 }
 
 const handleSave = () => {
-  console.log(dataSeaFreight)
+  handleSaveQuotation()
   emit('closeModal')
 }
 
@@ -510,4 +515,24 @@ const seaFreightQuotationObject = computed(() => ({
   consignee: consignee.value,
   term: term.value,
 }))
+
+const quotationCollection = collection(db, 'quotations')
+
+const handleSaveQuotation = async () => {
+  try {
+    const ts = new Date().getTime()
+    await addDoc(quotationCollection, {
+      ...seaFreightQuotationObject.value,
+      timestamp: ts,
+      quotationType: 'sea',
+      quotationNo: `QSF${ts}`,
+      creator: username.value,
+      origin: seaFreightQuotationObject.value.seaFreight[0].pol,
+      destination: seaFreightQuotationObject.value.seaFreight[0].pod,
+    })
+    toast.success('Quotation saved successfully')
+  } catch (error) {
+    toast.error('Error saving quotation:', error.message)
+  }
+}
 </script>

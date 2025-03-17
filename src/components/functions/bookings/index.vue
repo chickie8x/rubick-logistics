@@ -13,10 +13,6 @@
             <PlusIcon class="size-5 mr-2" />
             New
           </Button>
-          <Button class="flex items-center" @click="onExport">
-            <ArrowDownOnSquareIcon class="size-5 mr-2" />
-            Export
-          </Button>
           <Button class="flex items-center" @click="onSelect">
             <BookmarkIcon class="size-5 mr-2" />
             Select
@@ -56,11 +52,23 @@
         >Lưu ý , có thể chọn nhiều booking để xoá , chỉnh sửa chỉ được phép chọn 1 booking</span
       >
     </div>
-    <div class="mt-4 w-full h-full overflow-auto">
+
+    <div class="flex items-center gap-x-2 mt-4">
+      <div>
+        <span class="text-sm">Department</span>
+        <Select v-model="department" :options="departments" />
+      </div>
+      <div>
+        <span class="text-sm">Permission</span>
+        <Select v-model="right" :options="rights" />
+      </div>
+    </div>
+
+    <div class="w-full h-full overflow-auto mt-4">
       <Table
         :selectAllEnable="true"
-        :headers="headers"
-        :data="rowDataByRule"
+        :headers="tbHeaders"
+        :data="bookings"
         :modifiable="actions"
         @onRowClick="onSelectedRows"
         ref="tableRef"
@@ -77,24 +85,9 @@
       <EditBooking
         v-else-if="modalVSlot === 'edit'"
         :booking="bookingEdit"
-        :department="userDepartment"
+        :department="department"
         @submitEdit="onSubmitEdit"
         @cancelEdit="onCancelEdit"
-      />
-      <QuotationFormType1
-        v-else-if="quotationForm === 'fcl1'"
-        @submitExportQuotation="onSubmitExportQuotation"
-        @cancelExportQuotation="onCancelExportQuotation"
-      />
-      <QuotationFormType2
-        v-else-if="quotationForm === 'fcl2'"
-        @submitExportQuotation="onSubmitExportQuotation"
-        @cancelExportQuotation="onCancelExportQuotation"
-      />
-      <QuotationChoice
-        v-else-if="quotationChoice"
-        @submitQuotationChoice="onSubmitQuotationChoice"
-        @cancelQuotationChoice="onCancelQuotationChoice"
       />
     </Modal>
   </Teleport>
@@ -106,11 +99,9 @@ import Searchbar from '@/components/kits/searchbar/index.vue'
 import Button from '@/components/kits/button/index.vue'
 import Table from '@/components/kits/table/index.vue'
 import Modal from '@/components/kits/modal/index.vue'
+import Select from '@/components/kits/select/index.vue'
 import EditBooking from './edit/index.vue'
 import DeleteBooking from './delete/index.vue'
-import QuotationFormType2 from './quotation-form/type2/index.vue'
-import QuotationFormType1 from './quotation-form/type1/index.vue'
-import QuotationChoice from './quotation-form/choices/index.vue'
 import {
   PlusIcon,
   ArrowDownOnSquareIcon,
@@ -120,9 +111,11 @@ import {
   ArrowUturnLeftIcon,
   InformationCircleIcon,
 } from '@heroicons/vue/24/outline'
-import { ref, computed } from 'vue'
-import { headers, rows } from './data'
+import { ref, computed, onMounted } from 'vue'
+import { headers } from './data'
 import { permissions } from '@/mockdata'
+import { db } from '@/firebase'
+import { collection, getDocs, query, where } from 'firebase/firestore'
 
 const isModalOpen = ref(false)
 const router = useRouter()
@@ -135,14 +128,59 @@ const actions = ref(false)
 const actionRows = ref([])
 const bookingEdit = ref(null)
 const modalVSlot = ref(null)
-const quotationForm = ref(null)
-const quotationChoice = ref(false)
 const tableRef = ref(null)
-const rowDataByRule = computed(() => {
-  if (userPermission >= 2) return rows
-  const rowsBySaler = rows.filter((row) => row.saler === username)
-  return rowsBySaler
+const bookings = ref([])
+
+const departments = [
+  { label: 'Sale', value: 'Sale' },
+  { label: 'Cus', value: 'Cus' },
+  { label: 'Docs', value: 'Docs' },
+  { label: 'Ops', value: 'Ops' },
+  { label: 'Acc', value: 'Acc' },
+  { label: 'OpsDocs', value: 'OpsDocs' },
+]
+
+const rights = [
+  { label: 'Staff', value: 1 },
+  { label: 'Leader +', value: 3 },
+]
+
+const department = ref(departments[0].value)
+const right = ref(rights[0].value)
+
+const tbHeaders = computed(() => {
+  if (right.value >= 2) return headers
+  if (department.value === 'Sale')
+    return headers.filter((header) => header.dep === 'Sale' || header.dep === 'all')
+  if (department.value === 'Cus')
+    return headers.filter((header) => header.dep === 'Cus' || header.dep === 'all')
+  if (department.value === 'Docs')
+    return headers.filter((header) => header.dep === 'Docs' || header.dep === 'all')
+  if (department.value === 'Ops')
+    return headers.filter((header) => header.dep === 'Ops' || header.dep === 'all')
+  if (department.value === 'Acc')
+    return headers.filter((header) => header.dep === 'Acc' || header.dep === 'all')
+  if (department.value === 'OpsDocs')
+    return headers.filter((header) => header.dep === 'OpsDocs' || header.dep === 'all')
 })
+
+const getBookings = async () => {
+  try {
+    const bk = collection(db, 'bookings')
+    const q = query(bk, where('hrSale', '==', username))
+    const snapshot = await getDocs(q)
+    const data = snapshot.docs.map((doc) => {
+      let ret = {
+        ...doc.data(),
+        uid: doc.id,
+      }
+      return ret
+    })
+    bookings.value = data
+  } catch (error) {
+    console.log(error)
+  }
+}
 
 const onSelect = () => {
   actions.value = true
@@ -177,10 +215,11 @@ const onCancelEdit = () => {
 
 const onSelectedRows = (selectedRows) => {
   actionRows.value = selectedRows
+  console.log(actionRows.value)
   if (actionRows.value.filter(Boolean).length === 1) {
     actionRows.value.map((item, idx) => {
       if (item) {
-        bookingEdit.value = rowDataByRule.value[idx]
+        bookingEdit.value = bookings.value[idx]
       }
     })
   }
@@ -196,42 +235,15 @@ const onModify = () => {
   isModalOpen.value = true
 }
 
-const onExport = () => {
-  quotationChoice.value = true
-  isModalOpen.value = true
-}
-
-const onSubmitQuotationChoice = (choice) => {
-  quotationChoice.value = false
-  console.log(choice)
-  quotationForm.value = choice
-}
-
-const onCancelQuotationChoice = () => {
-  quotationChoice.value = false
-  modalVSlot.value = null
-  isModalOpen.value = false
-}
-
-const onSubmitExportQuotation = () => {
-  console.log('submit export quotation')
-  quotationForm.value = null
-  modalVSlot.value = null
-  isModalOpen.value = false
-}
-
-const onCancelExportQuotation = () => {
-  console.log('cancel export quotation')
-  quotationForm.value = null
-  modalVSlot.value = null
-  isModalOpen.value = false
-}
-
 const actionDelete = computed(() => {
   return actionRows.value.filter(Boolean).length > 0
 })
 
 const actionModify = computed(() => {
   return actionRows.value.filter(Boolean).length === 1
+})
+
+onMounted(() => {
+  getBookings()
 })
 </script>

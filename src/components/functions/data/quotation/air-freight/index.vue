@@ -373,7 +373,9 @@ import {
   consignees,
 } from '@/components/functions/data/quotation/index.js'
 import { unitPriceOptions, chargePerOptions } from '@/components/functions/bookings/edit/index.js'
-
+import { db } from '@/firebase'
+import { collection, addDoc } from 'firebase/firestore'
+import { toast } from 'vue-sonner'
 const props = defineProps({
   quotation: {
     type: Object,
@@ -415,6 +417,8 @@ const airFreightRows = ref([dataAirFreight()[0]])
 const localChargesRows = ref([dataLocalCharges()[0]])
 const otherChargesRows = ref([dataOtherCharges()[0]])
 const disbursementFeeRows = ref([dataDisbursementFee()[0]])
+const user = localStorage.getItem('user')
+const username = ref(user ? JSON.parse(user).username : null)
 
 const handleFetch = (tg) => {
   openDialog.value = true
@@ -450,7 +454,7 @@ const handleSelect = (data) => {
 }
 
 const handleSave = () => {
-  console.log(dataAirFreight)
+  handleSaveQuotation()
   emit('closeModal')
 }
 
@@ -512,4 +516,24 @@ const airFreightQuotationObject = computed(() => ({
   consignee: consignee.value,
   term: term.value,
 }))
+
+const quotationCollection = collection(db, 'quotations')
+
+const handleSaveQuotation = async () => {
+  try {
+    const ts = new Date().getTime()
+    await addDoc(quotationCollection, {
+      ...airFreightQuotationObject.value,
+      timestamp: ts,
+      quotationType: 'air',
+      quotationNo: `QAF${ts}`,
+      creator: username.value,
+      origin: airFreightQuotationObject.value.airfreight[0].origin,
+      destination: airFreightQuotationObject.value.airfreight[0].destination,
+    })
+    toast.success('Quotation saved successfully')
+  } catch (error) {
+    toast.error('Error saving quotation:', error.message)
+  }
+}
 </script>

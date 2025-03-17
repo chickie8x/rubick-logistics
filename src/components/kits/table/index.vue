@@ -16,19 +16,23 @@
           />
         </th>
         <th
-          v-for="header in headers"
+          v-for="header in cusHeaders"
           :key="header.key"
           scope="col"
-          class="py-3.5 pl-4 pr-6 text-left text-sm font-semibold text-gray-700 w-auto whitespace-nowrap"
+          class="py-3.5 pl-4 pr-6 text-left text-sm font-semibold text-gray-700 w-auto whitespace-nowrap relative group"
         >
-          {{ header.key === 'sortIdx' ? '' : header.label }}
+          {{ header.key === 'orderNo' ? '' : header.label }}
+          <XMarkIcon
+            @click="colHidden(header)"
+            class="hidden absolute top-1 right-1 text-red-500 border border-red-500 rounded-md bg-red-200 hover:bg-red-300 w-4 h-4 group-hover:block"
+          />
           <ChevronUpDownIcon
-            v-if="header.key === 'sortIdx' && !sortable"
+            v-if="header.key === 'orderNo' && !sortable"
             @click="enableSort"
             class="w-6 h-6 cursor-pointer hover:text-indigo-500 bg-gray-200 p-1 rounded-md scale-110"
           />
           <div
-            v-else-if="header.key === 'sortIdx' && sortable"
+            v-else-if="header.key === 'orderNo' && sortable"
             class="flex items-center justify-center gap-2"
           >
             <CheckIcon
@@ -48,7 +52,7 @@
         v-for="(row, idx) in data"
         :key="idx"
         @click="rowClicked(row, idx)"
-        class="divide-x hover:bg-slate-200 cursor-default"
+        class="divide-x divide-gray-200 cursor-default"
         :class="{
           '!bg-indigo-100': rowsSelected[idx],
           'bg-gray-50': idx % 2 !== 0,
@@ -69,17 +73,34 @@
           />
         </td>
         <td
-          v-for="header in headers"
+          v-for="header in cusHeaders"
           :key="header.key"
           class="py-2 pl-4 pr-6 text-left text-sm text-gray-600 w-auto whitespace-nowrap"
+          :class="{
+            'font-semibold': header.key === 'bkNo',
+          }"
         >
-          {{ header.key === 'sortIdx' && sortable ? '' : row[header.key] }}
+          <span v-if="header.key === 'timestamp' || header.key === 'eta'">{{
+            new Date(row[header.key]).toLocaleDateString('vi-VN')
+          }}</span>
+          <span
+            v-else-if="checkboxFields.includes(header.key)"
+            class="flex items-center justify-center"
+          >
+            <input type="checkbox" v-model="row[header.key]" class="scale-125" disabled />
+          </span>
+          <ul v-else-if="header.key === 'picInfo'" class="list-disc p-2">
+            <li v-for="pic in row[header.key]" :key="pic.picName">
+              {{ pic.picName || '-' }} - {{ pic.picPhone || '-' }} - {{ pic.picEmail || '-' }}
+            </li>
+          </ul>
+          <span v-else>{{ header.key === 'orderNo' && sortable ? '' : row[header.key] }}</span>
           <input
-            v-if="sortable && header.key === 'sortIdx'"
+            v-if="sortable && header.key === 'orderNo'"
             type="number"
             class="scale-125 w-14 text-xs px-2 py-1"
             :class="[sortable ? 'border border-gray-500 outline-indigo-500 rounded-md ' : '']"
-            v-model="row.sortIdx"
+            v-model="row.orderNo"
             min="0"
             @click.stop
           />
@@ -101,6 +122,8 @@
 <script setup>
 import { ref, watch, computed } from 'vue'
 import { NoSymbolIcon, ChevronUpDownIcon, CheckIcon, XMarkIcon } from '@heroicons/vue/24/outline'
+import { checkboxFields } from '@/components/functions/bookings/data'
+
 const props = defineProps({
   headers: {
     type: Array,
@@ -146,6 +169,9 @@ const rowsSelected = ref(new Array(props.data.length).fill(false))
 const selectedCustomers = ref([])
 const pickLimit = ref(5)
 
+const cusHeaders = ref([...props.headers])
+const cusData = ref([...props.data])
+
 watch(rowsSelected.value, (newVal) => {
   selectedCustomers.value = props.data.filter((item, idx) => {
     if (newVal[idx]) {
@@ -178,7 +204,7 @@ const selectAllToggle = () => {
 }
 
 const sortIndex = computed(() => {
-  return props.data.map((row, idx) => row.sortIdx)
+  return props.data.map((row, idx) => row.orderNo)
 })
 
 const refreshChecked = () => {
@@ -199,5 +225,20 @@ const enableSort = () => {
   if (props.rowEvent) {
     emit('enableSort', props.data)
   } else return
+}
+
+const colHidden = (col) => {
+  const retCol = cusHeaders.value.filter((item) => {
+    if (item.key !== col.key) {
+      return item
+    }
+  })
+  cusHeaders.value = retCol
+  const retData = cusData.value.filter((item) => {
+    if (item.key !== col.key) {
+      return item
+    }
+  })
+  cusData.value = retData
 }
 </script>

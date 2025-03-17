@@ -69,7 +69,7 @@ export const users = [
     username: 'accounting',
     email: 'accounting@gmail.com',
     role: 'leader',
-    department: 'Accountant',
+    department: 'Acc',
     createdAt: '2021-01-01',
     updatedAt: '2021-01-01',
     active: true,
@@ -81,20 +81,24 @@ export const users = [
 
 export const departments = [
   {
-    key: 'ops',
-    value: 'Ops',
+    key: 'sale',
+    value: 'Sale',
   },
   {
     key: 'docs',
     value: 'Docs',
   },
   {
-    key: 'bod',
-    value: 'BOD',
+    key: 'cus',
+    value: 'Cus',
   },
   {
-    key: 'accountant',
-    value: 'Accountant',
+    key: 'acc',
+    value: 'Acc',
+  },
+  {
+    key: 'ops',
+    value: 'Ops',
   },
 ]
 

@@ -132,68 +132,11 @@ export const quotations = [
   },
 ]
 
-export const quotationDB = {
-  air: [
-    {
-      qNo: 'QAF001',
-      customer: 'Customer 1',
-      origin: 'CSL',
-      dest: 'HKG',
-      service: '',
-      shipper: 'Shipper 1',
-      consignee: 'Consignee 1',
-      modify: '2024-01-01',
-      effect: '2024-01-01',
-      validity: 'Port 1',
-      creator: 'Creator 1',
-      customerPhone: '1234567890',
-    },
-    {
-      qNo: 'QAF002',
-      customer: 'Customer 2',
-      origin: 'CSL',
-      dest: 'HKG',
-      service: '',
-      shipper: 'Shipper 2',
-      consignee: 'Consignee 2',
-      modify: '2024-01-01',
-      effect: '2024-01-01',
-      validity: 'Port 1',
-      creator: 'Creator 2',
-      customerPhone: '1234567890',
-    },
-  ],
-  sea: [
-    {
-      qNo: 'QSF001',
-      customer: 'Customer 1',
-      POL: 'CSL',
-      POD: 'HKG',
-      modify: '2024-01-01',
-      effect: '2024-01-01',
-      validity: 'Port 1',
-      issueBy: 'BOD',
-      customerPhone: '1234567890',
-    },
-    {
-      qNo: 'QSF002',
-      customer: 'Customer 2',
-      POL: 'CSL',
-      POD: 'HKG',
-      modify: '2024-01-01',
-      effect: '2024-01-01',
-      validity: 'Port 1',
-      issueBy: 'BOD',
-      customerPhone: '1234567890',
-    },
-  ],
-}
-
 export const quotationDBHeaders = {
   air: [
     {
       label: 'Quotation No',
-      key: 'qNo',
+      key: 'quotationNo',
     },
     {
       label: 'Customer',
@@ -205,11 +148,11 @@ export const quotationDBHeaders = {
     },
     {
       label: 'Destination',
-      key: 'dest',
+      key: 'destination',
     },
     {
-      label: 'Service',
-      key: 'service',
+      label: 'Terms',
+      key: 'terms',
     },
     {
       label: 'Shipper',
@@ -224,12 +167,12 @@ export const quotationDBHeaders = {
       key: 'modify',
     },
     {
-      label: 'Effect',
-      key: 'effect',
+      label: 'Created At',
+      key: 'dateOfQ',
     },
     {
-      label: 'Validity',
-      key: 'validity',
+      label: 'Valid Until',
+      key: 'validIn',
     },
     {
       label: 'Creator',
@@ -239,7 +182,7 @@ export const quotationDBHeaders = {
   sea: [
     {
       label: 'Quotation No',
-      key: 'qNo',
+      key: 'quotationNo',
     },
     {
       label: 'Customer',
@@ -247,27 +190,31 @@ export const quotationDBHeaders = {
     },
     {
       label: 'POL',
-      key: 'POL',
+      key: 'pol',
     },
     {
       label: 'POD',
-      key: 'POD',
+      key: 'pod',
+    },
+    {
+      label: 'Terms',
+      key: 'terms',
     },
     {
       label: 'Modify',
       key: 'modify',
     },
     {
-      label: 'Effect',
-      key: 'effect',
+      label: 'Created At',
+      key: 'dateOfQ',
     },
     {
-      label: 'Validity',
-      key: 'validity',
+      label: 'Valid Until',
+      key: 'validIn',
     },
     {
-      label: 'Issue By',
-      key: 'issueBy',
+      label: 'Creator',
+      key: 'creator',
     },
   ],
 }

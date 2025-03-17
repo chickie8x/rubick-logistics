@@ -1,11 +1,47 @@
 export const typeOptions = [
   {
-    value: '1',
-    label: 'Nhập',
+    value: 'IF',
+    label: 'Nhập - Đường biển cont - IF',
   },
   {
-    value: '2',
-    label: 'Xuất',
+    value: 'IL',
+    label: 'Nhập - Đường biển lẻ - IL',
+  },
+  {
+    value: 'IB',
+    label: 'Nhập - Đường bộ - IB',
+  },
+  {
+    value: 'IA',
+    label: 'Nhập - Đường hàng không - IA',
+  },
+  {
+    value: 'IK',
+    label: 'Nhập - Đường biển bulk - IK',
+  },
+  {
+    value: 'EF',
+    label: 'Xuất - Đường biển cont - EF',
+  },
+  {
+    value: 'EL',
+    label: 'Xuất - Đường biển lẻ - EL',
+  },
+  {
+    value: 'EA',
+    label: 'Xuất - Đường hàng không - EA',
+  },
+  {
+    value: 'EB',
+    label: 'Xuất - Đường bộ - EB',
+  },
+  {
+    value: 'EK',
+    label: 'Xuất - Đường biển bulk - EK',
+  },
+  {
+    value: 'LG',
+    label: 'Hàng chỉ làm tờ khai HQ or Truck or cả 2 - LG',
   },
 ]
 
@@ -49,68 +85,68 @@ export const transportOptions = [
 
 export const termOptions = [
   {
-    value: 'exwork',
+    value: 'Exwork',
     label: 'Exwork',
   },
   {
-    value: 'fob',
+    value: 'FOB',
     label: 'FOB',
   },
   {
-    value: 'fca',
+    value: 'FCA',
     label: 'FCA',
   },
   {
-    value: 'cif',
+    value: 'CIF',
     label: 'CIF',
   },
   {
-    value: 'ddu',
+    value: 'DDU',
     label: 'DDU',
   },
   {
-    value: 'ddp',
+    value: 'DDP',
     label: 'DDP',
   },
 ]
 
 export const POL = [
   {
-    value: 'haiphong',
+    value: 'Hải Phòng',
     label: 'Hải Phòng',
   },
   {
-    value: 'hanoi',
+    value: 'Hà Nội',
     label: 'Hà Nội',
   },
   {
-    value: 'hcm',
+    value: 'TP HCM',
     label: 'TP HCM',
   },
 ]
 
 export const POD = [
   {
-    value: 'haiphong',
+    value: 'Hải Phòng',
     label: 'Hải Phòng',
   },
   {
-    value: 'hanoi',
+    value: 'Hà Nội',
     label: 'Hà Nội',
   },
   {
-    value: 'hcm',
+    value: 'TP HCM',
     label: 'TP HCM',
   },
 ]
 
 export const seaOptions = [
   {
-    value: 'lcl',
+    value: 'LCL',
     label: 'Hàng lẻ(LCL)',
   },
   {
-    value: 'flc',
+    value: 'FCL',
     label: 'Hàng nguyên cont(FCL)',
   },
 ]

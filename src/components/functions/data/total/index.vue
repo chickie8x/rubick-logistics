@@ -38,7 +38,18 @@
 </template>
 
 <script setup>
-import { ref, watch } from 'vue'
+import { onMounted, ref, watch } from 'vue'
+import {
+  writeBatch,
+  collection,
+  doc,
+  getDocs,
+  updateDoc,
+  query,
+  orderBy,
+  where,
+} from 'firebase/firestore'
+import { db } from '@/firebase'
 import { useRouter } from 'vue-router'
 import SearchBar from '@/components/kits/searchbar/index.vue'
 import Button from '@/components/kits/button/index.vue'
@@ -73,14 +84,20 @@ const filterOptions = ref([
 
 const customers = ref([])
 const pool = ref([])
-pool.value = JSON.parse(localStorage.getItem('customerPool'))
-if (pool.value) {
-  customers.value = pool.value.filter((item) => item.pickedUp === false)
-} else {
-  localStorage.setItem('customerPool', JSON.stringify(customerPool))
-  pool.value = customerPool
-  customers.value = pool.value.filter((item) => item.pickedUp === false)
+const fetchCustomers = async () => {
+  const q = query(
+    collection(db, 'customers'),
+    where('pickedUp', '==', ''),
+    orderBy('createdAt', 'desc'),
+  )
+  const snapshot = await getDocs(q)
+  const cus = snapshot.docs.map((doc) => {
+    return { id: doc.id, ...doc.data() }
+  })
+  pool.value = cus
+  customers.value = cus
 }
+
 const filter = ref(filterOptions.value[0].value)
 const filterValue = ref('')
 const filterCustomers = () => {
@@ -101,35 +118,36 @@ const customerPickedUp = ref([])
 const enableChoice = ref(true)
 const tableRef = ref(null)
 const user = JSON.parse(localStorage.getItem('user'))
+const username = user.username
 
 const selectedRows = (rows) => {
   customerPickedUp.value = rows
 }
 
 const pickUp = () => {
-  const isPicked = customerPickedUp.value.map((item) => {
-    item.pickedUp = true
-    return item
+  customerPickedUp.value.forEach((item) => {
+    const docRef = doc(db, 'customers', item.id)
+    updateDoc(docRef, { pickedUp: username })
   })
-  const arr2 = new Map(isPicked.map((item) => [item.mst, item]))
-  const updateArray = pool.value.map((item1) => {
-    const matchingItem = arr2.get(item1.mst)
-    return matchingItem ? { ...item1, ...matchingItem } : item1
-  })
-
-  localStorage.setItem('customerPool', JSON.stringify(updateArray))
-  pool.value = updateArray
-  customers.value = pool.value.filter((item) => item.pickedUp === false)
-  tableRef.value.refreshChecked()
-  if (user.pickupCustomer) {
-    user.pickupCustomer = [...customerPickedUp.value, ...user.pickupCustomer]
-  } else {
-    user.pickupCustomer = customerPickedUp.value
-  }
-  localStorage.setItem('user', JSON.stringify(user))
   router.push('/data/follow')
 }
 const warningPickLimit = (pickLimit) => {
   toast.warning(`Bạn chỉ được chọn tối đa ${pickLimit} khách hàng`)
 }
+
+// const bulkInsert = () => {
+//   const batch = writeBatch(db)
+//   customerPool.forEach((customer) => {
+//     const customersRef = doc(collection(db, 'customers'))
+//     customer.createdAt = new Date().getTime()
+//     customer.updatedAt = new Date().getTime()
+//     batch.set(customersRef, customer)
+//   })
+//   batch.commit()
+//   toast.success('Thêm khách hàng thành công')
+// }
+
+onMounted(() => {
+  fetchCustomers()
+})
 </script>

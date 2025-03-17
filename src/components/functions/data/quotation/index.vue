@@ -155,9 +155,11 @@ import Modal from '@/components/kits/modal/index.vue'
 import SeaFreight from './sea-freight/index.vue'
 import AirFreight from './air-freight/index.vue'
 import Select from '@/components/kits/select/index.vue'
-import { quotationDB, quotationDBHeaders } from './index.js'
+import { quotationDBHeaders } from './index.js'
 import Table from '@/components/kits/table/table3.vue'
-
+import { db } from '@/firebase'
+import { collection, getDocs, query, where } from 'firebase/firestore'
+import { toast } from 'vue-sonner'
 const quotationNo = ref('')
 const pol = ref('')
 const dest = ref('')
@@ -196,11 +198,27 @@ const quotationTypes = [
 ]
 
 const quotationType = ref(quotationTypes[0].value)
-const quotations = computed(() => {
-  return quotationDB[quotationType.value]
-})
+const quotations = ref([])
 
 const headers = computed(() => {
+  fetchQuotations()
   return quotationDBHeaders[quotationType.value]
 })
+
+const fetchQuotations = async () => {
+  try {
+    const q = query(collection(db, 'quotations'), where('quotationType', '==', quotationType.value))
+    const querySnapshot = await getDocs(q)
+    quotations.value = querySnapshot.docs.map((doc) => {
+      return {
+        ...doc.data(),
+        id: doc.id,
+      }
+    })
+  } catch (error) {
+    toast.error('Error fetching quotations:', error.message)
+  }
+}
+
+fetchQuotations()
 </script>
