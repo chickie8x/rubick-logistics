@@ -57,7 +57,6 @@
       <div>
         <span class="text-sm">Department</span>
         <Select v-model="department" :options="departments" />
-        {{ department }}
       </div>
     </div>
 
