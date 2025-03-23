@@ -36,15 +36,51 @@
 </template>
 
 <script setup>
-import { ref, watch } from 'vue'
+import { ref, watch, onMounted } from 'vue'
 import Loading from '@/components/icons/loading.vue'
 import Table from '@/components/kits/table/table3.vue'
 import { XMarkIcon } from '@heroicons/vue/24/outline'
-import { customerPool } from '@/components/functions/data/total'
+import { db } from '@/firebase'
+import { getDocs, collection, query, where } from 'firebase/firestore'
 
 const isLoading = ref(false)
 const data = ref([])
 const selectedData = ref(null)
+const customerPool = ref([])
+const customers = ref([])
+const commodities = ref([
+  {
+    name: 'Commondity 1',
+  },
+  {
+    name: 'Commondity 2',
+  },
+  {
+    name: 'Commondity 3',
+  },
+])
+const shippers = ref([
+  {
+    name: 'Shipper 1',
+  },
+  {
+    name: 'Shipper 2',
+  },
+  {
+    name: 'Shipper 3',
+  },
+])
+const consignees = ref([
+  {
+    name: 'Consignee 1',
+  },
+  {
+    name: 'Consignee 2',
+  },
+  {
+    name: 'Consignee 3',
+  },
+])
 const props = defineProps({
   open: {
     type: Boolean,
@@ -58,55 +94,11 @@ const props = defineProps({
   },
 })
 
-const customers = customerPool.map((customer) => {
-  return {
-    name: customer.buyerName,
-    mst: customer.mst,
-    phone: customer.buyerMobile,
-    PICName: customer.PICName,
-    PICPhone: customer.PICPhone,
-    PICEmail: customer.PICEmail,
-  }
-})
-
 const mockData = {
-  customer: customers,
-
-  commondity: [
-    {
-      name: 'Commondity 1',
-    },
-    {
-      name: 'Commondity 2',
-    },
-    {
-      name: 'Commondity 3',
-    },
-  ],
-
-  shipper: [
-    {
-      name: 'Shipper 1',
-    },
-    {
-      name: 'Shipper 2',
-    },
-    {
-      name: 'Shipper 3',
-    },
-  ],
-
-  consignee: [
-    {
-      name: 'Consignee 1',
-    },
-    {
-      name: 'Consignee 2',
-    },
-    {
-      name: 'Consignee 3',
-    },
-  ],
+  customer: customers.value,
+  commodity: commodities.value,
+  shipper: shippers.value,
+  consignee: consignees.value,
 }
 
 const headers = {
@@ -140,6 +132,33 @@ const headers = {
   ],
 }
 
+const fetchData = async () => {
+  isLoading.value = true
+  const username = JSON.parse(localStorage.getItem('user')).username
+  const q = query(collection(db, 'customers'), where('pickedUp', '==', username))
+  const snapshot = await getDocs(q)
+  const cus = snapshot.docs.map((doc) => ({
+    id: doc.id,
+    ...doc.data(),
+  }))
+  customerPool.value = cus
+  customers.value = customerPool.value.map((item) => ({
+    name: item.buyerName,
+    mst: item.mst,
+    phone: item.buyerMobile,
+    PICName: item.PICName,
+    PICPhone: item.PICPhone,
+    PICEmail: item.PICEmail,
+  }))
+  mockData['commodity'] = commodities.value
+  mockData['shipper'] = shippers.value
+  mockData['consignee'] = consignees.value
+  mockData['customer'] = customers.value
+  data.value = mockData[props.target]
+  headers.value = headers[props.target]
+  isLoading.value = false
+}
+
 const emit = defineEmits(['close', 'select'])
 
 const close = () => {
@@ -157,20 +176,11 @@ const selectedCustomer = () => {
   close()
 }
 
-const loadingData = () => {
-  isLoading.value = true
-  setTimeout(() => {
-    isLoading.value = false
-    data.value = mockData[props.target]
-    headers.value = headers[props.target]
-  }, 1000)
-}
-
 watch(
   () => props.open,
   (newVal) => {
     if (newVal) {
-      loadingData()
+      fetchData()
     }
   },
 )

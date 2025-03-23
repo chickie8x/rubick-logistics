@@ -69,7 +69,7 @@
 
 <script setup>
 import Select from '@/components/kits/select/index.vue'
-import { computed, ref } from 'vue'
+import { ref } from 'vue'
 import { typeOptions, serviceOptions, transportOptions, termOptions, POL, POD } from './add.js'
 import Button from '@/components/kits/button/index.vue'
 import Dialog from '@/components/kits/modal/dialog.vue'
@@ -126,6 +126,8 @@ const createBooking = async () => {
     const docRef = await addDoc(bookingCollection, {
       ...objForm.value,
       bookingType: bookingType.value,
+      fileNo:
+        bookingType.value === 'LG' ? `RUBICK/${bkNoDate()}-${count}${bookingType.value}` : null,
       service: service.value,
       transport: transport.value,
       pol: pol.value,
@@ -151,9 +153,9 @@ const handleSelect = (data) => {
     objForm.value.customerName = data.name
     objForm.value.mst = data.mst
     objForm.value.phone = data.phone
-    objForm.value.picName = data.PICName
-    objForm.value.picPhoneSale = data.PICPhone
-    objForm.value.picEmail = data.PICEmail
+    objForm.value.picName = data.picName || null
+    objForm.value.picPhone = data.picPhone || null
+    objForm.value.picEmail = data.picEmail || null
   } else if (target.value === 'commondity') {
     commondity.value = data.name
     console.log(commondity.value)

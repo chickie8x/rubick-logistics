@@ -74,7 +74,6 @@ const props = defineProps({
   },
 })
 
-
 const status = ref(props.customer.customerStatus)
 const picName = ref(null)
 const picPhone = ref(null)

@@ -55,6 +55,8 @@ const props = defineProps({
   },
 })
 
+console.log(props.data)
+
 const itemIdx = ref(null)
 
 const emit = defineEmits(['rowClick', 'rowDblClick'])

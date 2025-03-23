@@ -78,12 +78,47 @@
         @submitDelete="onSubmitDelete"
         @closeDelete="onCloseDelete"
       />
-      <EditBooking
-        v-else-if="modalVSlot === 'edit'"
+      <SaleDepEdit
+        v-else-if="modalVSlot === 'saleDep'"
         :booking="bookingEdit"
         :department="department"
-        @submitEdit="onSubmitEdit"
-        @cancelEdit="onCancelEdit"
+        @submitUpdate="onSubmitEdit"
+        @cancelUpdate="onCancelEdit"
+      />
+      <DocDepEdit
+        v-else-if="modalVSlot === 'docDep'"
+        :booking="bookingEdit"
+        :department="department"
+        @submitUpdate="onSubmitEdit"
+        @cancelUpdate="onCancelEdit"
+      />
+      <CusDepEdit
+        v-else-if="modalVSlot === 'cusDep'"
+        :booking="bookingEdit"
+        :department="department"
+        @submitUpdate="onSubmitEdit"
+        @cancelUpdate="onCancelEdit"
+      />
+      <OpsDepEdit
+        v-else-if="modalVSlot === 'opsDep'"
+        :booking="bookingEdit"
+        :department="department"
+        @submitUpdate="onSubmitEdit"
+        @cancelUpdate="onCancelEdit"
+      />
+      <OpsDocDepEdit
+        v-else-if="modalVSlot === 'opsDocDep'"
+        :booking="bookingEdit"
+        :department="department"
+        @submitUpdate="onSubmitEdit"
+        @cancelUpdate="onCancelEdit"
+      />
+      <AccDepEdit
+        v-else-if="modalVSlot === 'accDep'"
+        :booking="bookingEdit"
+        :department="department"
+        @submitUpdate="onSubmitEdit"
+        @cancelUpdate="onCancelEdit"
       />
     </Modal>
   </Teleport>
@@ -112,6 +147,12 @@ import { headers } from './data'
 import { permissions } from '@/mockdata'
 import { db } from '@/firebase'
 import { collection, getDocs, query, where } from 'firebase/firestore'
+import SaleDepEdit from './edit/saleDep/index.vue'
+import DocDepEdit from './edit/docDep/index.vue'
+import CusDepEdit from './edit/cusDep/index.vue'
+import OpsDepEdit from './edit/opsDep/index.vue'
+import OpsDocDepEdit from './edit/opsDocDep/index.vue'
+import AccDepEdit from './edit/accDep/index.vue'  
 
 const isModalOpen = ref(false)
 const router = useRouter()
@@ -200,6 +241,7 @@ const onSubmitEdit = () => {
   console.log('submit edit')
   isModalOpen.value = false
   modalVSlot.value = null
+  getBookings()
 }
 
 const onCancelEdit = () => {
@@ -209,13 +251,8 @@ const onCancelEdit = () => {
 
 const onSelectedRows = (selectedRows) => {
   actionRows.value = selectedRows
-  console.log(actionRows.value)
-  if (actionRows.value.filter(Boolean).length === 1) {
-    actionRows.value.map((item, idx) => {
-      if (item) {
-        bookingEdit.value = bookings.value[idx]
-      }
-    })
+  if (selectedRows.length === 1) {
+    bookingEdit.value = selectedRows[0]
   }
 }
 
@@ -225,7 +262,19 @@ const onDelete = () => {
 }
 
 const onModify = () => {
-  modalVSlot.value = 'edit'
+  if (department.value === 'Docs') {
+    modalVSlot.value = 'docDep'
+  } else if (department.value === 'OpsDocs') {
+    modalVSlot.value = 'opsDocDep'
+  } else if (department.value === 'Sale') {
+    modalVSlot.value = 'saleDep'
+  } else if (department.value === 'Cus') {
+    modalVSlot.value = 'cusDep'
+  } else if (department.value === 'Ops') {
+    modalVSlot.value = 'opsDep'
+  } else if (department.value === 'Acc') {
+    modalVSlot.value = 'accDep'
+  }
   isModalOpen.value = true
 }
 
