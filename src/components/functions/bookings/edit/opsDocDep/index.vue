@@ -35,23 +35,23 @@
                     <span class="text-sm font-bold text-slate-700">CBM</span>
                     <input type="text" class="w-full text-slate-700 h-8 border disabled:border-slate-300 border-indigo-500 rounded-md p-2 mt-1 outline-indigo-500 shadow-sm" v-model="cbm" />
                 </div>
-                <div class="col-span-1">
+                <div class="col-span-1" v-if="booking.bookingType === 'LG'">
                     <span class="text-sm font-bold text-slate-700">TEU</span>
                     <input type="text" class="w-full text-slate-700 h-8 border disabled:border-slate-300 border-indigo-500 rounded-md p-2 mt-1 outline-indigo-500 shadow-sm" v-model="teu" />
                 </div>
-                <div class="col-span-1">
+                <div class="col-span-1" v-if="booking.bookingType === 'LG'">
                     <span class="text-sm font-bold text-slate-700">Type</span>
                     <input type="text" class="w-full text-slate-700 h-8 border disabled:border-slate-300 border-indigo-500 rounded-md p-2 mt-1 outline-indigo-500 shadow-sm" v-model="type" />
                 </div>
-                <div class="col-span-1">
+                <div class="col-span-1" v-if="booking.bookingType === 'LG'">
                     <span class="text-sm font-bold text-slate-700">Type Quantity</span>
                     <input type="text" class="w-full text-slate-700 h-8 border disabled:border-slate-300 border-indigo-500 rounded-md p-2 mt-1 outline-indigo-500 shadow-sm" v-model="typeQuantity" />
                 </div>
-                <div class="col-span-1">
+                <div class="col-span-1" v-if="booking.bookingType === 'LG'">
                     <span class="text-sm font-bold text-slate-700">Số cont/Chì</span>
                     <input type="text" class="w-full text-slate-700 h-8 border disabled:border-slate-300 border-indigo-500 rounded-md p-2 mt-1 outline-indigo-500 shadow-sm" v-model="containerNumberDocOps" />
                 </div>
-                <div class="col-span-1">
+                <div class="col-span-1" v-if="booking.bookingType === 'LG'">
                     <span class="text-sm font-bold text-slate-700">Depot/CFS</span>
                     <input type="text" class="w-full text-slate-700 h-8 border disabled:border-slate-300 border-indigo-500 rounded-md p-2 mt-1 outline-indigo-500 shadow-sm" v-model="depotCfsDocOps" />
                 </div>
