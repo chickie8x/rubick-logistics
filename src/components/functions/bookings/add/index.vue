@@ -127,7 +127,7 @@ const createBooking = async () => {
       ...objForm.value,
       bookingType: bookingType.value,
       fileNo:
-        bookingType.value === 'LG' ? `RUBICK/${bkNoDate()}-${count}${bookingType.value}` : null,
+        bookingType.value === 'LG' ? `RUBIK/${bkNoDate()}-${count}${bookingType.value}` : null,
       service: service.value,
       transport: transport.value,
       pol: pol.value,

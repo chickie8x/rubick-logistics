@@ -1,19 +1,22 @@
 <template>
   <div class="h-full flex flex-col">
     <div class="flex items-center justify-between gap-x-4">
-      <h1 class="text-2xl font-bold">Bookings list</h1>
+      <div class="flex items-center gap-x-2">
+        <h1 class="text-2xl font-bold text-slate-700">Bookings list</h1>
+        <Select v-model="department" :options="departments" />
+      </div>
       <div class="flex items-center gap-x-4">
         <Searchbar />
         <div v-if="!actions" class="flex items-center space-x-4">
           <Button
-            v-if="userDepartment === 'Sale'"
+            v-if="department === 'Sale'"
             class="flex items-center"
             @click="router.push('/bookings/add')"
           >
             <PlusIcon class="size-5 mr-2" />
             New
           </Button>
-          <Button class="flex items-center" @click="onSelect">
+          <Button class="flex items-center" @click="setConfigHeaders">
             <BookmarkIcon class="size-5 mr-2" />
             Select
           </Button>
@@ -53,74 +56,18 @@
       >
     </div>
 
-    <div class="flex items-center gap-x-2 mt-4">
-      <div>
-        <span class="text-sm">Department</span>
-        <Select v-model="department" :options="departments" />
-      </div>
-    </div>
-
     <div class="w-full h-full overflow-auto mt-4">
-      <Table
-        :selectAllEnable="true"
-        :headers="tbHeaders"
+      <BookingTable
+        :headers="userConfigHeaders"
         :data="bookings"
-        :modifiable="actions"
-        @onRowClick="onSelectedRows"
+        :username="username"
+        :department="department"
         ref="tableRef"
       />
     </div>
   </div>
   <Teleport to="body">
-    <Modal :open="isModalOpen">
-      <DeleteBooking
-        v-if="modalVSlot === 'delete'"
-        @submitDelete="onSubmitDelete"
-        @closeDelete="onCloseDelete"
-      />
-      <SaleDepEdit
-        v-else-if="modalVSlot === 'saleDep'"
-        :booking="bookingEdit"
-        :department="department"
-        @submitUpdate="onSubmitEdit"
-        @cancelUpdate="onCancelEdit"
-      />
-      <DocDepEdit
-        v-else-if="modalVSlot === 'docDep'"
-        :booking="bookingEdit"
-        :department="department"
-        @submitUpdate="onSubmitEdit"
-        @cancelUpdate="onCancelEdit"
-      />
-      <CusDepEdit
-        v-else-if="modalVSlot === 'cusDep'"
-        :booking="bookingEdit"
-        :department="department"
-        @submitUpdate="onSubmitEdit"
-        @cancelUpdate="onCancelEdit"
-      />
-      <OpsDepEdit
-        v-else-if="modalVSlot === 'opsDep'"
-        :booking="bookingEdit"
-        :department="department"
-        @submitUpdate="onSubmitEdit"
-        @cancelUpdate="onCancelEdit"
-      />
-      <OpsDocDepEdit
-        v-else-if="modalVSlot === 'opsDocDep'"
-        :booking="bookingEdit"
-        :department="department"
-        @submitUpdate="onSubmitEdit"
-        @cancelUpdate="onCancelEdit"
-      />
-      <AccDepEdit
-        v-else-if="modalVSlot === 'accDep'"
-        :booking="bookingEdit"
-        :department="department"
-        @submitUpdate="onSubmitEdit"
-        @cancelUpdate="onCancelEdit"
-      />
-    </Modal>
+    <Modal :open="isModalOpen"> </Modal>
   </Teleport>
 </template>
 
@@ -128,45 +75,36 @@
 import { useRouter } from 'vue-router'
 import Searchbar from '@/components/kits/searchbar/index.vue'
 import Button from '@/components/kits/button/index.vue'
-import Table from '@/components/kits/table/index.vue'
+import BookingTable from '@/components/kits/table/bookingtable.vue'
 import Modal from '@/components/kits/modal/index.vue'
 import Select from '@/components/kits/select/index.vue'
-import EditBooking from './edit/index.vue'
-import DeleteBooking from './delete/index.vue'
 import {
   PlusIcon,
-  ArrowDownOnSquareIcon,
   PencilSquareIcon,
   TrashIcon,
   BookmarkIcon,
   ArrowUturnLeftIcon,
   InformationCircleIcon,
 } from '@heroicons/vue/24/outline'
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed, onMounted, watch } from 'vue'
 import { headers } from './data'
 import { permissions } from '@/mockdata'
 import { db } from '@/firebase'
-import { collection, getDocs, query, where } from 'firebase/firestore'
-import SaleDepEdit from './edit/saleDep/index.vue'
-import DocDepEdit from './edit/docDep/index.vue'
-import CusDepEdit from './edit/cusDep/index.vue'
-import OpsDepEdit from './edit/opsDep/index.vue'
-import OpsDocDepEdit from './edit/opsDocDep/index.vue'
-import AccDepEdit from './edit/accDep/index.vue'  
+import { collection, getDocs, query, where, setDoc, doc, getDoc } from 'firebase/firestore'
 
 const isModalOpen = ref(false)
 const router = useRouter()
 const user = JSON.parse(localStorage.getItem('user'))
-const username = user.username
+// const username = user.username
 const userRole = user.role
-const userDepartment = user.department
+// const userDepartment = user.department
 const userPermission = permissions.find((permission) => permission.key === userRole).value
 const actions = ref(false)
 const actionRows = ref([])
-const bookingEdit = ref(null)
 const modalVSlot = ref(null)
 const tableRef = ref(null)
 const bookings = ref([])
+const userConfigHeaders = ref([])
 
 const departments = [
   { label: 'Sale', value: 'Sale' },
@@ -177,12 +115,15 @@ const departments = [
   { label: 'OpsDocs', value: 'OpsDocs' },
 ]
 
-const rights = [
-  { label: 'Staff', value: 1 },
-  { label: 'Leader +', value: 3 },
-]
-
 const department = ref(departments[0].value)
+const username = computed(() => {
+  if (department.value === 'Sale') return 'sale'
+  if (department.value === 'Cus') return 'cus'
+  if (department.value === 'Docs') return 'docs'
+  if (department.value === 'Ops') return 'ops'
+  if (department.value === 'Acc') return 'acc'
+  if (department.value === 'OpsDocs') return 'opsdocs'
+})
 
 const tbHeaders = computed(() => {
   if (department.value === 'Sale')
@@ -202,7 +143,7 @@ const tbHeaders = computed(() => {
 const getBookings = async () => {
   try {
     const bk = collection(db, 'bookings')
-    const q = query(bk, where('hrSale', '==', username))
+    const q = query(bk, where('hrSale', '==', username.value))
     const snapshot = await getDocs(q)
     const data = snapshot.docs.map((doc) => {
       let ret = {
@@ -219,6 +160,7 @@ const getBookings = async () => {
 
 const onSelect = () => {
   actions.value = true
+  userConfigHeaders()
 }
 
 const onCancel = () => {
@@ -226,55 +168,8 @@ const onCancel = () => {
   tableRef.value.refreshChecked()
 }
 
-const onSubmitDelete = () => {
-  console.log('submit delete')
-  isModalOpen.value = false
-  modalVSlot.value = null
-}
-
-const onCloseDelete = () => {
-  isModalOpen.value = false
-  modalVSlot.value = null
-}
-
-const onSubmitEdit = () => {
-  console.log('submit edit')
-  isModalOpen.value = false
-  modalVSlot.value = null
-  getBookings()
-}
-
-const onCancelEdit = () => {
-  isModalOpen.value = false
-  modalVSlot.value = null
-}
-
-const onSelectedRows = (selectedRows) => {
-  actionRows.value = selectedRows
-  if (selectedRows.length === 1) {
-    bookingEdit.value = selectedRows[0]
-  }
-}
-
 const onDelete = () => {
   modalVSlot.value = 'delete'
-  isModalOpen.value = true
-}
-
-const onModify = () => {
-  if (department.value === 'Docs') {
-    modalVSlot.value = 'docDep'
-  } else if (department.value === 'OpsDocs') {
-    modalVSlot.value = 'opsDocDep'
-  } else if (department.value === 'Sale') {
-    modalVSlot.value = 'saleDep'
-  } else if (department.value === 'Cus') {
-    modalVSlot.value = 'cusDep'
-  } else if (department.value === 'Ops') {
-    modalVSlot.value = 'opsDep'
-  } else if (department.value === 'Acc') {
-    modalVSlot.value = 'accDep'
-  }
   isModalOpen.value = true
 }
 
@@ -286,7 +181,48 @@ const actionModify = computed(() => {
   return actionRows.value.filter(Boolean).length === 1
 })
 
+const setConfigHeaders = async () => {
+  try {
+    const userConfigRef = doc(db, 'userConfig', username.value)
+    const docSnap = await getDoc(userConfigRef)
+    if (docSnap.exists()) {
+      const data = docSnap.data()
+      return data
+    } else {
+      const setHeaders = await setDoc(userConfigRef, {
+        headers: tbHeaders.value,
+      })
+      return setHeaders
+    }
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+const getUserConfig = async () => {
+  try {
+    const userConfigRef = doc(db, 'userConfig', username.value)
+    const docSnap = await getDoc(userConfigRef)
+    if (docSnap.exists()) {
+      const data = docSnap.data()
+      userConfigHeaders.value = data.headers
+    } else {
+      userConfigHeaders.value = tbHeaders.value
+    }
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+watch(
+  () => username.value,
+  () => {
+    getUserConfig()
+  },
+)
+
 onMounted(() => {
   getBookings()
+  getUserConfig()
 })
 </script>
