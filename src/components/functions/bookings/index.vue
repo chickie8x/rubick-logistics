@@ -16,10 +16,6 @@
             <PlusIcon class="size-5 mr-2" />
             New
           </Button>
-          <Button class="flex items-center" @click="setConfigHeaders">
-            <BookmarkIcon class="size-5 mr-2" />
-            Select
-          </Button>
         </div>
         <div v-else class="flex items-center space-x-4">
           <Button
@@ -56,7 +52,7 @@
       >
     </div>
 
-    <div class="w-full h-full overflow-auto mt-4">
+    <div class="w-full h-full mt-4">
       <BookingTable
         :headers="userConfigHeaders"
         :data="bookings"
@@ -82,7 +78,6 @@ import {
   PlusIcon,
   PencilSquareIcon,
   TrashIcon,
-  BookmarkIcon,
   ArrowUturnLeftIcon,
   InformationCircleIcon,
 } from '@heroicons/vue/24/outline'
@@ -181,23 +176,23 @@ const actionModify = computed(() => {
   return actionRows.value.filter(Boolean).length === 1
 })
 
-const setConfigHeaders = async () => {
-  try {
-    const userConfigRef = doc(db, 'userConfig', username.value)
-    const docSnap = await getDoc(userConfigRef)
-    if (docSnap.exists()) {
-      const data = docSnap.data()
-      return data
-    } else {
-      const setHeaders = await setDoc(userConfigRef, {
-        headers: tbHeaders.value,
-      })
-      return setHeaders
-    }
-  } catch (error) {
-    console.log(error)
-  }
-}
+// const setConfigHeaders = async () => {
+//   try {
+//     const userConfigRef = doc(db, 'userConfig', username.value)
+//     const docSnap = await getDoc(userConfigRef)
+//     if (docSnap.exists()) {
+//       const data = docSnap.data()
+//       return data
+//     } else {
+//       const setHeaders = await setDoc(userConfigRef, {
+//         headers: tbHeaders.value,
+//       })
+//       return setHeaders
+//     }
+//   } catch (error) {
+//     console.log(error)
+//   }
+// }
 
 const getUserConfig = async () => {
   try {

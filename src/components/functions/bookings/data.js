@@ -324,3 +324,41 @@ export const agents = [
   { value: 'QUANTERM', label: 'QUANTERM' },
   { value: 'EMC', label: 'EMC' },
 ]
+
+export const bookingCostFields = () => [
+  { key: 'costDesc', label: 'Description' },
+  { key: 'ob', label: 'OB' },
+  { key: 'quantity', label: 'Quantity' },
+  { key: 'unit', label: 'Unit' },
+  { key: 'unitPrice', label: 'Unit Price' },
+  { key: 'currency', label: 'Currency' },
+  { key: 'tax', label: 'Tax' },
+  { key: 'total', label: 'Total' },
+  { key: 'edit', label: 'Edit' },
+  { key: 'pp', label: 'PP' },
+  { key: 'notes', label: 'Notes' },
+  { key: 'accountRef', label: 'Account Ref' },
+  { key: 'docs', label: 'Docs' },
+  { key: 'noRev', label: 'No Rev' },
+  { key: 'finishDate', label: 'Finish Date' },
+]
+
+export const bookingCostData = () => [
+  {
+    costDesc: null,
+    ob: false,
+    quantity: null,
+    unit: null,
+    unitPrice: null,
+    currency: null,
+    tax: null,
+    total: null,
+    edit: false,
+    pp: false,
+    notes: null,
+    accountRef: null,
+    docs: null,
+    noRev: null,
+    finishDate: null,
+  },
+]

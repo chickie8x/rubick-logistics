@@ -15,3 +15,7 @@ export const formatNumber = (value) => {
 export const bkNoDate = () => {
   return format(new Date(), 'yyMM')
 }
+
+export const formatDate = (date) => {
+  return format(new Date(date), 'dd/MM/yyyy')
+}
