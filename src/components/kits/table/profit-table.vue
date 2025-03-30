@@ -39,7 +39,7 @@
           <td class="text-slate-600 px-1 py-2"></td>
         </tr>
         <tr
-          v-for="cost in booking.billingCost.buying || []"
+          v-for="cost in costBuying"
           :key="cost.key"
           class="divide-x divide-slate-400 text-sm"
         >
@@ -68,7 +68,7 @@
           </td>
         </tr>
         <tr
-          v-for="cost in booking.billingCost.selling || []"
+          v-for="cost in costSelling"
           :key="cost.key"
           class="divide-x divide-slate-400 text-sm"
         >
@@ -188,26 +188,34 @@ const props = defineProps({
   },
 })
 
+const costBuying = computed(() => {
+  return props.booking.billingCost?.buying || []
+})
+
 const subTotalBuying = computed(() => {
-  return props.booking.billingCost?.buying?.reduce((total, cost) => {
+  return costBuying.value.reduce((total, cost) => {
     return total + (cost.unitPrice || 0)
   }, 0)
 })
 
 const subTotalBuyingTax = computed(() => {
-  return props.booking.billingCost?.buying?.reduce((total, cost) => {
+  return costBuying.value.reduce((total, cost) => {
     return total + ((cost.tax * cost.unitPrice) / 100 || 0)
   }, 0)
 })
 
+const costSelling = computed(() => {
+  return props.booking.billingCost?.selling || []
+})
+
 const subTotalSelling = computed(() => {
-  return props.booking.billingCost?.selling?.reduce((total, cost) => {
+  return costSelling.value.reduce((total, cost) => {
     return total + (cost.unitPrice || 0)
   }, 0)
 })
 
 const subTotalSellingTax = computed(() => {
-  return props.booking.billingCost?.selling?.reduce((total, cost) => {
+  return costSelling.value.reduce((total, cost) => {
     return total + ((cost.tax * cost.unitPrice) / 100 || 0)
   }, 0)
 })
