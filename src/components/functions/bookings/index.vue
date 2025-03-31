@@ -58,6 +58,7 @@
         :data="bookings"
         :username="username"
         :department="department"
+        @refresh="refresh"
         ref="tableRef"
       />
     </div>
@@ -207,6 +208,10 @@ const getUserConfig = async () => {
   } catch (error) {
     console.log(error)
   }
+}
+
+const refresh = () => {
+  getBookings()
 }
 
 watch(

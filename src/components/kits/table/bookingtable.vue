@@ -288,16 +288,11 @@ const props = defineProps({
   },
 })
 
+const emit = defineEmits(['refresh'])
+
 // const transportType = computed(() => {
 //   return ['IA', 'EA', 'IB', 'EB', 'LG'].includes(saveRowState.value.transport)?"AIR":"SEA"
 // })
-
-const transportType = 'AIR'
-const tabs = [
-  { title: 'Buying rate', content: 'buying' },
-  { title: 'Selling rate', content: 'selling' },
-  { title: 'Profit', content: 'profit' },
-]
 
 const displayHeaders = ref([])
 const savedHeaders = ref([])
@@ -430,7 +425,8 @@ const saveRow = async () => {
 const cancelRow = () => {
   selectedRowIdx.value = null
   selectedRow.value = null
-  // displayData.value = [...props.data]
+  emit('refresh')
+  exitFullScreen()
 }
 
 const addRow = () => {
