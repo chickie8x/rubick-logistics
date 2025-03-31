@@ -25,7 +25,9 @@
                   !numberFields.includes(header.key) &&
                   !checkFields.includes(header.key) &&
                   !dateFields.includes(header.key) &&
-                  header.key !== 'total'
+                  header.key !== 'total' &&
+                  header.key !== 'currency' &&
+                  header.key !== 'unit'
                 "
                 type="text"
                 v-model="row[header.key]"
@@ -44,6 +46,18 @@
                   )
                 }}
               </span>
+              <Select
+                v-else-if="header.key === 'currency'"
+                :options="unitPriceOptions"
+                v-model="row[header.key]"
+                class="bg-white w-full h-full outline-indigo-500 rounded-sm"
+              />
+              <Select
+                v-else-if="header.key === 'unit'"
+                :options="chargePerOptions"
+                v-model="row[header.key]"
+                class="bg-white w-full h-full outline-indigo-500 rounded-sm"
+              />
               <input
                 v-else-if="checkFields.includes(header.key)"
                 type="checkbox"
@@ -100,6 +114,8 @@
 <script setup>
 import { ref, watch } from 'vue'
 import { formatNumber } from '@/utils'
+import Select from '@/components/kits/select/index.vue'
+import { unitPriceOptions, chargePerOptions } from '@/components/functions/bookings/edit'
 
 const props = defineProps({
   headers: {
