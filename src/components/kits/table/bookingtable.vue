@@ -409,7 +409,7 @@ const editRow = (row) => {
 
 const saveRow = async () => {
   try {
-    const cost = null
+    let cost = null
     saveRowState.value.billingCost ??= {}
 
     if(props.department !== 'Sale') {
