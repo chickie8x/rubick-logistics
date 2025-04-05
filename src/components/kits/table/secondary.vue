@@ -37,12 +37,8 @@
             class="min-w-32"
           />
           <input
-            v-else
-            :type="
-              header.key === 'gw' || header.key === 'vat' || header.key === 'cost'
-                ? 'number'
-                : 'text'
-            "
+            v-else-if="header.key === 'gw' || header.key === 'vat' || header.key === 'cost'"
+            type="number"
             v-model="row[header.key]"
             class="outline-none focus:outline-indigo-500 hover:outline-indigo-500 read-only:outline-none text-slate-700"
             :size="row[header.key]?.length ? row[header.key]?.length : 18"
@@ -51,6 +47,19 @@
                 ? 'w-24 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none'
                 : '',
             ]"
+          />
+          <input
+            v-else-if="header.key === 'ob'"
+            type="checkbox"
+            v-model="row[header.key]"
+            class="scale-125"
+          />
+          <input
+            v-else
+            type="text"
+            v-model="row[header.key]"
+            class="outline-none focus:outline-indigo-500 hover:outline-indigo-500 read-only:outline-none text-slate-700"
+            :size="row[header.key]?.length ? row[header.key]?.length : 18"
           />
         </td>
       </tr>

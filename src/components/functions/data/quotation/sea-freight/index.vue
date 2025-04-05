@@ -301,31 +301,6 @@
           </div>
         </div>
       </div>
-
-      <div class="flex flex-col gap-y-2">
-        <span class="font-bold text-slate-700 text-lg">Phí chi hộ</span>
-        <div class="w-full overflow-auto">
-          <SecondaryTable
-            :headers="disbursementFeeHeaders"
-            :data="disbursementFeeRows"
-            :type="'disbursementFee'"
-          />
-          <div class="flex items-center gap-x-2 py-2">
-            <button
-              @click="handleAddRow('disbursementFee')"
-              class="bg-indigo-500 hover:bg-indigo-600 text-white p-1 rounded-md duration-300 shadow-sm mt-2"
-            >
-              <PlusIcon class="w-4 h-4" />
-            </button>
-            <button
-              @click="handleDeleteRow('disbursementFee')"
-              class="bg-red-500 hover:bg-red-600 text-white p-1 rounded-md duration-300 shadow-sm mt-2"
-            >
-              <MinusIcon class="w-4 h-4" />
-            </button>
-          </div>
-        </div>
-      </div>
     </div>
     <Dialog :open="openDialog" @close="closeDialog" :target="target" @select="handleSelect" />
     <QuotationForm
@@ -402,7 +377,6 @@ const openQuotationForm = ref(false)
 const seaFreightHeaders = ref(headersSeaFreight())
 const localChargesHeaders = ref(headersLocalCharges())
 const otherChargesHeaders = ref(headersOtherCharges())
-const disbursementFeeHeaders = ref(headersDisbursementFee())
 const validIn = ref(props.quotation.validIn ? props.quotation.validIn : null)
 const dateOfQ = ref(
   props.quotation.dateOfQ ? props.quotation.dateOfQ : format(new Date(), 'yyyy-MM-dd'),
@@ -412,10 +386,9 @@ const PICPhone = ref(props.quotation.PICPhone ? props.quotation.PICPhone : null)
 const PICEmail = ref(props.quotation.PICEmail ? props.quotation.PICEmail : null)
 const term = ref(props.quotation.term ? props.quotation.term : null)
 
-const seaFreightRows = ref([dataSeaFreight()[0]])
-const localChargesRows = ref([dataLocalCharges()[0]])
-const otherChargesRows = ref([dataOtherCharges()[0]])
-const disbursementFeeRows = ref([dataDisbursementFee()[0]])
+const seaFreightRows = ref(props.quotation.seaFreight ? props.quotation.seaFreight : [])
+const localChargesRows = ref(props.quotation.localcharge ? props.quotation.localcharge : [])
+const otherChargesRows = ref(props.quotation.othercharges ? props.quotation.othercharges : [])
 const user = localStorage.getItem('user')
 const username = ref(user ? JSON.parse(user).username : null)
 
@@ -475,9 +448,6 @@ const handleAddRow = (type) => {
   } else if (type === 'otherCharges') {
     otherChargesRows.value.push(dataOtherCharges()[0])
     console.log(otherChargesRows.value)
-  } else if (type === 'disbursementFee') {
-    disbursementFeeRows.value.push(dataDisbursementFee()[0])
-    console.log(disbursementFeeRows.value)
   }
 }
 
@@ -488,32 +458,29 @@ const handleDeleteRow = (type) => {
     localChargesRows.value.pop()
   } else if (type === 'otherCharges') {
     otherChargesRows.value.pop()
-  } else if (type === 'disbursementFee') {
-    disbursementFeeRows.value.pop()
   }
 }
 
 const seaFreightQuotationObject = computed(() => ({
-  seaFreight: seaFreightRows.value,
-  localcharge: localChargesRows.value,
-  othercharges: otherChargesRows.value,
-  disbursementfee: disbursementFeeRows.value,
-  product: commondity.value,
-  containerType: containerType.value,
-  transferRate: transferRate.value,
-  gw: gw.value,
-  cw: cw.value,
-  validIn: validIn.value,
-  dateOfQ: dateOfQ.value,
-  PICName: PICName.value,
-  PICPhone: PICPhone.value,
-  PICEmail: PICEmail.value,
-  customer: customer.value,
-  customerMST: customerMST.value,
-  customerPhone: customerPhone.value,
-  shipper: shipper.value,
-  consignee: consignee.value,
-  term: term.value,
+  seaFreight: seaFreightRows.value || [],
+  localcharge: localChargesRows.value || [],
+  othercharges: otherChargesRows.value || [],
+  product: commondity.value || null,
+  containerType: containerType.value || null,
+  transferRate: transferRate.value || 0,
+  gw: gw.value || 0,
+  cw: cw.value || 0,
+  validIn: validIn.value || null,
+  dateOfQ: dateOfQ.value || null,
+  PICName: PICName.value || null,
+  PICPhone: PICPhone.value || null,
+  PICEmail: PICEmail.value || null,
+  customer: customer.value || null,
+  customerMST: customerMST.value || null,
+  customerPhone: customerPhone.value || null,
+  shipper: shipper.value || null,
+  consignee: consignee.value || null,
+  term: term.value || null,
 }))
 
 const quotationCollection = collection(db, 'quotations')
@@ -527,8 +494,8 @@ const handleSaveQuotation = async () => {
       quotationType: 'sea',
       quotationNo: `QSF${ts}`,
       creator: username.value,
-      origin: seaFreightQuotationObject.value.seaFreight[0].pol,
-      destination: seaFreightQuotationObject.value.seaFreight[0].pod,
+      origin: seaFreightQuotationObject.value.seaFreight[0]?.pol||null,
+      destination: seaFreightQuotationObject.value.seaFreight[0]?.pod||null,
     })
     toast.success('Quotation saved successfully')
   } catch (error) {

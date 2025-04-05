@@ -126,10 +126,10 @@
           <td class="text-slate-600 px-1 py-2 border-b border-r border-slate-400"></td>
           <td class="text-slate-600 px-1 py-2 border-b border-r border-slate-400">Sub balance</td>
           <td class="text-slate-600 px-1 py-2 border-b border-r border-slate-400 font-semibold">
-            {{ vndCurrency(subTotalBuying - subTotalSelling) }}
+            {{ vndCurrency(subTotalSelling - subTotalBuying) }}
           </td>
           <td class="text-slate-600 px-1 py-2 border-b border-r border-slate-400 font-semibold">
-            {{ vndCurrency(subTotalBuyingTax - subTotalSellingTax) }}
+            {{ vndCurrency(subTotalSellingTax - subTotalBuyingTax) }}
           </td>
           <td class="text-slate-600 px-1 py-2 border-b border-r border-slate-400"></td>
           <td class="text-slate-600 px-1 py-2 border-b border-r border-slate-400"></td>

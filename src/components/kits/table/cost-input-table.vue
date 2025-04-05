@@ -138,10 +138,11 @@ const checkFields = ['pp', 'ob', 'edit', 'noRev']
 const dateFields = ['finishDate']
 
 const getBillingCost = () => {
+  console.log(rows.value)
   return rows.value
 }
 
-defineExpose({ getBillingCost })
+defineExpose({getBillingCost})
 
 watch(
   () => props.data,

@@ -1,7 +1,7 @@
 <template>
   <div
     class="w-full p-2"
-    :class="{ 'fixed z-1000 bg-white top-0 left-0 h-full overflow-auto': fullScreen }"
+    :class="{ 'fixed z-50 bg-white top-0 left-0 h-full overflow-auto': fullScreen }"
   >
     <div class="flex items-center justify-between p-4" v-if="fullScreen">
       <span class="text-md font-semibold text-slate-700"
@@ -188,7 +188,7 @@
       </table>
     </div>
     <div class="mt-4 border-t border-slate-200" v-if="costView">
-      <div class="mt-2">
+      <div class="mt-2" v-if="department !== 'Sale'">
         <span class="text-slate-700 font-semibold">Cost/Billing</span>
         <div class="text-sm text-slate-700 mt-2">
           <span
@@ -218,10 +218,15 @@
         </div>
       </div>
       <div class="mt-4">
-        <span
-          class="block font-semibold bg-slate-300 w-fit px-2 py-1 rounded-tl-md rounded-tr-md border-b border-white uppercase text-indigo-500"
-          >Selling</span
-        >
+        <div class="flex items-center space-x-2" >
+          <span
+            class="block font-semibold bg-slate-300 w-fit px-2 py-1 rounded-tl-md rounded-tr-md border-b border-white uppercase text-indigo-500"
+            >Selling</span
+          >
+          <button v-if="costEditFlag" @click="importQuotation">
+            <BarsArrowDownIcon class="size-5 cursor-pointer text-indigo-500 hover:ring-1 hover:ring-indigo-500 rounded-sm ring-offset-2 hover:bg-indigo-500 hover:text-white" />
+          </button>
+        </div>
         <div class="w-full overflow-auto">
           <CostTable
             :headers="costHeaders"
@@ -232,12 +237,12 @@
         </div>
         <div class="flex gap-2 mt-2" v-if="costEditFlag">
           <PlusIcon
-            @click="addRow(costBuyingData)"
+            @click="addRow(costSellingData)"
             class="size-5 cursor-pointer bg-green-100 hover:bg-green-200 text-green-500 rounded-md border border-green-500"
             :style="{ strokeWidth: '3px' }"
           />
           <MinusIcon
-            @click="removeRow(costBuyingData)"
+            @click="removeRow(costSellingData)"
             class="size-5 cursor-pointer bg-red-100 hover:bg-red-200 text-red-500 rounded-md border border-red-500"
             :style="{ strokeWidth: '3px' }"
           />
@@ -254,20 +259,26 @@
       </div>
     </div>
   </div>
+  <Teleport to="body">
+    <QuotationImportModal :openDialog="openDialog" @closeDialog="closeDialog" @selectQuotation="selectQuotation" />
+  </Teleport>
 </template>
 
 <script setup>
 import { watch, ref, computed } from 'vue'
 import { PencilSquareIcon, XMarkIcon, CheckIcon, ArrowPathIcon } from '@heroicons/vue/24/outline'
 import { db } from '@/firebase'
-import { getDoc, setDoc, doc } from 'firebase/firestore'
+import { getDoc, setDoc, doc, getDocs, collection } from 'firebase/firestore'
 import { toast } from 'vue-sonner'
 import { format } from 'date-fns'
 import { checkboxFields, datetimeFields } from '@/components/functions/bookings/data'
 import CostTable from '@/components/kits/table/cost-input-table.vue'
 import ProfitTable from '@/components/kits/table/profit-table.vue'
 import { bookingCostFields, bookingCostData } from '@/components/functions/bookings/data'
-import { PlusIcon, MinusIcon } from '@heroicons/vue/24/outline'
+import { PlusIcon, MinusIcon, BarsArrowDownIcon } from '@heroicons/vue/24/outline'
+import QuotationImportModal from '@/components/kits/modal/quotation-import.vue'
+
+const openDialog = ref(false)
 
 const props = defineProps({
   headers: {
@@ -398,10 +409,14 @@ const editRow = (row) => {
 
 const saveRow = async () => {
   try {
-    const cost = costTableBuying.value.getBillingCost()
-    const sellingCost = costTableSelling.value.getBillingCost()
+    const cost = null
     saveRowState.value.billingCost ??= {}
-    saveRowState.value.billingCost.buying = cost
+
+    if(props.department !== 'Sale') {
+      cost = costTableBuying.value.getBillingCost()
+      saveRowState.value.billingCost.buying = cost
+    }
+    const sellingCost = costTableSelling.value.getBillingCost()
     saveRowState.value.billingCost.selling = sellingCost
     console.log(saveRowState.value)
     const docRef = doc(db, 'bookings', saveRowState.value.uid)
@@ -429,12 +444,12 @@ const cancelRow = () => {
   exitFullScreen()
 }
 
-const addRow = () => {
-  costBuyingData.value.push(bookingCostData()[0])
+const addRow = (target) => {
+  target.push(bookingCostData()[0])
 }
 
-const removeRow = () => {
-  costBuyingData.value.pop()
+const removeRow = (target) => {
+  target.pop()
 }
 
 const rowClickView = (row, idx) => {
@@ -459,5 +474,26 @@ const exitFullScreen = () => {
   selectedRow.value = null
   saveRowState.value = null
   displayData.value = [...props.data]
+}
+
+const importQuotation = () => {
+  openDialog.value = true
+}
+
+const selectQuotation = (data) => {
+  openDialog.value = false
+  data.map(item => {
+    costSellingData.value.push({
+      ...bookingCostData()[0],
+      costDesc: item.desc,
+      unit: item.unit || null,
+      unitPrice: item.cost || null,
+      tax: item.vat || null,
+      currency: item.currency || null
+    })
+  })
+}
+const closeDialog = () => {
+  openDialog.value = false
 }
 </script>
